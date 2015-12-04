@@ -12,7 +12,7 @@ class CreateSharedCost extends Migration
      */
     public function up()
     {
-        Schema::create('shared_cost', function (Blueprint $table) {
+        Schema::create('shared_costs', function (Blueprint $table) {
             $table->increments('id');
             $table->string("name");
             $table->double("amount");
@@ -28,6 +28,6 @@ class CreateSharedCost extends Migration
      */
     public function down()
     {
-        Schema::drop('shared_cost');
+        Schema::drop('shared_costs');
     }
 }

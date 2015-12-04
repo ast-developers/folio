@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Project;
+use App\StaffRate;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 
-class ProjectController extends Controller
+class StaffRateController extends Controller
 {
 
     /**
@@ -20,9 +20,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(5);
+        $staffrates = StaffRate::paginate(15);
 
-        return view('project.index', compact('projects'));
+        return view('staff-rate.index', compact('staffrates'));
     }
 
     /**
@@ -32,7 +32,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project.create');
+        return view('staff-rate.create');
     }
 
     /**
@@ -43,11 +43,11 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         
-        Project::create($request->all());
+        StaffRate::create($request->all());
 
-        Session::flash('flash_message', 'Project successfully added!');
+        Session::flash('flash_message', 'StaffRate successfully added!');
 
-        return redirect('project');
+        return redirect('staff-rate');
     }
 
     /**
@@ -58,9 +58,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::findOrFail($id);
+        $staffrate = StaffRate::findOrFail($id);
 
-        return view('project.show', compact('project'));
+        return view('staff-rate.show', compact('staffrate'));
     }
 
     /**
@@ -71,9 +71,9 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::findOrFail($id);
+        $staffrate = StaffRate::findOrFail($id);
 
-        return view('project.edit', compact('project'));
+        return view('staff-rate.edit', compact('staffrate'));
     }
 
     /**
@@ -85,12 +85,12 @@ class ProjectController extends Controller
     public function update($id, Request $request)
     {
         
-        $project = Project::findOrFail($id);
-        $project->update($request->all());
+        $staffrate = StaffRate::findOrFail($id);
+        $staffrate->update($request->all());
 
-        Session::flash('flash_message', 'Project successfully updated!');
+        Session::flash('flash_message', 'StaffRate successfully updated!');
 
-        return redirect('project');
+        return redirect('staff-rate');
     }
 
     /**
@@ -101,11 +101,11 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        Project::destroy($id);
+        StaffRate::destroy($id);
 
-        Session::flash('flash_message', 'Project successfully deleted!');
+        Session::flash('flash_message', 'StaffRate successfully deleted!');
 
-        return redirect('project');
+        return redirect('staff-rate');
     }
 
 }

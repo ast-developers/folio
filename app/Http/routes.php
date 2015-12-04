@@ -16,3 +16,6 @@ Route::get('/', function () {
 });
 
 Route::resource('project', 'ProjectController');
+Route::resource('shared-cost', 'SharedCostController');
+Route::resource('staff', 'StaffController');
+Route::resource('staff-rate', 'StaffRateController');

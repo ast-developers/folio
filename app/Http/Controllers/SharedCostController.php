@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Project;
+use App\SharedCost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 
-class ProjectController extends Controller
+class SharedCostController extends Controller
 {
 
     /**
@@ -20,9 +20,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(5);
+        $sharedcosts = SharedCost::paginate(15);
 
-        return view('project.index', compact('projects'));
+        return view('shared-cost.index', compact('sharedcosts'));
     }
 
     /**
@@ -32,7 +32,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project.create');
+        return view('shared-cost.create');
     }
 
     /**
@@ -43,11 +43,11 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         
-        Project::create($request->all());
+        SharedCost::create($request->all());
 
-        Session::flash('flash_message', 'Project successfully added!');
+        Session::flash('flash_message', 'SharedCost successfully added!');
 
-        return redirect('project');
+        return redirect('shared-cost');
     }
 
     /**
@@ -58,9 +58,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::findOrFail($id);
+        $sharedcost = SharedCost::findOrFail($id);
 
-        return view('project.show', compact('project'));
+        return view('shared-cost.show', compact('sharedcost'));
     }
 
     /**
@@ -71,9 +71,9 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::findOrFail($id);
+        $sharedcost = SharedCost::findOrFail($id);
 
-        return view('project.edit', compact('project'));
+        return view('shared-cost.edit', compact('sharedcost'));
     }
 
     /**
@@ -85,12 +85,12 @@ class ProjectController extends Controller
     public function update($id, Request $request)
     {
         
-        $project = Project::findOrFail($id);
-        $project->update($request->all());
+        $sharedcost = SharedCost::findOrFail($id);
+        $sharedcost->update($request->all());
 
-        Session::flash('flash_message', 'Project successfully updated!');
+        Session::flash('flash_message', 'SharedCost successfully updated!');
 
-        return redirect('project');
+        return redirect('shared-cost');
     }
 
     /**
@@ -101,11 +101,11 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        Project::destroy($id);
+        SharedCost::destroy($id);
 
-        Session::flash('flash_message', 'Project successfully deleted!');
+        Session::flash('flash_message', 'SharedCost successfully deleted!');
 
-        return redirect('project');
+        return redirect('shared-cost');
     }
 
 }

@@ -11,32 +11,30 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<!-- Basic Styles -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+		{!! HTML::style('css/bootstrap.min.css') !!}
+		{!! HTML::style("css/font-awesome.min.css") !!}
 
 		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production-plugins.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+		{!! HTML::style("css/smartadmin-production-plugins.min.css") !!}
+		{!! HTML::style("css/smartadmin-production.min.css") !!}
+		{!! HTML::style("css/smartadmin-skins.min.css") !!}
 
 		<!-- SmartAdmin RTL Support  -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+		{!! HTML::style("css/smartadmin-rtl.min.css") !!}
 
 		<!-- We recommend you use "your_style.css" to override SmartAdmin
 		     specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+		{!! HTML::style("css/your_style.css") !!} -->
 
 		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+		{!! HTML::style("css/demo.min.css") !!}
 
-		<!-- FAVICONS -->
-		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
 
 		<!-- GOOGLE FONT -->
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
-		<!-- Specifying a Webpage Icon for Web Clip 
+		<!-- Specifying a Webpage Icon for Web Clip
 			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
 		<link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
 		<link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
@@ -54,50 +52,7 @@
 
 	</head>
 	
-	<!--
 
-	TABLE OF CONTENTS.
-	
-	Use search to find needed section.
-	
-	===================================================================
-	
-	|  01. #CSS Links                |  all CSS links and file paths  |
-	|  02. #FAVICONS                 |  Favicon links and file paths  |
-	|  03. #GOOGLE FONT              |  Google font link              |
-	|  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
-	|  05. #BODY                     |  body tag                      |
-	|  06. #HEADER                   |  header tag                    |
-	|  07. #PROJECTS                 |  project lists                 |
-	|  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
-	|  09. #MOBILE                   |  mobile view dropdown          |
-	|  10. #SEARCH                   |  search field                  |
-	|  11. #NAVIGATION               |  left panel & navigation       |
-	|  12. #RIGHT PANEL              |  right panel userlist          |
-	|  13. #MAIN PANEL               |  main panel                    |
-	|  14. #MAIN CONTENT             |  content holder                |
-	|  15. #PAGE FOOTER              |  page footer                   |
-	|  16. #SHORTCUT AREA            |  dropdown shortcuts area       |
-	|  17. #PLUGINS                  |  all scripts and plugins       |
-	
-	===================================================================
-	
-	-->
-	
-	<!-- #BODY -->
-	<!-- Possible Classes
-
-		* 'smart-style-{SKIN#}'
-		* 'smart-rtl'         - Switch theme mode to RTL
-		* 'menu-on-top'       - Switch to top navigation (no DOM change required)
-		* 'no-menu'			  - Hides the menu completely
-		* 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
-		* 'fixed-header'      - Fixes the header
-		* 'fixed-navigation'  - Fixes the main menu
-		* 'fixed-ribbon'      - Fixes breadcrumb
-		* 'fixed-page-footer' - Fixes footer
-		* 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
-	-->
 	<body class="">
 
 		<!-- HEADER -->
@@ -901,57 +856,49 @@
 
 		<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script>
-			if (!window.jQuery) {
-				document.write('<script src="js/libs/jquery-2.1.1.min.js"><\/script>');
-			}
-		</script>
+
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-		<script>
-			if (!window.jQuery.ui) {
-				document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
-			}
-		</script>
+
 
 		<!-- IMPORTANT: APP CONFIG -->
-		<script src="js/app.config.js"></script>
+		{!! HTML::script("js/app.config.js") !!}
 
 		<!-- JS TOUCH : include this plugin for mobile drag / drop touch events-->
-		<script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> 
+		{!! HTML::script("js/plugin/jquery-touch/jquery.ui.touch-punch.min.js") !!}
 
 		<!-- BOOTSTRAP JS -->
-		<script src="js/bootstrap/bootstrap.min.js"></script>
+		{!! HTML::script("js/bootstrap/bootstrap.min.js") !!}
 
 		<!-- CUSTOM NOTIFICATION -->
-		<script src="js/notification/SmartNotification.min.js"></script>
+		{!! HTML::script("js/notification/SmartNotification.min.js") !!}
 
 		<!-- JARVIS WIDGETS -->
-		<script src="js/smartwidgets/jarvis.widget.min.js"></script>
+		{!! HTML::script("js/smartwidgets/jarvis.widget.min.js") !!}
 
 		<!-- EASY PIE CHARTS -->
-		<script src="js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js"></script>
+		{!! HTML::script("js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js") !!}
 
 		<!-- SPARKLINES -->
-		<script src="js/plugin/sparkline/jquery.sparkline.min.js"></script>
+		{!! HTML::script("js/plugin/sparkline/jquery.sparkline.min.js") !!}
 
 		<!-- JQUERY VALIDATE -->
-		<script src="js/plugin/jquery-validate/jquery.validate.min.js"></script>
+		{!! HTML::script("js/plugin/jquery-validate/jquery.validate.min.js") !!}
 
 		<!-- JQUERY MASKED INPUT -->
-		<script src="js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+		{!! HTML::script("js/plugin/masked-input/jquery.maskedinput.min.js") !!}
 
 		<!-- JQUERY SELECT2 INPUT -->
-		<script src="js/plugin/select2/select2.min.js"></script>
+		{!! HTML::script("js/plugin/select2/select2.min.js") !!}
 
 		<!-- JQUERY UI + Bootstrap Slider -->
-		<script src="js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+		{!! HTML::script("js/plugin/bootstrap-slider/bootstrap-slider.min.js") !!}
 
 		<!-- browser msie issue fix -->
-		<script src="js/plugin/msie-fix/jquery.mb.browser.min.js"></script>
+		{!! HTML::script("js/plugin/msie-fix/jquery.mb.browser.min.js") !!}
 
 		<!-- FastClick: For mobile devices -->
-		<script src="js/plugin/fastclick/fastclick.min.js"></script>
+		{!! HTML::script("js/plugin/fastclick/fastclick.min.js") !!}
 
 		<!--[if IE 8]>
 
@@ -960,34 +907,34 @@
 		<![endif]-->
 
 		<!-- Demo purpose only -->
-		<script src="js/demo.min.js"></script>
+		{!! HTML::script("js/demo.min.js") !!}
 
 		<!-- MAIN APP JS FILE -->
-		<script src="js/app.min.js"></script>
+		{!! HTML::script("js/app.min.js") !!}
 
 		<!-- ENHANCEMENT PLUGINS : NOT A REQUIREMENT -->
 		<!-- Voice command : plugin -->
-		<script src="js/speech/voicecommand.min.js"></script>
+		{!! HTML::script("js/speech/voicecommand.min.js") !!}
 
 		<!-- SmartChat UI : plugin -->
-		<script src="js/smart-chat-ui/smart.chat.ui.min.js"></script>
-		<script src="js/smart-chat-ui/smart.chat.manager.min.js"></script>
+		{!! HTML::script("js/smart-chat-ui/smart.chat.ui.min.js") !!}
+		{!! HTML::script("js/smart-chat-ui/smart.chat.manager.min.js") !!}
 		
 		<!-- PAGE RELATED PLUGIN(S) -->
 		
 		<!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip -->
-		<script src="js/plugin/flot/jquery.flot.cust.min.js"></script>
-		<script src="js/plugin/flot/jquery.flot.resize.min.js"></script>
-		<script src="js/plugin/flot/jquery.flot.time.min.js"></script>
-		<script src="js/plugin/flot/jquery.flot.tooltip.min.js"></script>
+		{!! HTML::script("js/plugin/flot/jquery.flot.cust.min.js") !!}
+		{!! HTML::script("js/plugin/flot/jquery.flot.resize.min.js") !!}
+		{!! HTML::script("js/plugin/flot/jquery.flot.time.min.js") !!}
+		{!! HTML::script("js/plugin/flot/jquery.flot.tooltip.min.js") !!}
 		
 		<!-- Vector Maps Plugin: Vectormap engine, Vectormap language -->
-		<script src="js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-		<script src="js/plugin/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+		{!! HTML::script("js/plugin/vectormap/jquery-jvectormap-1.2.2.min.js") !!}
+		{!! HTML::script("js/plugin/vectormap/jquery-jvectormap-world-mill-en.js") !!}
 		
 		<!-- Full Calendar -->
-		<script src="js/plugin/moment/moment.min.js"></script>
-		<script src="js/plugin/fullcalendar/jquery.fullcalendar.min.js"></script>
+		{!! HTML::script("js/plugin/moment/moment.min.js") !!}
+		{!! HTML::script("js/plugin/fullcalendar/jquery.fullcalendar.min.js") !!}
 
 		<script>
 			$(document).ready(function() {
