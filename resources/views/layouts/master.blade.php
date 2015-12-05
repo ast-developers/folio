@@ -36,19 +36,19 @@
 
 		<!-- Specifying a Webpage Icon for Web Clip
 			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-		<link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
-		<link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
-		<link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
-		<link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+		<link rel="apple-touch-icon" href="{{ url("img/splash/sptouch-icon-iphone.png") }}">
+		<link rel="apple-touch-icon" sizes="76x76" href="{{ url("img/splash/touch-icon-ipad.png") }}">
+		<link rel="apple-touch-icon" sizes="120x120" href="{{ url("img/splash/touch-icon-iphone-retina.png") }}">
+		<link rel="apple-touch-icon" sizes="152x152" href="{{ url("img/splash/touch-icon-ipad-retina.png") }}">
 		
 		<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		
 		<!-- Startup image for web apps -->
-		<link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
-		<link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
-		<link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+		<link rel="apple-touch-startup-image" href="{{ url("img/splash/ipad-landscape.png") }}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+		<link rel="apple-touch-startup-image" href="{{ url("img/splash/ipad-portrait.png") }}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+		<link rel="apple-touch-startup-image" href="{{ url("img/splash/iphone.png") }}" media="screen and (max-device-width: 320px)">
 
 	</head>
 	
@@ -60,7 +60,7 @@
 			<div id="logo-group">
 
 				<!-- PLACE YOUR LOGO HERE -->
-				<span id="logo"> <img src="img/logo.png" alt="SmartAdmin"> </span>
+				<span id="logo"> {!! HTML::image("img/logo.png", "Admin")  !!}  </span>
 				<!-- END LOGO PLACEHOLDER -->
 
 				<!-- Note: The activity badge color changes when clicked and resets the number to 0
@@ -149,7 +149,7 @@
 				<ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
 					<li class="">
 						<a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown"> 
-							<img src="img/avatars/sunny.png" alt="John Doe" class="online" />  
+							{!! HTML::image("img/avatars/sunny.png", "Admin", array("class"=>"online"))  !!}
 						</a>
 						<ul class="dropdown-menu pull-right">
 							<li>
@@ -242,7 +242,7 @@
 				<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
 					
 					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
+						{!! HTML::image("img/avatars/sunny.png", "me", array('class'=>"online")) !!}
 						<span>
 							john.doe 
 						</span>
@@ -293,18 +293,7 @@
 				<ol class="breadcrumb">
 					<li>Home</li><li>Dashboard</li>
 				</ol>
-				<!-- end breadcrumb -->
 
-				<!-- You can also add more buttons to the
-				ribbon for further usability
-
-				Example below:
-
-				<span class="ribbon-button-alignment pull-right">
-				<span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
-				<span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
-				<span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
-				</span> -->
 
 			</div>
 			<!-- END RIBBON -->
@@ -553,76 +542,7 @@
 
 				}
 
-				/*
-				* RUN PAGE GRAPHS
-				*/
 
-				/* TAB 1: UPDATING CHART */
-				// For the demo we use generated data, but normally it would be coming from the server
-
-				var data = [], totalPoints = 200, $UpdatingChartColors = $("#updating-chart").css('color');
-
-				function getRandomData() {
-					if (data.length > 0)
-						data = data.slice(1);
-
-					// do a random walk
-					while (data.length < totalPoints) {
-						var prev = data.length > 0 ? data[data.length - 1] : 50;
-						var y = prev + Math.random() * 10 - 5;
-						if (y < 0)
-							y = 0;
-						if (y > 100)
-							y = 100;
-						data.push(y);
-					}
-
-					// zip the generated y values with the x values
-					var res = [];
-					for (var i = 0; i < data.length; ++i)
-						res.push([i, data[i]])
-					return res;
-				}
-
-				// setup control widget
-				var updateInterval = 1500;
-				$("#updating-chart").val(updateInterval).change(function() {
-
-					var v = $(this).val();
-					if (v && !isNaN(+v)) {
-						updateInterval = +v;
-						$(this).val("" + updateInterval);
-					}
-
-				});
-
-				// setup plot
-				var options = {
-					yaxis : {
-						min : 0,
-						max : 100
-					},
-					xaxis : {
-						min : 0,
-						max : 100
-					},
-					colors : [$UpdatingChartColors],
-					series : {
-						lines : {
-							lineWidth : 1,
-							fill : true,
-							fillColor : {
-								colors : [{
-									opacity : 0.4
-								}, {
-									opacity : 0
-								}]
-							},
-							steps : false
-
-						}
-					}
-				};
 
 				/* live switch */
 				$('input[type="checkbox"]#start_interval').click(function() {
@@ -652,14 +572,6 @@
 
 				/*end updating chart*/
 
-
-
-
-
-
-				/*
-				 * FULL CALENDAR JS
-				 */
 
 
 				/* hide default buttons */
@@ -707,22 +619,6 @@
 
 		</script>
 
-		<!-- Your GOOGLE ANALYTICS CODE Below -->
-		<script type="text/javascript">
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
-			_gaq.push(['_trackPageview']);
-
-			(function() {
-				var ga = document.createElement('script');
-				ga.type = 'text/javascript';
-				ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0];
-				s.parentNode.insertBefore(ga, s);
-			})();
-
-		</script>
 
 	</body>
 
