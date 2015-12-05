@@ -21,4 +21,9 @@ class Staff extends Model
      */
     protected $fillable = ['user_name', 'email'];
 
+    public function rates()
+    {
+        return $this->hasMany(StaffRate::class);
+    }
+
 }

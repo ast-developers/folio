@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Staff;
 use App\StaffRate;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -20,7 +20,7 @@ class StaffRateController extends Controller
      */
     public function index()
     {
-        $staffrates = StaffRate::paginate(15);
+        $staffrates = StaffRate::with('staff')->paginate(15);
 
         return view('staff-rate.index', compact('staffrates'));
     }
@@ -32,7 +32,8 @@ class StaffRateController extends Controller
      */
     public function create()
     {
-        return view('staff-rate.create');
+        $staff = Staff::all();
+        return view('staff-rate.create', ['staff'=>$staff]);
     }
 
     /**
@@ -71,9 +72,10 @@ class StaffRateController extends Controller
      */
     public function edit($id)
     {
+        $staff = Staff::all();
         $staffrate = StaffRate::findOrFail($id);
 
-        return view('staff-rate.edit', compact('staffrate'));
+        return view('staff-rate.edit', compact('staffrate', 'staff'));
     }
 
     /**

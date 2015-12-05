@@ -16,7 +16,8 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td><a href="{{ url('/staff-rate', $item->id) }}">{{ $item->staff_id }}</a></td><td>{{ $item->rate }}</td><td>{{ $item->effective_date }}</td>
+                    <td><a href="{{ url('/staff-rate', $item->id) }}">{{ $item->staff->email }}</a></td><td>$ {{
+                    $item->rate }}</td><td>{{ $item->effective_date }}</td>
                     <td>
                         <a href="{{ route('staff-rate.edit', $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>

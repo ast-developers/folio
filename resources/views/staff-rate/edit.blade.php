@@ -14,7 +14,8 @@
                 <div class="form-group {{ $errors->has('staff_id') ? 'has-error' : ''}}">
                 {!! Form::label('staff_id', 'Staff Id: ', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::number('staff_id', null, ['class' => 'form-control']) !!}
+                    {!! Form::select('staff_id', $staff->lists('email', 'id'), null, ['class' =>
+                    'form-control']) !!}
                     {!! $errors->first('staff_id', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>

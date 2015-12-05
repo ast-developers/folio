@@ -21,4 +21,9 @@ class StaffRate extends Model
      */
     protected $fillable = ['staff_id', 'rate', 'effective_date'];
 
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class);
+    }
+
 }
