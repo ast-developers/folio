@@ -21,7 +21,7 @@ class CreateStaffRatesTable extends Migration
 
             $table->foreign('staff_id')
                 ->references('id')
-                ->on('staffs')
+                ->on('staff')
                 ->onDelete('cascade');
         });
     }

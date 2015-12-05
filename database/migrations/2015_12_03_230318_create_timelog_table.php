@@ -22,7 +22,7 @@ class CreateTimelogTable extends Migration
 
             $table->foreign('staff_id')
                 ->references('id')
-                ->on('staffs')
+                ->on('staff')
                 ->onDelete('cascade');
 
             $table->foreign('project_id')
