@@ -5,7 +5,7 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>Description</th><th>Amount</th><th>Received On</th><th>Actions</th>
+                    <th>Description</th><th>Amount</th><th>Received On</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -13,8 +13,9 @@
             @foreach($revenues as $item)
                 {{-- */$x++;/* --}}
                 <tr>
-                    <td>{{ $x }}</td>
-                    <td><a href="{{ url('/revenue', $item->id) }}">{{ $item->description }}</a></td><td>{{ $item->amount }}</td><td>{{ $item->received_on }}</td>
+                    <td><a href="{{ url('/revenue', $item->id) }}">{{ $item->description }}</a></td>
+                    <td>${{ $item->amount }}</td>
+                    <td>{{ $item->received_on }}</td>
                     <td>
                         <a href="{{ route('revenue.edit', $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
@@ -30,6 +31,17 @@
                 </tr>
             @endforeach
             </tbody>
+            <tfoot>
+            <tr>
+                <th>Total</th>
+                <th> ${{$revenues->sum('amount')}}
+                </th>
+                <th> -
+                </th>
+                <th> -
+                </th>
+            </tr>
+            </tfoot>
         </table>
 
     </div>

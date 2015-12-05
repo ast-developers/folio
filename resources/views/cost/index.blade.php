@@ -3,15 +3,15 @@
     <table class="table table-bordered table-striped table-hover">
         <thead>
         <tr>
-            <th>S.No</th><th>Name</th><th>Amount</th><th>Rate</th><th>Hours</th>
+            <th>Name</th><th>Amount</th><th>Rate</th><th>Hours</th>
         </tr>
         </thead>
         <tbody>
         {{-- */$x=0;/* --}}
         @foreach($costs as $cost)
+
             {{-- */$x++;/* --}}
             <tr>
-                <td>{{ $x }}</td>
                 <td>{{ $cost->staff->user_name  }}</td>
                 <td> ${{$cost->amount }}
                 </td>
@@ -22,6 +22,17 @@
             </tr>
         @endforeach
         </tbody>
+        <tfoot>
+            <tr>
+                <th>Total</th>
+                <th> ${{$costs->sum('amount')}}
+                </th>
+                <th> -
+                </th>
+                <th> ${{$costs->sum('hours')}}
+                </th>
+            </tr>
+        </tfoot>
     </table>
 
 </div>
