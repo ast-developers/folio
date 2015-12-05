@@ -21,7 +21,7 @@ class Project extends Model
      */
     protected $fillable = ['name', 'jira_key', 'start_date', 'end_date', 'is_overhead'];
 
-    public function revenue()
+    public function revenues()
     {
         return $this->hasMany(Revenue::class);
     }

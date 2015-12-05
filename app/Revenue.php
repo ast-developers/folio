@@ -19,6 +19,10 @@ class Revenue extends Model
      *
      * @var array
      */
-    protected $fillable = ['description', 'amount', 'received_on'];
+    protected $fillable = ['description', 'amount', 'received_on', 'project_id'];
 
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

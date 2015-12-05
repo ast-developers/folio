@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>Edit Revenue</h1>
+    <h1>Edit Revenue for {{ $revenue->project->name }}</h1>
     <hr/>
 
     {!! Form::model($revenue, [
@@ -36,6 +36,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
+            {!! Form::hidden('project_id') !!}
             {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
         </div>
     </div>

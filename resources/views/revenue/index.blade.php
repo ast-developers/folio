@@ -1,8 +1,6 @@
-@extends('layouts.master')
 
-@section('content')
 
-    <h1>Revenues <a href="{{ route('revenue.create') }}" class="btn btn-primary pull-right btn-sm">Add New Revenue</a></h1>
+    <h1>Revenues <a href="{{ route('revenue.create', ['project_id'=>$project_id]) }}" class="btn btn-primary pull-right btn-sm">Add New Revenue</a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -33,7 +31,6 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $revenues->render() !!} </div>
+
     </div>
 
-@endsection

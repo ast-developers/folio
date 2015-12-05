@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>Create New Revenue</h1>
+    <h1>Create New Revenue for {{ $project->name }}</h1>
     <hr/>
 
     {!! Form::open(['route' => 'revenue.store', 'class' => 'form-horizontal']) !!}
@@ -32,6 +32,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
+            {!! Form::hidden('project_id', $project->id) !!}
             {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
         </div>
     </div>

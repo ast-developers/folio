@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Project;
 use App\Revenue;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -13,17 +13,6 @@ use Session;
 class RevenueController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $revenues = Revenue::paginate(15);
-
-        return view('revenue.index', compact('revenues'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -32,7 +21,9 @@ class RevenueController extends Controller
      */
     public function create()
     {
-        return view('revenue.create');
+        $project_id = \Input::get("project_id");
+        $project = Project::find($project_id);
+        return view('revenue.create', ['project'=>$project]);
     }
 
     /**
@@ -42,26 +33,13 @@ class RevenueController extends Controller
      */
     public function store(Request $request)
     {
-        
         Revenue::create($request->all());
 
         Session::flash('flash_message', 'Revenue successfully added!');
 
-        return redirect('revenue');
+        return redirect(route('project.show', $request->get('project_id')));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $revenue = Revenue::findOrFail($id);
-
-        return view('revenue.show', compact('revenue'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -90,7 +68,7 @@ class RevenueController extends Controller
 
         Session::flash('flash_message', 'Revenue successfully updated!');
 
-        return redirect('revenue');
+        return redirect(route('project.show', $request->get('project_id')));
     }
 
     /**
@@ -101,11 +79,12 @@ class RevenueController extends Controller
      */
     public function destroy($id)
     {
+        $revenue = Revenue::find($id);
         Revenue::destroy($id);
 
         Session::flash('flash_message', 'Revenue successfully deleted!');
 
-        return redirect('revenue');
+        return redirect(route('project.show', $revenue->project_id));
     }
 
 }

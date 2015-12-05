@@ -38,9 +38,7 @@
             </p>
         </div>
         <div id="tabs-c">
-            <p>
-                Nam dui erat, auctor a, dignissim quis, sollicitudin eu, felis. Pellentesque nisi urna, interdum eget, sagittis et, consequat vestibulum, lacus. Mauris porttitor ullamcorper augue.
-            </p>
+            @include('revenue.index', ['revenues'=>$project->revenues, 'project_id'=>$project->id])
         </div>
     </div>
 
