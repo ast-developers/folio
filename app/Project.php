@@ -19,6 +19,6 @@ class Project extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'jira_key', 'start_date', 'end_date'];
+    protected $fillable = ['name', 'jira_key', 'start_date', 'end_date', 'is_overhead'];
 
 }

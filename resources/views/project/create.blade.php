@@ -35,6 +35,18 @@
                     {!! $errors->first('end_date', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+            <div class="form-group {{ $errors->has('is_overhead') ? 'has-error' : ''}}">
+                {!! Form::label('is_overhead', 'Is Overhead: ', ['class' => 'col-sm-3 control-label']) !!}
+                <div class="col-sm-6">
+                                <div class="checkbox">
+                <label>{!! Form::radio('is_overhead', '1') !!} Yes</label>
+            </div>
+            <div class="checkbox">
+                <label>{!! Form::radio('is_overhead', '0', true) !!} No</label>
+            </div>
+                    {!! $errors->first('is_overhead', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
 
 
     <div class="form-group">
