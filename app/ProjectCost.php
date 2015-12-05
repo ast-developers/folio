@@ -3,20 +3,20 @@
  * Created by PhpStorm.
  * User: shabbir
  * Date: 12/4/15
- * Time: 9:07 PM
+ * Time: 11:02 PM
  */
 namespace App;
 
-class Timelog extends Model
-{
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'timelog';
+use Illuminate\Database\Eloquent\Model;
 
-    public function project() {
+class ProjectCost extends Model
+{
+    public $incrementing = false;
+
+    protected $table = 'project_costs';
+
+    public function project()
+    {
         return $this->belongsTo(Project::class);
     }
 

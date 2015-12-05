@@ -33,9 +33,7 @@
             </div>
         </div>
         <div id="tabs-b">
-            <p>
-                Phasellus mattis tincidunt nibh. Cras orci urna, blandit id, pretium vel, aliquet ornare, felis. Maecenas scelerisque sem non nisl. Fusce sed lorem in enim dictum bibendum.
-            </p>
+            @include('cost.index', ['costs'=>$project->costs])
         </div>
         <div id="tabs-c">
             @include('revenue.index', ['revenues'=>$project->revenues, 'project_id'=>$project->id])

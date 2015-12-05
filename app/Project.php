@@ -26,4 +26,12 @@ class Project extends Model
         return $this->hasMany(Revenue::class);
     }
 
+    public function timelog() {
+        return $this->hasMany(Timelog::class);
+    }
+
+    public function costs() {
+        return $this->hasMany(ProjectCost::class);
+    }
+
 }

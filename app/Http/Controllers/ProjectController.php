@@ -58,8 +58,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::with('revenues')->findOrFail($id);
-
+        $project = Project::with(['revenues', 'costs', 'costs.staff'])->findOrFail($id);
         return view('project.show', compact('project'));
     }
 
