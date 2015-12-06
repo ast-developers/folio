@@ -5,7 +5,7 @@
             <th>Month</th>
             <th>Cost</th>
             <th>Revenue</th>
-            <th>Difference</th>
+            <th>Profit</th>
         </tr>
         </thead>
         <tbody>

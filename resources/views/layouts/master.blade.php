@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-		<title> SmartAdmin </title>
+		<title> Arsenaltech - Portfolio Management </title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 			
@@ -267,7 +267,19 @@
 					<a href="{{ url('staff') }}"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Staff</span></a></li>
 					<li>
 					<a href="{{ url('staff-rate') }}"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Staff Rate</span></a></li>
-					
+					<li class="top-menu-invisible">
+						<a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span
+									class="menu-item-parent">Reports</span></a>
+						<ul>
+							<li>
+								<a href="{{ url('report/project') }}"><i class="fa fa-stack-overflow"></i> Project Performance</a>
+							</li>
+							<li>
+								<a href="{{ url('report/monthly') }}"><i class="fa fa-cube"></i> Monthly Performance</a>
+							</li>
+
+						</ul>
+					</li>
 			  </ul>
 		  </nav>
 			<span class="minifyme" data-action="minifyMenu"> 
