@@ -22,7 +22,7 @@
             <div class="form-group {{ $errors->has('rate') ? 'has-error' : ''}}">
                 {!! Form::label('rate', 'Rate: ', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::number('rate', null, ['class' => 'form-control']) !!}
+                    {!! Form::number('rate', null, ['class' => 'form-control', 'step'=>'0.01']) !!}
                     {!! $errors->first('rate', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>

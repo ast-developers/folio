@@ -11,13 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function() {
+        return view('welcome');
+    });
+    Route::resource('project', 'ProjectController');
+    Route::resource('shared-cost', 'SharedCostController');
+    Route::resource('staff', 'StaffController');
+    Route::resource('staff-rate', 'StaffRateController');
+    Route::resource('revenue', 'RevenueController');
+    Route::get('project/sync-with-jira/{id}', 'ProjectController@syncWithJira');
+    Route::get('auth/logout', 'Auth\AuthController@getLogout');
 });
 
-Route::resource('project', 'ProjectController');
-Route::resource('shared-cost', 'SharedCostController');
-Route::resource('staff', 'StaffController');
-Route::resource('staff-rate', 'StaffRateController');
-Route::resource('revenue', 'RevenueController');
-Route::get('project/sync-with-jira/{id}', 'ProjectController@syncWithJira');
