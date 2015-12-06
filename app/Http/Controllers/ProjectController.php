@@ -6,9 +6,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Project;
+use App\RevenueVsCost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
+use Response;
 
 class ProjectController extends Controller
 {
@@ -37,7 +39,7 @@ class ProjectController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @param Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -52,14 +54,16 @@ class ProjectController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param  int $id
+     * @param RevenueVsCost $revenue_vs_cost
      * @return Response
      */
-    public function show($id)
+    public function show($id, RevenueVsCost $revenue_vs_cost)
     {
-        $project = Project::with(['revenues', 'costs', 'costs.staff'])->findOrFail($id);
-        return view('project.show', compact('project'));
+        $project = Project::with(['revenues', 'costs', 'costs.staff'])
+            ->findOrFail($id);
+        $performance = $revenue_vs_cost->get(['project_id'=>$id], ['month_logged']);
+        return view('project.show', compact('project', 'performance'));
     }
 
     /**

@@ -32,7 +32,7 @@ class StaffRateController extends Controller
      */
     public function create()
     {
-        $staff = Staff::all();
+        $staff = Staff::orderBy("user_name")->get();
         return view('staff-rate.create', ['staff'=>$staff]);
     }
 

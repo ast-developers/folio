@@ -16,7 +16,9 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td><a href="{{ url('/shared-cost', $item->id) }}">{{ $item->name }}</a></td><td>{{ $item->amount }}</td><td>{{ $item->incurred_on }}</td>
+                    <td><a href="{{ url('/shared-cost', $item->id) }}">{{ $item->name }}</a></td>
+                    <td>${{ $item->amount }}</td>
+                    <td>{{ $item->incurred_on }}</td>
                     <td>
                         <a href="{{ route('shared-cost.edit', $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
