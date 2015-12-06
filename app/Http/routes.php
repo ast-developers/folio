@@ -20,3 +20,4 @@ Route::resource('shared-cost', 'SharedCostController');
 Route::resource('staff', 'StaffController');
 Route::resource('staff-rate', 'StaffRateController');
 Route::resource('revenue', 'RevenueController');
+Route::get('project/sync-with-jira/{id}', 'ProjectController@syncWithJira');

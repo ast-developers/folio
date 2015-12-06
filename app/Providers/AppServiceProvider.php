@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use JiraRestApi\Configuration\ConfigurationInterface;
+use JiraRestApi\Configuration\DotEnvConfiguration;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(ConfigurationInterface::class, function(){
+            return new DotEnvConfiguration(base_path());
+        });
     }
 }
