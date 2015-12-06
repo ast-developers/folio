@@ -18,7 +18,6 @@
                 <td class="text-right"> ${{number_format($row->cost,2) }}</td>
                 <td class="text-right"> ${{number_format($row->revenue,2) }}</td>
                 <td class="text-right"> ${{number_format($row->revenue - $row->cost,2) }}</td>
-                </td>
             </tr>
         @endforeach
         </tbody>

@@ -21,7 +21,6 @@
                 <td class="text-right"> {{number_format($cost->hours,2) }}
                 <td class="text-right"> ${{number_format($cost->project_cost,2) }}</td>
                 <td class="text-right"> ${{number_format($cost->shared_cost,2) }}</td>
-                </td>
             </tr>
         @endforeach
         </tbody>
