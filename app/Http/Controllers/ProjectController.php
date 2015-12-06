@@ -131,18 +131,20 @@ class ProjectController extends Controller
                 $issues = $issue_service->search(
                     "project={$project->jira_key} and timespent>0 and updated >= {$project->start_date}",
                     $start,
-                    100,
+                    1000,
                     [
-                        "key"
+                        "key",
+                        "worklog"
                     ]
                 );
+
                 if(count($issues->getIssues()) == 0) {
                     break;
                 }
                 $timelogs = [];
                 foreach ($issues->getIssues() as $issue) {
-                    $jira_work_logs = $issue_service->getWorklog($issue->key);
-                    foreach($jira_work_logs->getWorklogs() as $jira_work_log) {
+                    $jira_work_logs = $issue->fields->worklog->worklogs;
+                    foreach($jira_work_logs as $jira_work_log) {
                         if(!isset($jira_work_log->author)) {
                             continue;
                         }
@@ -161,6 +163,7 @@ class ProjectController extends Controller
                     }
 
                 }
+
                 Timelog::insert($timelogs);
                 $start += count($issues->getIssues());
             }
