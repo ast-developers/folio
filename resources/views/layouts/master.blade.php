@@ -28,7 +28,6 @@
 		{!! HTML::style("css/your_style.css") !!} -->
 
 
-
 		<!-- GOOGLE FONT -->
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 
@@ -105,25 +104,29 @@
 			<!-- NAVIGATION : This navigation is also responsive-->
 			<nav>
 				<ul>
-					<li class="active">
+					<li class="{{ set_active(['/']) }}">
 						<a href="{{ url("/") }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
 					</li>
 
-				<li> <a href="{{ url('project') }}"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Projects</span></a></li>
+				    <li class="{{ set_active(['project*']) }}">
+                        <a href="{{ url('project') }}" ><i class="fa fa-lg fa-fw fa-inbox"></i> <span
+                                class="menu-item-parent">Projects</span></a>
+                    </li>
 				
-					<li><a href="{{ url('shared-cost') }}"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Shared Cost</span></a>
-					<li>
+					<li class="{{ set_active(['shared-cost*']) }}">
+                        <a href="{{ url('shared-cost') }}"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Shared Cost</span></a>
+					<li class="{{ set_active(['staff','staff/*']) }}">
 					<a href="{{ url('staff') }}"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Staff</span></a></li>
-					<li>
+					<li class="{{ set_active(['staff-rate*']) }}">
 					<a href="{{ url('staff-rate') }}"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Staff Rate</span></a></li>
 					<li class="top-menu-invisible">
 						<a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span
 									class="menu-item-parent">Reports</span></a>
 						<ul>
-							<li>
+							<li class="{{ set_active(['report/project']) }}">
 								<a href="{{ url('report/project') }}"><i class="fa fa-stack-overflow"></i> Project Performance</a>
 							</li>
-							<li>
+							<li class="{{ set_active(['report/monthly']) }}">
 								<a href="{{ url('report/monthly') }}"><i class="fa fa-cube"></i> Monthly Performance</a>
 							</li>
 
