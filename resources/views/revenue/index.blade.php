@@ -14,8 +14,8 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td><a href="{{ url('/revenue', $item->id) }}">{{ $item->description }}</a></td>
-                    <td>${{ $item->amount }}</td>
-                    <td>{{ $item->received_on }}</td>
+                    <td>{{ money($item->amount) }}</td>
+                    <td>{{ date_formation($item->received_on) }}</td>
                     <td>
                         <a href="{{ route('revenue.edit', $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
@@ -34,7 +34,7 @@
             <tfoot>
             <tr>
                 <th>Total</th>
-                <th> ${{$revenues->sum('amount')}}
+                <th> {{money($revenues->sum('amount'))}}
                 </th>
                 <th> -
                 </th>

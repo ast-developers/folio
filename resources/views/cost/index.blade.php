@@ -16,11 +16,11 @@
 
             {{-- */$x++;/* --}}
             <tr>
-                <td>{{ $cost->month_logged  }}</td>
+                <td>{{ date_formation($cost->month_logged)  }}</td>
                 <td>{{ $cost->staff->user_name  }}</td>
                 <td class="text-right"> {{number_format($cost->hours,2) }}
-                <td class="text-right"> ${{number_format($cost->project_cost,2) }}</td>
-                <td class="text-right"> ${{number_format($cost->shared_cost,2) }}</td>
+                <td class="text-right"> {{money($cost->project_cost) }}</td>
+                <td class="text-right"> {{money($cost->shared_cost) }}</td>
             </tr>
         @endforeach
         </tbody>
@@ -29,13 +29,12 @@
                 <th>Total</th>
                 <th> - </th>
                 <th class="text-right"> {{number_format($costs->sum('hours'), 2)}}</th>
-                <th class="text-right"> ${{number_format($costs->sum('project_cost'), 2)}}</th>
-                <th class="text-right"> ${{number_format($costs->sum('shared_cost'), 2)}}</th>
+                <th class="text-right"> {{money($costs->sum('project_cost'))}}</th>
+                <th class="text-right"> {{money($costs->sum('shared_cost'))}}</th>
             </tr>
             <tr>
                 <th>Total Cost</th>
-                <th colspan="4" class="text-right"> ${{number_format($costs->sum('project_cost') + $costs->sum('shared_cost'),
-                2)}} </th>
+                <th colspan="4" class="text-right"> {{money($costs->sum('project_cost') + $costs->sum('shared_cost'))}} </th>
 
             </tr>
         </tfoot>

@@ -12,7 +12,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $revenue->id }}</td> <td> {{ $revenue->description }} </td><td> {{ $revenue->amount }} </td><td> {{ $revenue->received_on }} </td>
+                    <td>{{ $revenue->id }}</td> <td> {{ $revenue->description }} </td><td> {{ money($revenue->amount)
+                        }} </td><td> {{ date_formation($revenue->received_on) }} </td>
                 </tr>
             </tbody>    
         </table>

@@ -18,18 +18,18 @@
             {{-- */$x++;/* --}}
             <tr>
                 <td>{{ $row->month_logged  }}</td>
-                <td class="text-right"> ${{number_format($row->cost,2) }}</td>
-                <td class="text-right"> ${{number_format($row->revenue,2) }}</td>
-                <td class="text-right"> ${{number_format($row->revenue - $row->cost,2) }}</td>
+                <td class="text-right"> {{money($row->cost) }}</td>
+                <td class="text-right"> {{money($row->revenue) }}</td>
+                <td class="text-right"> {{money($row->revenue - $row->cost) }}</td>
             </tr>
         @endforeach
         </tbody>
         <tfoot>
         <tr>
             <th>Total</th>
-            <th class="text-right"> ${{number_format($performance->sum('cost'), 2)}}</th>
-            <th class="text-right"> ${{number_format($performance->sum('revenue'), 2)}}</th>
-            <th class="text-right"> ${{number_format($performance->sum('revenue')-$performance->sum('cost'), 2)}}</th>
+            <th class="text-right"> {{money($performance->sum('cost'))}}</th>
+            <th class="text-right"> {{money($performance->sum('revenue'))}}</th>
+            <th class="text-right"> {{money($performance->sum('revenue')-$performance->sum('cost'))}}</th>
         </tr>
 
         </tfoot>
