@@ -213,7 +213,11 @@
 				$('.ui-tabs').tabs();
                 $('.ui-tabs').show();
 
+
+
 			});
+
+
 
 		</script>
 

@@ -17,7 +17,7 @@
 
             {{-- */$x++;/* --}}
             <tr>
-                <td>{{ $row->month_logged  }}</td>
+                <td>{{month_formation($row->month_logged)  }}</td>
                 <td class="text-right"> {{money($row->cost) }}</td>
                 <td class="text-right"> {{money($row->revenue) }}</td>
                 <td class="text-right"> {{money($row->revenue - $row->cost) }}</td>

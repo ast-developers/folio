@@ -19,7 +19,7 @@
                     <td>
                         <a href="{{ route('revenue.edit', $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
-                        </a> /
+                        </a>
                         {!! Form::open([
                             'method'=>'DELETE',
                             'route' => ['revenue.destroy', $item->id],

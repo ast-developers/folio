@@ -21,7 +21,7 @@
                     <td>
                         <a href="{{ route('staff-rate.edit', $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
-                        </a> /
+                        </a>
                         {!! Form::open([
                             'method'=>'DELETE',
                             'route' => ['staff-rate.destroy', $item->id],

@@ -18,17 +18,17 @@
                     <td>{{ $x }}</td>
                     <td><a href="{{ url('/shared-cost', $item->id) }}">{{ $item->name }}</a></td>
                     <td>{{ money($item->amount) }}</td>
-                    <td>{{ $item->incurred_on }}</td>
+                    <td>{{ date_formation($item->incurred_on) }}</td>
                     <td>
                         <a href="{{ route('shared-cost.edit', $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
-                        </a> /
+                        </a>
                         {!! Form::open([
                             'method'=>'DELETE',
                             'route' => ['shared-cost.destroy', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>

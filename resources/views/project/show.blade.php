@@ -3,9 +3,11 @@
 @section('content')
 
 <h1>{{ $project->name }} </h1>
-<button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
-    Sync Timelog
-</button>
+<button type="button" id="sync-timelog" data-loading-text="Loading..." class="btn btn-primary pull-right"
+                      autocomplete="off">
+        Sync Timelog
+    </button> <br />
+
 
 <div class="ui-tabs"  style="display: none;">
         <ul>
@@ -30,8 +32,5 @@
             @include('revenue.index', ['revenues'=>$project->revenues, 'project_id'=>$project->id])
         </div>
     </div>
-
-
-
 
 @endsection

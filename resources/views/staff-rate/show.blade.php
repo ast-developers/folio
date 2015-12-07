@@ -12,7 +12,10 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $staffrate->id }}</td> <td> {{ $staffrate->staff_id }} </td><td> {{ $staffrate->rate }} </td><td> {{ $staffrate->effective_date }} </td>
+                    <td> {{ $staffrate->id }}</td>
+                    <td> {{ $staffrate->staff_id }} </td>
+                    <td> {{ $staffrate->rate }}</td>
+                    <td> {{ date_formation($staffrate->effective_date) }} </td>
                 </tr>
             </tbody>    
         </table>

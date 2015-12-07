@@ -12,7 +12,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $sharedcost->id }}</td> <td> {{ $sharedcost->name }} </td><td> {{ $sharedcost->amount }} </td><td> {{ $sharedcost->incurred_on }} </td>
+                    <td>{{ $sharedcost->id }}</td> <td> {{ $sharedcost->name }} </td><td> {{ $sharedcost->amount }}
+                    </td><td> {{ date_formation($sharedcost->incurred_on) }} </td>
                 </tr>
             </tbody>    
         </table>

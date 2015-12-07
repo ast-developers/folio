@@ -16,7 +16,7 @@
 
             {{-- */$x++;/* --}}
             <tr>
-                <td>{{ date_formation($cost->month_logged)  }}</td>
+                <td>{{ month_formation($cost->month_logged)  }}</td>
                 <td>{{ $cost->staff->user_name  }}</td>
                 <td class="text-right"> {{number_format($cost->hours,2) }}
                 <td class="text-right"> {{money($cost->project_cost) }}</td>

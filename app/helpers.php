@@ -2,7 +2,6 @@
 
 function debugInfo($info)
 {
-
     Debugbar::info($info);
 }
 
@@ -18,5 +17,8 @@ function money($amount){
 
 function date_formation($date){
     return date("M jS Y", strtotime( $date ));                 // March 10, 2001, 5:16 pm
+}
 
+function month_formation($date){
+    return date("M Y", mktime(0, 0, 0,  intval(substr($date,4,2)), 1, substr($date, 0,4)));
 }
