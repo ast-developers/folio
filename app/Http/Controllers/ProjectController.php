@@ -10,12 +10,7 @@ use App\RevenueVsCost;
 use App\Staff;
 use App\Timelog;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use JiraRestApi\Configuration\ConfigurationInterface;
-use JiraRestApi\Issue\IssueService;
-use JiraRestApi\Issue\Worklog;
-use JiraRestApi\JiraException;
-use JiraRestApi\Project\ProjectService;
+
 use Session;
 use Response;
 
@@ -117,62 +112,24 @@ class ProjectController extends Controller
 
         return redirect('project');
     }
-
-    public function syncWithJira($id) {
-        $project = Project::find($id);
-        $staff_list = Staff::all();
+    
+    public function syncWithJira($id = null) {
         try {
             \DB::beginTransaction();
-            Timelog::where('project_id', '=', $id)->delete();
-            $issue_service = new IssueService(app(ConfigurationInterface::class));
-            $start = 0;
-
-            while(1) {
-                $issues = $issue_service->search(
-                    "project={$project->jira_key} and timespent>0 and updated >= {$project->start_date}",
-                    $start,
-                    1000,
-                    [
-                        "key",
-                        "worklog"
-                    ]
-                );
-
-                if(count($issues->getIssues()) == 0) {
-                    break;
+            if($id != null) {
+                Project::findOrFail($id)->syncWithJira();
+            }
+            else {
+                foreach(Project::all() as $project) {
+                    $project->syncWithJira();
                 }
-                $timelogs = [];
-                foreach ($issues->getIssues() as $issue) {
-                    $jira_work_logs = $issue->fields->worklog->worklogs;
-                    foreach($jira_work_logs as $jira_work_log) {
-                        if(!isset($jira_work_log->author)) {
-                            continue;
-                        }
-                        $employee = $staff_list->where('email', $jira_work_log->author->emailAddress)->first();
-                        if($employee == null) {
-                            continue;
-                        }
-
-                        $timelogs[] = [
-                            'project_id' => $id,
-                            'staff_id' => $employee->id,
-                            'time_spent' => $jira_work_log->timeSpentSeconds,
-                            'jira_id' => $jira_work_log->id,
-                            'started' => $jira_work_log->started
-                        ];
-                    }
-
-                }
-
-                Timelog::insert($timelogs);
-                $start += count($issues->getIssues());
             }
             \DB::commit();
         } catch (\Exception $e) {
             \DB::rollBack();
             throw $e;
         }
-        return 'tst';
+        return 'synced succesfully';
     }
 
 }
