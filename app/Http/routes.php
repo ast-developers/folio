@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('staff-rate', 'StaffRateController');
     Route::resource('revenue', 'RevenueController');
     Route::get('project/sync-with-jira/{id?}', 'ProjectController@syncWithJira');
+    Route::get('project/sync-all', 'ProjectController@syncWithJira');
     Route::get('logout', 'Auth\AuthController@getLogout');
     Route::get('report/project', 'ReportController@project');
     Route::get('report/monthly', 'ReportController@monthly');
