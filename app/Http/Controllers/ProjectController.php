@@ -47,7 +47,8 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         
-        Project::create($request->all());
+        $project = Project::create($request->all());
+        $project->syncWithJira();
 
         Session::flash('flash_message', 'Project successfully added!');
 
