@@ -16,7 +16,7 @@ Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('project/sync-with-jira/{id?}', 'ProjectController@syncWithJira');
+    Route::get('sync-with-jira/{id?}', 'ProjectController@syncWithJira');
     Route::resource('/', 'ProjectController');
 
     Route::resource('project', 'ProjectController');
