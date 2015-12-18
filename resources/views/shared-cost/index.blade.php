@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>Sharedcosts <a href="{{ route('shared-cost.create') }}" class="btn btn-primary pull-right btn-sm">Add New Sharedcost</a></h1>
+    <h1>Sharedcosts <a href="{{ route('shared-cost.copy') }}" class="btn btn-primary pull-right btn-sm" style="margin-left:5px;">Copy</a> <a href="{{ route('shared-cost.create') }}" class="btn btn-primary pull-right btn-sm">Add New Sharedcost</a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>

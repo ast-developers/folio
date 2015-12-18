@@ -10,7 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::post('timelog/$2y$10$RmbwSQUSNhJpotMh9Z0/9ObnAJDnFvaYd9bfQDI8rGz8vDRgngLdq', 'TimelogController@create');
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
@@ -20,6 +19,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/', 'ProjectController');
 
     Route::resource('project', 'ProjectController');
+
+    Route::match(['get', 'post'], 'shared-cost/copy', ['as' => 'shared-cost.copy', 'uses' =>'SharedCostController@copy']);
+
     Route::resource('shared-cost', 'SharedCostController');
     Route::resource('staff', 'StaffController');
     Route::resource('staff-rate', 'StaffRateController');

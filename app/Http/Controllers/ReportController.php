@@ -16,6 +16,12 @@ class ReportController extends Controller
         $performance = $revenue_vs_cost->get([], ['month_logged', 'project_name']);
         return view('reports.project', compact('performance'));
     }
+    
+    /*public function projectMonthly(RevenueVsCost $revenue_vs_cost) {
+
+        $performance = $revenue_vs_cost->get([], ['month_logged', 'project_name']);
+        return view('reports.project', compact('performance'));
+    }*/
 
     public function monthly(RevenueVsCost $revenue_vs_cost) {
 

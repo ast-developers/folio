@@ -9,6 +9,7 @@ use App\SharedCost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
+use DB;
 
 class SharedCostController extends Controller
 {
@@ -106,6 +107,18 @@ class SharedCostController extends Controller
         Session::flash('flash_message', 'SharedCost successfully deleted!');
 
         return redirect('shared-cost');
+    }
+    
+    public function copy(Request $request) {
+        if ($request->isMethod('post'))
+        {
+            DB::statement( 'INSERT INTO shared_costs(name, amount, incurred_on) SELECT name, amount, :to as incurred_on FROM shared_costs WHERE MONTH(incurred_on)=MONTH(:from)', $request->only(['from', 'to']) );
+            Session::flash('flash_message', 'SharedCost successfully copied!');
+            return redirect('shared-cost');
+        }
+        else {
+            return view('shared-cost.copy');
+        }
     }
 
 }
