@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bab80fba12e4200be87587860c094da0",
-    "content-hash": "cc26377b231dcd1a7bd09787cd7d5e9f",
+    "hash": "78a0fee1cb9aa02730dcd4b6d64dae88",
+    "content-hash": "4404a3808f217cc8908aaa90ce276a9e",
     "packages": [
         {
             "name": "appzcoder/crud-generator",
@@ -895,7 +895,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lesstif/php-jira-rest-client/zipball/a4be6113d87ff55ed668086cb3bf485d9ecee8b6",
+                "url": "https://api.github.com/repos/lesstif/php-jira-rest-client/zipball/406bf4245aa9aebf69cc59946f8623c67e9d4ba4",
                 "reference": "a4be6113d87ff55ed668086cb3bf485d9ecee8b6",
                 "shasum": ""
             },
@@ -1464,6 +1464,49 @@
                 "shell"
             ],
             "time": "2015-11-12 16:18:56"
+        },
+        {
+            "name": "reportico/laravel-reportico",
+            "version": "5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reportico-web/laravel-reportico.git",
+                "reference": "546b441b5db7eadf6c645caae5fc70296699f29e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reportico-web/laravel-reportico/zipball/546b441b5db7eadf6c645caae5fc70296699f29e",
+                "reference": "546b441b5db7eadf6c645caae5fc70296699f29e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations",
+                    "src/controllers"
+                ],
+                "files": [
+                    "src/Reportico/Reportico/reportico.php"
+                ],
+                "psr-0": {
+                    "Reportico\\Reportico\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Reportico",
+                    "email": "info@reportico.org"
+                }
+            ],
+            "time": "2015-07-30 18:47:52"
         },
         {
             "name": "swiftmailer/swiftmailer",

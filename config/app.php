@@ -151,6 +151,7 @@ return [
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
         // Use the line bellow for "laravelcollective/html" package otherwise remove it.
         Collective\Html\HtmlServiceProvider::class,
+        Reportico\Reportico\ReporticoServiceProvider::class,
 
     ],
 
