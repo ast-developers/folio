@@ -16,7 +16,7 @@ Route::post('login', 'Auth\AuthController@postLogin');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('sync-with-jira/{id?}', 'ProjectController@syncWithJira');
-    Route::resource('/', 'ProjectController');
+    Route::resource('/', 'ReportController@project');
 
     Route::resource('project', 'ProjectController');
 
@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('revenue', 'RevenueController');
     
     Route::get('logout', 'Auth\AuthController@getLogout');
-    Route::get('report/project', 'ReportController@project');
+    Route::get('report/project', 'ReportController@projectMonthly');
     Route::get('report/monthly', 'ReportController@monthly');
     Route::get('report/time-sheet', 'ReportController@timesheet');
 });
