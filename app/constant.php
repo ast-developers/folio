@@ -1,4 +1,3 @@
 <?php
-
 define('STATUS_OK', 200);
-define('URL_PROJECT_PATH', URL::to('http://localhost/ems/ems_api/'));
+define('EMS_API_PATH', 'ems/ems_api/');
