@@ -40,14 +40,13 @@ class CheckJiraHours extends Command
 		//Call to EMS API to get the employee details
 
 		$date = Carbon::yesterday()->format('Y-m-d');
-		$res  = $client->get(HOST_PATH.'ems/ems_api/employee_list/' . $date);
+		$res  = $client->get(HOST_PATH . 'ems/ems_api/employee_list/' . $date);
 		if ($res->getStatusCode() == STATUS_OK) {
 			$data = json_decode($res->getBody()->getContents());
 			foreach ($data as $key => $ems) {
 				$staff = Staff::whereEmail($ems->employee_email_id)->first();
 				if (!empty($staff)) {
 					//Find JIRA hours
-
 					$worklog           = Timelog::whereStaffId($staff->id)->whereStarted($date)->sum('time_spent');
 					$actual_jira_hours = gmdate('H:i:s', ($worklog));
 					$actual_ems_hours  = $ems->actual_hours;
@@ -57,11 +56,9 @@ class CheckJiraHours extends Command
 						//IF difference is greater then 1 hour, then update EMS
 						if ($diff > 1 && $diff < 4) {
 							// Call back to EMS to mark employee as half absent
-							$client->get(HOST_PATH.'ems/ems_api/update_employee_timesheet/' . $ems->emp_id . '/' . $date .'/half');
-						}
-						else
-						{
-							$client->get(HOST_PATH.'ems/ems_api/update_employee_timesheet/' . $ems->emp_id . '/' . $date .'/full');
+							$client->get(HOST_PATH . 'ems/ems_api/update_employee_timesheet/' . $ems->emp_id . '/' . $date . '/half');
+						} else {
+							$client->get(HOST_PATH . 'ems/ems_api/update_employee_timesheet/' . $ems->emp_id . '/' . $date . '/full');
 						}
 					}
 				}
