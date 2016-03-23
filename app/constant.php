@@ -1,4 +1,4 @@
 <?php
 
 define('STATUS_OK', 200);
-define('HOST_PATH', 'http://localhost/');
+define('URL_PROJECT_PATH', URL::to('http://localhost/'));
