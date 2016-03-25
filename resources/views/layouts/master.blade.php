@@ -46,7 +46,7 @@
 		<link rel="apple-touch-startup-image" href="{{ url("img/splash/ipad-landscape.png") }}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
 		<link rel="apple-touch-startup-image" href="{{ url("img/splash/ipad-portrait.png") }}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 		<link rel="apple-touch-startup-image" href="{{ url("img/splash/iphone.png") }}" media="screen and (max-device-width: 320px)">
-
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	</head>
 	
 
@@ -86,14 +86,31 @@
 					<span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
 				</div>
 				<!-- end fullscreen button -->
-				
-			
 
-			</div>
+                <!-- Global Date range filter -->
+
+                <div id="fullscreen" class="pull-right" style="margin-top: 10px">
+
+                    <span>From: {{--<input type="text" id="datepickerFrom">--}}
+
+                        {!! Form::text('text', (session('from_date')!=null) ? session('from_date') : null, array('id'=>'datepickerFrom')) !!}
+                    </span>
+                    <span>To: {{--<input type="text" id="datepickerTo">--}}
+                        {!! Form::text('text', (session('to_date')!=null) ? session('to_date') : null, array('id'=>'datepickerTo')) !!}
+                    </span>
+
+                </div>
+
+
+                <!-- End Global date range filter -->
+            </div>
 			<!-- end pulled right: nav area -->
 
 		</header>
-		<!-- END HEADER -->
+
+
+
+        <!-- END HEADER -->
 
 		<!-- Left panel : Navigation area -->
 		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
@@ -195,6 +212,10 @@
 		<!-- FastClick: For mobile devices -->
 		{!! HTML::script("js/plugin/fastclick/fastclick.min.js") !!}
 
+        !-- custom js -->
+		{!! HTML::script("js/custom/filter.js") !!}
+
+
 		<!--[if IE 8]>
 
 		<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
@@ -216,7 +237,6 @@
 
 
 			});
-
 
 
 		</script>
