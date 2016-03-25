@@ -13,101 +13,98 @@ use Session;
 class StaffRateController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $staffrates = StaffRate::with('staff')->paginate(15);
+	/**
+	 * Display a listing of the resource.
+	 * @return Response
+	 */
+	public function index()
+	{
+		if (session('from_date') != NULL) {
+			$staffrates = StaffRate::with('staff')->whereBetween('effective_date', [session('from_date'), session('to_date')])->paginate(15);
+		} else {
+			$staffrates = StaffRate::with('staff')->paginate(15);
+		}
 
-        return view('staff-rate.index', compact('staffrates'));
-    }
+		return view('staff-rate.index', compact('staffrates'));
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        $staff = Staff::orderBy("user_name")->get();
-        return view('staff-rate.create', ['staff'=>$staff]);
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 * @return Response
+	 */
+	public function create()
+	{
+		$staff = Staff::orderBy("user_name")->get();
+		return view('staff-rate.create', ['staff' => $staff]);
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        
-        StaffRate::create($request->all());
+	/**
+	 * Store a newly created resource in storage.
+	 * @return Response
+	 */
+	public function store(Request $request)
+	{
 
-        Session::flash('flash_message', 'StaffRate successfully added!');
+		StaffRate::create($request->all());
 
-        return redirect('staff-rate');
-    }
+		Session::flash('flash_message', 'StaffRate successfully added!');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $staffrate = StaffRate::findOrFail($id);
+		return redirect('staff-rate');
+	}
 
-        return view('staff-rate.show', compact('staffrate'));
-    }
+	/**
+	 * Display the specified resource.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$staffrate = StaffRate::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $staff = Staff::all();
-        $staffrate = StaffRate::findOrFail($id);
+		return view('staff-rate.show', compact('staffrate'));
+	}
 
-        return view('staff-rate.edit', compact('staffrate', 'staff'));
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$staff     = Staff::all();
+		$staffrate = StaffRate::findOrFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id, Request $request)
-    {
-        
-        $staffrate = StaffRate::findOrFail($id);
-        $staffrate->update($request->all());
+		return view('staff-rate.edit', compact('staffrate', 'staff'));
+	}
 
-        Session::flash('flash_message', 'StaffRate successfully updated!');
+	/**
+	 * Update the specified resource in storage.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function update($id, Request $request)
+	{
 
-        return redirect('staff-rate');
-    }
+		$staffrate = StaffRate::findOrFail($id);
+		$staffrate->update($request->all());
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        StaffRate::destroy($id);
+		Session::flash('flash_message', 'StaffRate successfully updated!');
 
-        Session::flash('flash_message', 'StaffRate successfully deleted!');
+		return redirect('staff-rate');
+	}
 
-        return redirect('staff-rate');
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		StaffRate::destroy($id);
+
+		Session::flash('flash_message', 'StaffRate successfully deleted!');
+
+		return redirect('staff-rate');
+	}
 
 }

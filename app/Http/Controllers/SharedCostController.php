@@ -14,111 +14,109 @@ use DB;
 class SharedCostController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $sharedcosts = SharedCost::paginate(15);
+	/**
+	 * Display a listing of the resource.
+	 * @return Response
+	 */
+	public function index()
+	{
 
-        return view('shared-cost.index', compact('sharedcosts'));
-    }
+		if (session('from_date') != NULL) {
+			$sharedcosts = SharedCost::whereBetween('incurred_on', [session('from_date'), session('to_date')])->paginate(15);
+		} else {
+			$sharedcosts = SharedCost::paginate(15);
+		}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('shared-cost.create');
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        
-        SharedCost::create($request->all());
+		return view('shared-cost.index', compact('sharedcosts'));
+	}
 
-        Session::flash('flash_message', 'SharedCost successfully added!');
+	/**
+	 * Show the form for creating a new resource.
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('shared-cost.create');
+	}
 
-        return redirect('shared-cost');
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 * @return Response
+	 */
+	public function store(Request $request)
+	{
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $sharedcost = SharedCost::findOrFail($id);
+		SharedCost::create($request->all());
 
-        return view('shared-cost.show', compact('sharedcost'));
-    }
+		Session::flash('flash_message', 'SharedCost successfully added!');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $sharedcost = SharedCost::findOrFail($id);
+		return redirect('shared-cost');
+	}
 
-        return view('shared-cost.edit', compact('sharedcost'));
-    }
+	/**
+	 * Display the specified resource.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$sharedcost = SharedCost::findOrFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id, Request $request)
-    {
-        
-        $sharedcost = SharedCost::findOrFail($id);
-        $sharedcost->update($request->all());
+		return view('shared-cost.show', compact('sharedcost'));
+	}
 
-        Session::flash('flash_message', 'SharedCost successfully updated!');
+	/**
+	 * Show the form for editing the specified resource.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$sharedcost = SharedCost::findOrFail($id);
 
-        return redirect('shared-cost');
-    }
+		return view('shared-cost.edit', compact('sharedcost'));
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        SharedCost::destroy($id);
+	/**
+	 * Update the specified resource in storage.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function update($id, Request $request)
+	{
 
-        Session::flash('flash_message', 'SharedCost successfully deleted!');
+		$sharedcost = SharedCost::findOrFail($id);
+		$sharedcost->update($request->all());
 
-        return redirect('shared-cost');
-    }
-    
-    public function copy(Request $request) {
-        if ($request->isMethod('post'))
-        {
-            DB::statement( 'INSERT INTO shared_costs(name, amount, incurred_on) SELECT name, amount, :to as incurred_on FROM shared_costs WHERE MONTH(incurred_on)=MONTH(:from)', $request->only(['from', 'to']) );
-            Session::flash('flash_message', 'SharedCost successfully copied!');
-            return redirect('shared-cost');
-        }
-        else {
-            return view('shared-cost.copy');
-        }
-    }
+		Session::flash('flash_message', 'SharedCost successfully updated!');
+
+		return redirect('shared-cost');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		SharedCost::destroy($id);
+
+		Session::flash('flash_message', 'SharedCost successfully deleted!');
+
+		return redirect('shared-cost');
+	}
+
+	public function copy(Request $request)
+	{
+		if ($request->isMethod('post')) {
+			DB::statement('INSERT INTO shared_costs(name, amount, incurred_on) SELECT name, amount, :to as incurred_on FROM shared_costs WHERE MONTH(incurred_on)=MONTH(:from)', $request->only(['from', 'to']));
+			Session::flash('flash_message', 'SharedCost successfully copied!');
+			return redirect('shared-cost');
+		} else {
+			return view('shared-cost.copy');
+		}
+	}
 
 }
