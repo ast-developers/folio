@@ -34,5 +34,9 @@ return [
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+    'google' => [
+        'client_id'     => GOOGLE_ID,
+        'client_secret' => GOOGLE_SECRET,
+        'redirect'      => url().GOOGLE_REDIRECT
+    ]
 ];
