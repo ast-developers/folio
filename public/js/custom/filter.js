@@ -3,7 +3,7 @@
  */
 $(document).ready(function () {
 
-    $("#datepickerFrom").datepicker({
+     $("#datepickerFrom").datepicker({
         dateFormat: 'yy-mm-dd',
         onSelect: function (dateText, inst) {
             if ($('#datepickerTo').val() != '') {
