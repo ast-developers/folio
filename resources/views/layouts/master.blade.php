@@ -234,6 +234,7 @@
 				$('.ui-tabs').tabs();
                 $('.ui-tabs').show();
 			});
+			var base_url = window.location.origin;
 
 		</script>
 

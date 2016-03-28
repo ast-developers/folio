@@ -35,7 +35,6 @@ $(document).ready(function () {
     });
 
     function store_date(from, to) {
-        var base_url = window.location.origin;
         $.ajax({
             type: 'POST',
             url: base_url + "/folio/public/filter",
