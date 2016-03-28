@@ -14,6 +14,9 @@ Route::post('timelog/$2y$10$RmbwSQUSNhJpotMh9Z0/9ObnAJDnFvaYd9bfQDI8rGz8vDRgngLd
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 
+Route::get('auth/google', 'Auth\AuthController@googleredirectToProvider');
+Route::get('auth/google/callback', 'Auth\AuthController@googlehandleProviderCallback');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('sync-with-jira/{id?}', 'ProjectController@syncWithJira');
     Route::resource('/', 'ReportController@project');

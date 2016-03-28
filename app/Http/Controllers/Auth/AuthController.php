@@ -87,23 +87,22 @@ class AuthController extends Controller
 		return Redirect::to('/');
 	}
 
-	private function findOrCreateUser($googleUser)
+	private function findOrCreateUser($google_user)
 	{
 
-		$authUser = User::where('google_id', $googleUser->id)->first();
+		$authUser = User::where('google_id', $google_user->id)->first();
 
 		if ($authUser) {
 			return $authUser;
 		}
+		$user = new User();
+		$user->name = $google_user->name;
+		$user->email = $google_user->email;
+		$user->google_id = $google_user->google_id;
+		$user->avatar = $google_user->avatar;
+		$user->access_token = $google_user->access_token;
 
-		return User::create([
-			'name'         => $googleUser->name,
-			'email'        => $googleUser->email,
-			'google_id'    => $googleUser->id,
-			'avatar'       => $googleUser->avatar,
-			'access_token' => $googleUser->token,
-
-		]);
+		return User::create($user);
 	}
 
 }
