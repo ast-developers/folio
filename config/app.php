@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -150,8 +150,9 @@ return [
 
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
         // Use the line bellow for "laravelcollective/html" package otherwise remove it.
-        Collective\Html\HtmlServiceProvider::class,
+        //Collective\Html\HtmlServiceProvider::class,
         Reportico\Reportico\ReporticoServiceProvider::class,
+        Illuminate\Html\HtmlServiceProvider::class,
 
     ],
 
@@ -202,8 +203,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'Form'      => Collective\Html\FormFacade::class,
-        'HTML'      => Collective\Html\HtmlFacade::class,
+        'Form'      => 'Illuminate\Html\FormFacade',
+        'HTML'      => 'Illuminate\Html\HtmlFacade',
 
         'Debugbar'    => Barryvdh\Debugbar\Facade::class,
 
