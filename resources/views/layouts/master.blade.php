@@ -47,6 +47,7 @@
 		<link rel="apple-touch-startup-image" href="{{ url("img/splash/ipad-portrait.png") }}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 		<link rel="apple-touch-startup-image" href="{{ url("img/splash/iphone.png") }}" media="screen and (max-device-width: 320px)">
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="{!! asset('css/sweetalert.css') !!}">
 	</head>
 	
 
@@ -115,9 +116,6 @@
 		<!-- Left panel : Navigation area -->
 		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
 		<aside id="left-panel">
-
-
-
 			<!-- NAVIGATION : This navigation is also responsive-->
 			<nav>
 				<ul>
@@ -215,6 +213,10 @@
         !-- custom js -->
 		{!! HTML::script("js/custom/filter.js") !!}
 
+		!-- sweetalert js -->
+		{!! HTML::script("js/plugin/sweet-alerts/sweetalert.min.js") !!}
+		{!! HTML::script("js/plugin/sweet-alerts/sweetalert-dev.js") !!}
+
 
 		<!--[if IE 8]>
 
@@ -229,18 +231,11 @@
 
 		<script>
 			$(document).ready(function() {
-
-
 				$('.ui-tabs').tabs();
                 $('.ui-tabs').show();
-
-
-
 			});
 
-
 		</script>
-
 
 	</body>
 
