@@ -152,12 +152,8 @@ return [
         // Use the line bellow for "laravelcollective/html" package otherwise remove it.
         //Collective\Html\HtmlServiceProvider::class,
         Reportico\Reportico\ReporticoServiceProvider::class,
-<<<<<<< HEAD
         Illuminate\Html\HtmlServiceProvider::class,
-=======
         Laravel\Socialite\SocialiteServiceProvider::class,
->>>>>>> 655cabf0cb7e5e084474d002b65f5baa47cdc982
-
     ],
 
     /*
