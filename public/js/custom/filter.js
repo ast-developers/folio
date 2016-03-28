@@ -3,19 +3,18 @@
  */
 $(document).ready(function () {
 
-    $("#datepickerFrom").datepicker({
+     $("#datepickerFrom").datepicker({
         dateFormat: 'yy-mm-dd',
         onSelect: function (dateText, inst) {
-            if ($('#datepickerTo').val() != '' )
-		{			
-		 if($('#datepickerTo').val() < $('#datepickerFrom').val()) {
+            if ($('#datepickerTo').val() != '') {
+                if ($('#datepickerTo').val() < $('#datepickerFrom').val()) {
                     sweetAlert("Oops...", "Your To-Date must be greater then From-Date", "error");
                 }
                 else {
                     store_date($("#datepickerFrom").val(), $("#datepickerTo").val());
                 }
             }
-	}
+        }
 
     });
 
@@ -26,12 +25,12 @@ $(document).ready(function () {
                 sweetAlert("Oops...", "Please select From-Date", "error");
             }
             else if ($('#datepickerTo').val() < $('#datepickerFrom').val()) {
-                    sweetAlert("Oops...", "Your To-Date must be greater then From-Date", "error");
-                }
-            else {
-                    store_date($("#datepickerFrom").val(), $("#datepickerTo").val());
-                }
+                sweetAlert("Oops...", "Your To-Date must be greater then From-Date", "error");
             }
+            else {
+                store_date($("#datepickerFrom").val(), $("#datepickerTo").val());
+            }
+        }
 
     });
 

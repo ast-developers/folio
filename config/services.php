@@ -37,6 +37,6 @@ return [
     'google' => [
         'client_id'     => GOOGLE_ID,
         'client_secret' => GOOGLE_SECRET,
-        'redirect'      => url().GOOGLE_REDIRECT
+        'redirect'      => GOOGLE_REDIRECT
     ]
 ];
