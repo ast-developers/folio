@@ -12,6 +12,6 @@ class FilterController extends Controller
 {
     public function dateFilter(Request $req)
     {
-        session(['from_date' => $req['f'] , 'to_date' => $req['t']]);
+        session(['from_date' => $req['from_date'] , 'to_date' => $req['to_date']]);
     }
 }

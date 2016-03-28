@@ -39,7 +39,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: base_url + "/folio/public/filter",
-            data: {f: from, t: to},
+            data: {from_date: from, to_date: to},
             error: function () {
                 $('#info').html('<p>An error has occurred</p>');
             },
