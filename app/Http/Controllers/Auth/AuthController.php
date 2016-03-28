@@ -95,11 +95,11 @@ class AuthController extends Controller
 		if ($authUser) {
 			return $authUser;
 		}
-		$user = new User();
-		$user->name = $google_user->name;
-		$user->email = $google_user->email;
-		$user->google_id = $google_user->id;
-		$user->avatar = $google_user->avatar;
+		$user               = new User();
+		$user->name         = $google_user->name;
+		$user->email        = $google_user->email;
+		$user->google_id    = $google_user->id;
+		$user->avatar       = $google_user->avatar;
 		$user->access_token = $google_user->token;
 		$user->save();
 
