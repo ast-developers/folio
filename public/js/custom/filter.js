@@ -21,7 +21,7 @@ $(document).ready(function () {
         dateFormat: 'yy-mm-dd',
         onSelect: function (dateText, inst) {
             if ($('#datepickerFrom').val() == '') {
-                alert('Select From date');
+                sweetAlert("Oops...", "Please select From-Date", "error");
             }
             else {
                 if ($('#datepickerTo').val() < $('#datepickerFrom').val()) {
