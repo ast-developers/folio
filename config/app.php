@@ -152,6 +152,7 @@ return [
         // Use the line bellow for "laravelcollective/html" package otherwise remove it.
         Collective\Html\HtmlServiceProvider::class,
         Reportico\Reportico\ReporticoServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -206,6 +207,8 @@ return [
         'HTML'      => Collective\Html\HtmlFacade::class,
 
         'Debugbar'    => Barryvdh\Debugbar\Facade::class,
+
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

@@ -9,7 +9,7 @@
         "laravel/framework": "5.1.*",
         "guzzlehttp/guzzle":"6.1.*",
         "appzcoder/crud-generator": "^1.0",
-        "lesstif/php-jira-rest-client": "dev-master",
+        "lesstif/php-jira-rest-client": "1.5.*",
         "reportico/laravel-reportico": "~5.1"
     },
     "require-dev": {
@@ -28,7 +28,8 @@
             "App\\": "app/"
         },
         "files": [
-            "app/helpers.php"
+            "app/helpers.php",
+            "app/constant.php"
         ]
     },
     "autoload-dev": {

@@ -20,7 +20,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staff = Staff::paginate(15);
+        $staff = Staff::paginate(PAGINATE_LIMIT);
 
         return view('staff.index', compact('staff'));
     }

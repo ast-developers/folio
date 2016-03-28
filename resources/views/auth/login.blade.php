@@ -37,6 +37,7 @@
             <button type="submit" class="btn btn-primary">
                 Sign in
             </button>
+            <a class="btn btn-primary" href="{{ url('auth/google') }}" role="button" data-toggle="tooltip" data-placement="right" title="Login with Google"><i class="fa fa-google-plus fa-1x"></i></a>
         </footer>
     </form>
 

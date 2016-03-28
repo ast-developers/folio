@@ -10,12 +10,18 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 Route::post('timelog/$2y$10$RmbwSQUSNhJpotMh9Z0/9ObnAJDnFvaYd9bfQDI8rGz8vDRgngLdq', 'TimelogController@create');
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 
+Route::get('auth/google', 'Auth\AuthController@googleredirectToProvider');
+Route::get('auth/google/callback', 'Auth\AuthController@googlehandleProviderCallback');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('sync-with-jira/{id?}', 'ProjectController@syncWithJira');
+    Route::get('ems', 'EmsController@index');
+    Route::post('filter', 'FilterController@dateFilter');
     Route::resource('/', 'ReportController@project');
 
     Route::resource('project', 'ProjectController');
