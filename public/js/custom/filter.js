@@ -8,7 +8,6 @@ $(document).ready(function () {
         onSelect: function (dateText, inst) {
             if ($('#datepickerTo').val() != '') {
                 if ($('#datepickerTo').val() < $('#datepickerFrom').val()) {
-                   // alert('Your To-Date must be greater then From-Date');
                     sweetAlert("Oops...", "Your To-Date must be greater then From-Date", "error");
                 }
                 else {
@@ -26,7 +25,6 @@ $(document).ready(function () {
             }
             else {
                 if ($('#datepickerTo').val() < $('#datepickerFrom').val()) {
-                    //alert('Your To-Date must be greater then From-Date');
                     sweetAlert("Oops...", "Your To-Date must be greater then From-Date", "error");
                 }
                 else {
