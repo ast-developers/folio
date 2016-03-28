@@ -20,9 +20,9 @@ class StaffRateController extends Controller
 	public function index()
 	{
 		if (session('from_date') != NULL) {
-			$staffrates = StaffRate::with('staff')->whereBetween('effective_date', [session('from_date'), session('to_date')])->paginate(15);
+			$staffrates = StaffRate::with('staff')->whereBetween('effective_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
 		} else {
-			$staffrates = StaffRate::with('staff')->paginate(15);
+			$staffrates = StaffRate::with('staff')->paginate(PAGINATE_LIMIT);
 		}
 
 		return view('staff-rate.index', compact('staffrates'));

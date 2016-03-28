@@ -22,9 +22,9 @@ class SharedCostController extends Controller
 	{
 
 		if (session('from_date') != NULL) {
-			$sharedcosts = SharedCost::whereBetween('incurred_on', [session('from_date'), session('to_date')])->paginate(15);
+			$sharedcosts = SharedCost::whereBetween('incurred_on', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
 		} else {
-			$sharedcosts = SharedCost::paginate(15);
+			$sharedcosts = SharedCost::paginate(PAGINATE_LIMIT);
 		}
 
 

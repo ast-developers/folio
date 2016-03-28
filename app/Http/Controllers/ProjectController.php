@@ -26,9 +26,9 @@ class ProjectController extends Controller
 	{
 
 		if (session('from_date') != NULL) {
-			$projects = Project::whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(15);
+			$projects = Project::whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
 		} else {
-			$projects = Project::paginate(15);
+			$projects = Project::paginate(PAGINATE_LIMIT);
 		}
 
 		return view('project.index', compact('projects'));
