@@ -9,9 +9,8 @@
         "laravel/framework": "5.1.*",
         "guzzlehttp/guzzle":"6.1.*",
         "appzcoder/crud-generator": "^1.0",
-        "lesstif/php-jira-rest-client": "dev-master",
-        "reportico/laravel-reportico": "~5.1",
-        "laravel/socialite": "^2.0"
+        "lesstif/php-jira-rest-client": "1.5.*",
+        "reportico/laravel-reportico": "~5.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
