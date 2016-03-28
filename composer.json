@@ -11,7 +11,8 @@
         "appzcoder/crud-generator": "^1.0",
         "lesstif/php-jira-rest-client": "1.5.*",
         "reportico/laravel-reportico": "~5.1",
-        "illuminate/html": "~5.0"
+        "illuminate/html": "~5.0",
+        "laravel/socialite": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
