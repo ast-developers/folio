@@ -9,6 +9,7 @@ use App\Project;
 use App\RevenueVsCost;
 use App\Staff;
 use App\Timelog;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Session;
@@ -17,120 +18,120 @@ use Response;
 class ProjectController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        $projects = Project::paginate(15);
+	/**
+	 * Display a listing of the resource.
+	 * @return Response
+	 */
+	public function index()
+	{
 
-        return view('project.index', compact('projects'));
-    }
+		if (session('from_date') != NULL) {
+			$projects = Project::whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
+		} else {
+			$projects = Project::paginate(PAGINATE_LIMIT);
+		}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        return view('project.create');
-    }
+		return view('project.index', compact('projects'));
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        
-        $project = Project::create($request->all());
-        $project->syncWithJira();
+	/**
+	 * Show the form for creating a new resource.
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('project.create');
+	}
 
-        Session::flash('flash_message', 'Project successfully added!');
+	/**
+	 * Store a newly created resource in storage.
+	 * @param Request $request
+	 * @return Response
+	 */
+	public function store(Request $request)
+	{
 
-        return redirect('project');
-    }
+		$project = Project::create($request->all());
+		$project->syncWithJira();
 
-    /**
-     * Display the specified resource.
-     * @param  int $id
-     * @param RevenueVsCost $revenue_vs_cost
-     * @return Response
-     */
-    public function show($id, RevenueVsCost $revenue_vs_cost)
-    {
-        $project = Project::with(['revenues', 'costs', 'costs.staff'])
-            ->findOrFail($id);
-        $performance = $revenue_vs_cost->get(['project_id'=>$id], ['month_logged']);
-        return view('project.show', compact('project', 'performance'));
-    }
+		Session::flash('flash_message', 'Project successfully added!');
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        $project = Project::findOrFail($id);
+		return redirect('project');
+	}
 
-        return view('project.edit', compact('project'));
-    }
+	/**
+	 * Display the specified resource.
+	 * @param  int $id
+	 * @param RevenueVsCost $revenue_vs_cost
+	 * @return Response
+	 */
+	public function show($id, RevenueVsCost $revenue_vs_cost)
+	{
+		$project     = Project::with(['revenues', 'costs', 'costs.staff'])
+			->findOrFail($id);
+		$performance = $revenue_vs_cost->get(['project_id' => $id], ['month_logged']);
+		return view('project.show', compact('project', 'performance'));
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id, Request $request)
-    {
-        
-        $project = Project::findOrFail($id);
-        $project->update($request->all());
+	/**
+	 * Show the form for editing the specified resource.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		$project = Project::findOrFail($id);
 
-        Session::flash('flash_message', 'Project successfully updated!');
+		return view('project.edit', compact('project'));
+	}
 
-        return redirect('project');
-    }
+	/**
+	 * Update the specified resource in storage.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function update($id, Request $request)
+	{
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        Project::destroy($id);
+		$project = Project::findOrFail($id);
+		$project->update($request->all());
 
-        Session::flash('flash_message', 'Project successfully deleted!');
+		Session::flash('flash_message', 'Project successfully updated!');
 
-        return redirect('project');
-    }
-    
-    public function syncWithJira($id = null) {
-        try {
-            \DB::beginTransaction();
-            if($id != null) {
-                Project::findOrFail($id)->syncWithJira();
-            }
-            else {
-                foreach(Project::all() as $project) {
-                    $project->syncWithJira();
-                }
-            }
-            \DB::commit();
-        } catch (\Exception $e) {
-            \DB::rollBack();
-            throw $e;
-        }
-        return 'synced succesfully';
-    }
+		return redirect('project');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+		Project::destroy($id);
+
+		Session::flash('flash_message', 'Project successfully deleted!');
+
+		return redirect('project');
+	}
+
+	public function syncWithJira($id = NULL)
+	{
+		try {
+			\DB::beginTransaction();
+			if ($id != NULL) {
+				Project::findOrFail($id)->syncWithJira();
+			} else {
+				foreach (Project::all() as $project) {
+					$project->syncWithJira();
+				}
+			}
+			\DB::commit();
+		} catch (\Exception $e) {
+			\DB::rollBack();
+			throw $e;
+		}
+		return 'synced succesfully';
+	}
 
 }
