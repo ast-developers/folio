@@ -150,9 +150,8 @@ return [
 
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
         // Use the line bellow for "laravelcollective/html" package otherwise remove it.
-        //Collective\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         Reportico\Reportico\ReporticoServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
 
@@ -205,8 +204,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        'Form'      => Illuminate\Html\FormFacade::class,
-        'HTML'      => Illuminate\Html\HtmlFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
 
         'Debugbar'    => Barryvdh\Debugbar\Facade::class,
 
