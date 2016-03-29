@@ -210,10 +210,10 @@
 		<!-- FastClick: For mobile devices -->
 		{!! HTML::script("js/plugin/fastclick/fastclick.min.js") !!}
 
-        !-- custom js -->
+        <!-- custom js -->
 		{!! HTML::script("js/custom/filter.js") !!}
 
-		!-- sweetalert js -->
+		<!-- sweetalert js -->
 		{!! HTML::script("js/plugin/sweet-alerts/sweetalert.min.js") !!}
 		{!! HTML::script("js/plugin/sweet-alerts/sweetalert-dev.js") !!}
 
