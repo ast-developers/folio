@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Staff;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Socialite;
 use Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -82,6 +84,12 @@ class AuthController extends Controller
 
 		$authUser = $this->findOrCreateUser($user);
 
+		if(!$authUser)
+		{
+			Session::flash('message', 'You are not a member of Arsenal Team. So you can not login');
+			Session::flash('alert-class', 'alert-danger');
+			return Redirect::to('/auth/login');
+		}
 		Auth::login($authUser, true);
 
 		return Redirect::to('/');
@@ -90,20 +98,27 @@ class AuthController extends Controller
 	private function findOrCreateUser($google_user)
 	{
 
+		$staff = Staff::where('email', $google_user->email)->first();
 		$authUser = User::where('google_id', $google_user->id)->first();
 
 		if ($authUser) {
 			return $authUser;
 		}
-		$user               = new User();
-		$user->name         = $google_user->name;
-		$user->email        = $google_user->email;
-		$user->google_id    = $google_user->id;
-		$user->avatar       = $google_user->avatar;
-		$user->access_token = $google_user->token;
-		$user->save();
+		else if(isset($staff['email'])) {
+			$user               = new User();
+			$user->name         = $google_user->name;
+			$user->email        = $google_user->email;
+			$user->google_id    = $google_user->id;
+			$user->avatar       = $google_user->avatar;
+			$user->access_token = $google_user->token;
+			$user->save();
 
-		return $user;
+			return $user;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }
