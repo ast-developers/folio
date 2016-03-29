@@ -41,7 +41,8 @@ class CheckJiraHours extends Command
 		$client = new Client();
 		//Call to EMS API to get the employee details
 		$date = Carbon::yesterday()->format('Y-m-d');
-		$res  = $client->get(URL() . "/" . EMS_API_PATH . 'employee_list/' . $date);
+		//$date = '2016-03-03';
+		$res  = $client->get(HOST . "/" . EMS_API_PATH . 'employee_list/' . $date);
 		if ($res->getStatusCode() == STATUS_OK) {
 			$data = json_decode($res->getBody()->getContents());
 			foreach ($data as $key => $ems) {
@@ -57,9 +58,9 @@ class CheckJiraHours extends Command
 						//IF difference is greater then 1 hour, then update EMS
 						if ($diff > 1 && $diff < 4) {
 							// Call back to EMS to mark employee as half absent
-							$client->get(URL() . "/" . EMS_API_PATH . 'update_employee_timesheet/' . $ems->emp_id . '/' . $date . '/half');
+							$client->get(HOST . "/" . EMS_API_PATH . 'update_employee_timesheet/' . $ems->emp_id . '/' . $date . '/half');
 						} else {
-							$client->get(URL() . "/" . EMS_API_PATH . 'update_employee_timesheet/' . $ems->emp_id . '/' . $date . '/full');
+							$client->get(HOST . "/" . EMS_API_PATH . 'update_employee_timesheet/' . $ems->emp_id . '/' . $date . '/full');
 						}
 					}
 				}
