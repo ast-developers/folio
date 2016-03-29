@@ -23,6 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('sync-with-jira/{id?}', 'ProjectController@syncWithJira');
     Route::get('ems', 'EmsController@index');
     Route::post('filter', 'FilterController@dateFilter');
+    Route::post('update_role', 'AssignmentController@updateRole');
     Route::resource('/', 'ReportController@project');
 
     Route::resource('project', 'ProjectController');
@@ -37,6 +38,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('logout', 'Auth\AuthController@getLogout');
     Route::get('report/project', 'ReportController@projectMonthly');
     Route::get('report/monthly', 'ReportController@monthly');
+
+    Route::get('assign/roles', 'AssignmentController@getRoles');
+    Route::get('assign/project', 'AssignmentController@getProjects');
+
     Route::get('report/time-sheet', 'ReportController@timesheet');
 });
 

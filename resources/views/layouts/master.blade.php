@@ -147,6 +147,19 @@
 
 						</ul>
 					</li>
+					<li class="top-menu-invisible">
+						<a href="#"><i class="fa fa-lg fa-fw fa-lock txt-color-blue"></i> <span
+									class="menu-item-parent">Assign to users</span></a>
+						<ul>
+							<li class="{{ set_active(['assign/roles']) }}">
+								<a href="{{ url('assign/roles') }}"><i class="fa fa-user"></i> Role</a>
+							</li>
+							<li class="{{ set_active(['assign/project']) }}">
+								<a href="{{ url('assign/project') }}"><i class="fa fa-inbox"></i> Projects</a>
+							</li>
+
+						</ul>
+					</li>
 			  </ul>
 		  </nav>
 			<span class="minifyme" data-action="minifyMenu"> 
@@ -212,6 +225,8 @@
 
         <!-- custom js -->
 		{!! HTML::script("js/custom/filter.js") !!}
+
+		@yield('js')
 
 		<!-- sweetalert js -->
 		{!! HTML::script("js/plugin/sweet-alerts/sweetalert.min.js") !!}
