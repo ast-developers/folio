@@ -1,6 +1,24 @@
 @extends('layouts.auth')
 
 @section('content')
+    @if(Session::has('message'))
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert {{ Session::get('alert-class', 'alert-info') }} msg">
+                    {{ Session::get('message') }}
+                </div>
+            </div>
+        </div>
+    @endif
+    @if (count($errors) > 0)
+          <div class="alert alert-danger">
+              <ul>
+                  @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+                  @endforeach
+              </ul>
+          </div>
+      @endif
 <div class="well no-padding">
     <form action="{{URL::to('login')}}" id="login-form" class="smart-form client-form" method="POST" >
         {!! csrf_field() !!}
