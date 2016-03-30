@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('filter', 'FilterController@dateFilter');
 
     Route::post('update-role', 'RoleManagementController@updateRole');
+    Route::post('assign', 'ProjectManagementController@assign');
 
     Route::resource('/', 'ReportController@project');
 
@@ -42,7 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('report/monthly', 'ReportController@monthly');
 
     Route::get('assign/roles', 'RoleManagementController@getRoles');
-    Route::get('assign/project', 'RoleManagementController@getProjects');
+    Route::get('assign/project', 'ProjectManagementController@getProject');
 
     Route::get('report/time-sheet', 'ReportController@timesheet');
 });
