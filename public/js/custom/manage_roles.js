@@ -2,13 +2,9 @@
  * Created by rashmi-dholakiya on 29/3/16.
  */
 $(document).ready(function () {
-    $('#roles').change(function (){
-        if($('option:selected', this).text() == 'Select') {
-            sweetAlert("Oops...", "Please Choose value", "error");
-        }
-        else
-        {
-            var role_value = $('option:selected', this).text();
+    $('.roles').click(function (){
+
+            var role_value =$(this).val();
 
             var user_id=$(this).data('user-id');
             $.ajax({
@@ -24,6 +20,5 @@ $(document).ready(function () {
                 }
             });
 
-        }
     });
 });

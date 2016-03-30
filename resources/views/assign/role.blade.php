@@ -22,7 +22,14 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->role}}</td>
                     <td>
-                        {!! Form::select('roles', array('0' => 'Select','Admin' => 'Admin','Sales' => 'Sales', 'Manager' => 'Manager'), 'key', array('class' => 'form-control','id' => 'roles','data-user-id'=>$item->id)) !!}
+{{--
+                        {!! Form::select('roles', , 'key', array('class' => 'form-control','id' => 'roles','data-user-id'=>$item->id)) !!}
+--}}
+                       {!!  Form::label('Sales') !!}
+                       {!!  Form::radio('roles', 'Sales', false, array('class' => 'roles','data-user-id'=>$item->id))  !!}
+                        {!!  Form::label('Manager') !!}
+                       {!!  Form::radio('roles', 'Manager', false, array('class' => 'roles','data-user-id'=>$item->id)) !!}
+
                     </td>
                 </tr>
             @endforeach
@@ -30,5 +37,4 @@
         </table>
         <div class="pagination"> {!! $user->render() !!} </div>
     </div>
-
 @endsection
