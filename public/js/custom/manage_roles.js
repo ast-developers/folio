@@ -13,7 +13,7 @@ $(document).ready(function () {
             var user_id=$(this).data('user-id');
             $.ajax({
                 type: 'POST',
-                url: base_url + "/folio/public/update_role",
+                url: base_url + "/folio/public/update-role",
                 data: { role : role_value, user_id : user_id },
                 error: function () {
                     sweetAlert("Oops...", "Error Occurred", "error");

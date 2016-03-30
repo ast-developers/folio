@@ -19,7 +19,7 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td><a href="{{ url('/project', $item->id) }}">{{ $item->name }}</a></td>
+                    <td>{{ $item->name }}</td>
                     <td>{{ $item->role}}</td>
                     <td>
                         {!! Form::select('roles', array('0' => 'Select','Admin' => 'Admin','Sales' => 'Sales', 'Manager' => 'Manager'), 'key', array('class' => 'form-control','id' => 'roles','data-user-id'=>$item->id)) !!}
