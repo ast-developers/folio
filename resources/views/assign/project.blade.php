@@ -14,7 +14,13 @@
                 <th>Name</th>
                 <th>Jira Key</th>
                 <th>Start Date</th>
-                <th>Assign to</th>
+                <th>Assign to
+                    {!!  Form::checkbox('check_all', 'Sales',false, array('class' => 'check_all_sales'))  !!}
+                    {!!  Form::label('Sales') !!}
+                    {!!  Form::checkbox('check_all', 'Manager', false, array('class' => 'check_all_manager')) !!}
+                    {!!  Form::label('Manager') !!}
+
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -32,39 +38,39 @@
                         @if(count($item->assign_projects)==1)
 
                             @if($item->assign_projects[0]->assigned_to=="Sales")
-                                {!!  Form::label('Sales') !!}
                                 {!!  Form::checkbox('roles', 'Sales',true, array('class' => 'roles','data-project-id'=>$item->id))  !!}
-                            @else
                                 {!!  Form::label('Sales') !!}
+                            @else
                                 {!!  Form::checkbox('roles', 'Sales',false, array('class' => 'roles','data-project-id'=>$item->id))  !!}
+                                {!!  Form::label('Sales') !!}
                             @endif
                             @if($item->assign_projects[0]->assigned_to=="Manager" )
-                                {!!  Form::label('Manager') !!}
                                 {!!  Form::checkbox('roles', 'Manager', true, array('class' => 'roles','data-project-id'=>$item->id)) !!}
-                            @else
                                 {!!  Form::label('Manager') !!}
+                            @else
                                 {!!  Form::checkbox('roles', 'Manager', false, array('class' => 'roles','data-project-id'=>$item->id)) !!}
+                                {!!  Form::label('Manager') !!}
                             @endif
                         @elseif(count($item->assign_projects)==2)
                             @if($item->assign_projects[0]->assigned_to=="Sales" || $item->assign_projects[1]->assigned_to=="Sales")
-                                {!!  Form::label('Sales') !!}
                                 {!!  Form::checkbox('roles', 'Sales',true, array('class' => 'roles','data-project-id'=>$item->id))  !!}
-                            @else
                                 {!!  Form::label('Sales') !!}
+                            @else
                                 {!!  Form::checkbox('roles', 'Sales',false, array('class' => 'roles','data-project-id'=>$item->id))  !!}
+                                {!!  Form::label('Sales') !!}
                             @endif
                             @if($item->assign_projects[0]->assigned_to=="Manager"  || $item->assign_projects[1]->assigned_to=="Manager")
-                                {!!  Form::label('Manager') !!}
                                 {!!  Form::checkbox('roles', 'Manager', true, array('class' => 'roles','data-project-id'=>$item->id)) !!}
-                            @else
                                 {!!  Form::label('Manager') !!}
+                            @else
                                 {!!  Form::checkbox('roles', 'Manager', false, array('class' => 'roles','data-project-id'=>$item->id)) !!}
+                                    {!!  Form::label('Manager') !!}
                             @endif
                         @else
-                            {!!  Form::label('Sales') !!}
                             {!!  Form::checkbox('roles', 'Sales',false, array('class' => 'roles','data-project-id'=>$item->id))  !!}
-                            {!!  Form::label('Manager') !!}
+                            {!!  Form::label('Sales') !!}
                             {!!  Form::checkbox('roles', 'Manager', false, array('class' => 'roles','data-project-id'=>$item->id)) !!}
+                            {!!  Form::label('Manager') !!}
                         @endif
                     </td>
                 </tr>
