@@ -39,11 +39,6 @@ class Project extends Model
     public function costs() {
         return $this->hasMany(ProjectCost::class)->orderBy('month_logged')->orderBy('staff_id');
     }
-
-    public function assign_projects()
-    {
-        return $this->hasMany(AssignProject::class);
-    }
     
     public function syncWithJira() {
         $staff_list = Staff::all();

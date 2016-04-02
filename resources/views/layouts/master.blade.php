@@ -24,8 +24,8 @@
 		{!! HTML::style("css/smartadmin-rtl.min.css") !!}
 
 		<!-- We recommend you use "your_style.css" to override SmartAdmin
-		     specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-		{!! HTML::style("css/your_style.css") !!} -->
+		     specific styles this will also ensure you retrain your customization with each SmartAdmin update.-->
+		{!! HTML::style("css/your_style.css") !!}
 
 
 		<!-- GOOGLE FONT -->
@@ -92,11 +92,10 @@
 
                 <div id="fullscreen" class="pull-right" style="margin-top: 10px">
 
-                    <span>From: {{--<input type="text" id="datepickerFrom">--}}
-
+                    <span>From:
                         {!! Form::text('text', (session('from_date')!=null) ? session('from_date') : null, array('id'=>'datepickerFrom')) !!}
                     </span>
-                    <span>To: {{--<input type="text" id="datepickerTo">--}}
+                    <span>To:
                         {!! Form::text('text', (session('to_date')!=null) ? session('to_date') : null, array('id'=>'datepickerTo')) !!}
                     </span>
 
@@ -117,6 +116,57 @@
 		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
 		<aside id="left-panel">
 			<!-- NAVIGATION : This navigation is also responsive-->
+			@if( Auth::user()->role == 'Manager')
+				<nav>
+					<ul>
+						<li class="{{ set_active(['/']) }}">
+							<a href="{{ url("/") }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+						</li>
+						<li class="{{ set_active(['project*']) }}">
+							<a href="{{ url('project') }}" ><i class="fa fa-lg fa-fw fa-inbox"></i> <span
+										class="menu-item-parent">Projects</span></a>
+						</li>
+						<li class="{{ set_active(['staff','staff/*']) }}">
+							<a href="{{ url('staff') }}"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Staff</span></a></li>
+						<li class="{{ set_active(['staff-rate*']) }}">
+							<a href="{{ url('staff-rate') }}"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Staff Rate</span></a></li>
+					</ul>
+				</nav>
+			@elseif( Auth::user()->role == 'Sales')
+				<nav>
+					<ul>
+						<li class="{{ set_active(['/']) }}">
+							<a href="{{ url("/") }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+						</li>
+						<li class="{{ set_active(['project*']) }}">
+							<a href="{{ url('project') }}" ><i class="fa fa-lg fa-fw fa-inbox"></i> <span
+										class="menu-item-parent">Projects</span></a>
+						</li>
+
+						<li class="top-menu-invisible">
+							<a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span
+										class="menu-item-parent">Reports</span></a>
+							<ul>
+								<li class="{{ set_active(['report/project']) }}">
+									<a href="{{ url('report/project') }}"><i class="fa fa-stack-overflow"></i> Project Performance</a>
+								</li>
+								<li class="{{ set_active(['report/monthly']) }}">
+									<a href="{{ url('report/monthly') }}"><i class="fa fa-cube"></i> Monthly Performance</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+             @elseif(Auth::user()->role == 'Guest')
+                <nav>
+                    <ul>
+                        <li class="{{ set_active(['welcome']) }}">
+                            <a href="{{ url('welcome') }}" ><i class="fa fa-lg fa-fw fa-home"></i> <span
+                                        class="menu-item-parent">Welcome</span></a>
+                        </li>
+                    </ul>
+                </nav>
+			@else
 			<nav>
 				<ul>
 					<li class="{{ set_active(['/']) }}">
@@ -144,7 +194,6 @@
 							<li class="{{ set_active(['report/monthly']) }}">
 								<a href="{{ url('report/monthly') }}"><i class="fa fa-cube"></i> Monthly Performance</a>
 							</li>
-
 						</ul>
 					</li>
 					<li class="top-menu-invisible">
@@ -162,6 +211,7 @@
 					</li>
 			  </ul>
 		  </nav>
+			@endif
 			<span class="minifyme" data-action="minifyMenu"> 
 				<i class="fa fa-arrow-circle-left hit"></i> 
 			</span>

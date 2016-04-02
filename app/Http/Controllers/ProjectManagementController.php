@@ -12,24 +12,34 @@ use App\Http\Controllers\Controller;
 
 class ProjectManagementController extends Controller
 {
-    public function getProject()
-    {
-        if (session('from_date') != NULL) {
-            $projects = Project::with('assign_projects')->whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
-        } else {
-            $projects = Project::with('assign_projects')->paginate(PAGINATE_LIMIT);
-        }
+	public function getProject()
+	{
+		if (session('from_date') != NULL) {
+			$projects = Project::with('assignProjects')->whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
+		} else {
+			$projects = Project::with('assignProjects')->paginate(PAGINATE_LIMIT);
+		}
 
-        return view('assign.project', compact('projects'));
-    }
+		return view('assign.project', compact('projects'));
+	}
 
-    public function assign(Request $request)
-    {
-        $assign_projects = new AssignProject();
-        $assign_projects->project_id = $request['project_id'];
-        $assign_projects->assigned_to = $request['role'];
-        $assign_projects->save();
+	public function getUsers(Request $request)
+	{
+		$users = User::where('role', $request['role'])->get()->toArray();
+		return json_encode($users);
+	}
 
-    }
+	public function assignProjectToUser(Request $request)
+	{
+		$user = User::find($request['user_id']);
+		$user->projects()->attach([$request['project_id']]);
+	}
+
+	public function getUserProjects(Request $request)
+	{
+		$user = User::find($request['user_id']);
+		$user_projects = $user->projects()->select('user_id')->where('project_id',$request['project_id'])->get()->toArray();
+		return json_encode(count($user_projects));
+	}
 
 }

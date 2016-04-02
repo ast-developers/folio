@@ -20,14 +20,25 @@ Route::get('auth/google', 'Auth\AuthController@googleredirectToProvider');
 Route::get('auth/google/callback', 'Auth\AuthController@googlehandleProviderCallback');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'filter-user'], function () {
+            Route::resource('/', 'ReportController@project');
+		    Route::get('report/project', 'ReportController@projectMonthly');
+		    Route::get('report/monthly', 'ReportController@monthly');
+    });
+    Route::get('welcome', function(){
+        return view('welcome');
+    });
     Route::get('sync-with-jira/{id?}', 'ProjectController@syncWithJira');
     Route::get('ems', 'EmsController@index');
     Route::post('filter', 'FilterController@dateFilter');
 
     Route::post('update-role', 'RoleManagementController@updateRole');
+    Route::post('get-users', 'ProjectManagementController@getUsers');
+    Route::post('assign-project-to-user', 'ProjectManagementController@assignProjectToUser');
+    Route::post('get-user-projects', 'ProjectManagementController@getUserProjects');
     Route::post('assign', 'ProjectManagementController@assign');
 
-    Route::resource('/', 'ReportController@project');
+    Route::resource('/report', 'ReportController@project');
 
     Route::resource('project', 'ProjectController');
 
@@ -37,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('staff', 'StaffController');
     Route::resource('staff-rate', 'StaffRateController');
     Route::resource('revenue', 'RevenueController');
-    
+
     Route::get('logout', 'Auth\AuthController@getLogout');
     Route::get('report/project', 'ReportController@projectMonthly');
     Route::get('report/monthly', 'ReportController@monthly');
@@ -46,5 +57,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('assign/project', 'ProjectManagementController@getProject');
 
     Route::get('report/time-sheet', 'ReportController@timesheet');
+
 });
 
+/*Route::any('/{all}', function(){
+    return view('errors.503');
+})->where('all', '.*');*/

@@ -36,4 +36,9 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function projects()
+    {
+        return $this->belongsToMany('App\Project', 'user_projects', 'user_id', 'project_id')->withPivot('user_id', 'project_id');
+    }
 }

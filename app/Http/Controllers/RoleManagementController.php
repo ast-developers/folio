@@ -20,9 +20,9 @@ class RoleManagementController extends Controller
 
     public function updateRole(Request $request)
     {
-        $project = User::findOrFail($request['user_id']);
-        $project->role = $request['role'];
-        $project->save();
+        $user = User::findOrFail($request['user_id']);
+        $user->role = $request['role'];
+        $user->save();
     }
     /**
      * Display a listing of the resource.
