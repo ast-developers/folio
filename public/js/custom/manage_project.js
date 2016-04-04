@@ -20,13 +20,13 @@ $(document).ready(function () {
                 var select = '<div class="multiselect">' +
                     '<div class="selectBox" onclick="showCheckboxes(this)">' + '<select>' + '<option>Select ' + role_value + '</option>' + '</select>' + '<div class="overSelect"></div>' + '</div>' + '<div class="checkboxes">';
                 var check = false;
-                $.each(data, function (index, d) {
+                $.each(data, function (index, value) {
 
                     $.ajax({
                         type: 'POST',
                         url: base_url + "/folio/public/get-user-projects",
                         async: false,
-                        data: {'user_id': d.id, 'project_id': project_id},
+                        data: {'user_id': value.id, 'project_id': project_id},
                         error: function () {
                             sweetAlert("Oops...", "Error Occurred", "error");
                         },
@@ -49,11 +49,11 @@ $(document).ready(function () {
                     });
                     if (check) {
                         var option =
-                            '<label><input type="checkbox" checked="checked" class="checkboxvalue" data-user-id="' + d.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + d.name + '</label>';
+                            '<label><input type="checkbox" checked="checked" class="checkboxvalue" data-user-id="' + value.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + value.name + '</label>';
                     }
                     else {
                         var option =
-                            '<label><input type="checkbox"  class="checkboxvalue" data-user-id="' + d.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + d.name + '</label>';
+                            '<label><input type="checkbox"  class="checkboxvalue" data-user-id="' + value.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + value.name + '</label>';
                     }
                     select += option;
                 });
