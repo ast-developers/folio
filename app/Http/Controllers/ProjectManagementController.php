@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AssignProject;
 use App\Project;
 use App\User;
+use App\UserRoles;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -25,7 +26,8 @@ class ProjectManagementController extends Controller
 
 	public function getUsers(Request $request)
 	{
-		$users = User::where('role', $request['role'])->get()->toArray();
+		$role = UserRoles::where('user_role_name',$request['role'])->first();
+		$users = User::where('role_id', $role->id)->get()->toArray();
 		return json_encode($users);
 	}
 
@@ -38,10 +40,8 @@ class ProjectManagementController extends Controller
 	public function getUserProjects(Request $request)
 	{
 		$user = User::find($request['user_id']);
-		$user_projects = $user->projects()->select('user_id')->where('project_id',$request['project_id'])->get()->toArray();
-		echo $user_projects->count();
-
-		return json_encode($user_projects->count());
+		$user_projects = $user->projects()->select('user_id')->where('project_id',$request['project_id'])->get()->count('user_id');
+		return json_encode($user_projects);
 	}
 
 }

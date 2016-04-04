@@ -74,7 +74,7 @@ class RevenueVsCost
 
 			$query->whereBetween('sub.month_logged', [$from, $to]);
 		}
-		if(Auth::user()->role == SALES || Auth::user()->role == MANAGER)
+		if(Auth::user()->role_id == 3 || Auth::user()->role_id == 2)
 		{
 			$user = Auth::user();
 			$user_projects = $user->projects()->select('user_id')->get();

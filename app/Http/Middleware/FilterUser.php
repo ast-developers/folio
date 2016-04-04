@@ -3,12 +3,17 @@
 namespace App\Http\Middleware;
 
 use App\AssignProject;
-use App\Project;
+use App\Interfaces\ProjectRepositoryInterface;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
 class FilterUser
 {
+	public  $projects;
+	public function __construct(ProjectRepositoryInterface $project)
+	{
+		$this->projects=$project;
+	}
 	/**
 	 * Handle an incoming request.
 	 * @param  \Illuminate\Http\Request $request
@@ -17,38 +22,27 @@ class FilterUser
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (Auth::user()->role == MANAGER) {
-			$projects = $this->getProjects();
-			session(['projects' => $projects]);
-		} elseif (Auth::user()->role == SALES) {
-			$projects = $this->getProjects();
-			session(['projects' => $projects]);
-		} elseif (Auth::user()->role == GUEST) {
-			return redirect('welcome');
-		} elseif (Auth::user()->role == ADMIN) {
-			return redirect('report');
-		} else {
-			return redirect('error');
-		}
 
+		switch(Auth::user()->role_id)
+		{
+			case 1:
+				return redirect('report');
+				break;
+			case 2:
+				$projects = $this->projects->getProjects();
+				session(['projects' => $projects]);
+				break;
+			case 3:
+				$projects = $this->projects->getProjects();
+				session(['projects' => $projects]);
+				break;
+			case 4:
+				return redirect('welcome');
+				break;
+
+			default:
+				return redirect('error');
+		}
 		return $next($request);
-	}
-
-	public function getProjects()
-	{
-		$user = Auth::user();
-		$user_projects = $user->projects()->select('user_id')->get();
-		$project_id       = array();
-		$i                = 0;
-		foreach ($user_projects as $item) {
-			$project_id[$i] = $item->pivot->project_id;
-			$i++;
-		}
-		if (session('from_date') != NULL) {
-			$projects = Project::whereIn('id', $project_id)->whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
-		} else {
-			$projects = Project::whereIn('id', $project_id)->paginate(PAGINATE_LIMIT);
-		}
-		return $projects;
 	}
 }

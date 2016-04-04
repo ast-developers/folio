@@ -21,7 +21,11 @@ class RoleManagementController extends Controller
     public function updateRole(Request $request)
     {
         $user = User::findOrFail($request['user_id']);
-        $user->role = $request['role'];
+        if ($request['role'] == MANAGER)
+            $user->role_id = 2;
+        else {
+            $user->role_id = 3;
+        }
         $user->save();
     }
 }

@@ -13,7 +13,8 @@
         "laravelcollective/html": "5.1.*",
         "reportico/laravel-reportico": "~5.1",
         "laravel/socialite": "^2.0",
-        "cartalyst/sentinel": "2.0.*"
+        "cartalyst/sentinel": "2.0.*",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
