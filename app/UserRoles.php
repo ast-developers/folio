@@ -4,10 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-define('MANAGER','Manager');
-define('SALES','Sales');
-define('ADMIN','Admin');
-define('GUEST','Guest');
 
 class UserRoles extends Model
 {
@@ -19,7 +15,10 @@ class UserRoles extends Model
 	 * @var array
 	 */
 	protected $fillable = ['user_role_name'];
-
+	const MANAGER = 'Manager';
+	const SALES = 'Sales';
+	const ADMIN = 'Admin';
+	const GUEST = 'Guest';
 	public function user()
 	{
 		return $this->hasMany('App\User');

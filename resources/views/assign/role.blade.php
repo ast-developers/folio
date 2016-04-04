@@ -20,17 +20,17 @@
                 <tr>
                     <td>{{ $x }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>@if($item->role_id == 1){!! ADMIN !!}
-                        @elseif($item->role_id == 2){!! MANAGER !!}
-                        @elseif($item->role_id == 3){!! SALES !!}
-                        @elseif($item->role_id == 4){!! GUEST !!}
+                    <td>@if($item->role_id == 1){!! \App\UserRoles::ADMIN !!}
+                        @elseif($item->role_id == 2){!! \App\UserRoles::MANAGER !!}
+                        @elseif($item->role_id == 3){!! \App\UserRoles::SALES !!}
+                        @elseif($item->role_id == 4){!! \App\UserRoles::GUEST !!}
                         @endif
                     </td>
                     <td>
-                       {!!  Form::label(SALES) !!}
-                       {!!  Form::radio('roles', SALES, false, array('class' => 'roles','data-user-id'=>$item->id))  !!}
-                        {!!  Form::label(MANAGER) !!}
-                       {!!  Form::radio('roles', MANAGER, false, array('class' => 'roles','data-user-id'=>$item->id)) !!}
+                       {!!  Form::label(\App\UserRoles::SALES) !!}
+                       {!!  Form::radio('roles', \App\UserRoles::SALES, false, array('class' => 'roles','data-user-id'=>$item->id))  !!}
+                        {!!  Form::label(\App\UserRoles::MANAGER) !!}
+                       {!!  Form::radio('roles', \App\UserRoles::MANAGER, false, array('class' => 'roles','data-user-id'=>$item->id)) !!}
                     </td>
                 </tr>
             @endforeach

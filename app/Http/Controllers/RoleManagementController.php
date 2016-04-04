@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\UserRoles;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -21,7 +22,7 @@ class RoleManagementController extends Controller
     public function updateRole(Request $request)
     {
         $user = User::findOrFail($request['user_id']);
-        if ($request['role'] == MANAGER)
+        if ($request['role'] == UserRoles::MANAGER)
             $user->role_id = 2;
         else {
             $user->role_id = 3;
