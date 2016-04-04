@@ -3,34 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
+use App\Interfaces\ProjectRepositoryInterface;
 use App\Project;
 use App\RevenueVsCost;
-use App\Staff;
-use App\Timelog;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use Session;
 use Response;
 
 class ProjectController extends Controller
 {
 
+	public  $project_repository;
+	public function __construct(ProjectRepositoryInterface $project)
+	{
+		$this->project_repository=$project;
+	}
 	/**
 	 * Display a listing of the resource.
 	 * @return Response
 	 */
 	public function index()
 	{
-
-		if (session('from_date') != NULL) {
-			$projects = Project::whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
-		} else {
-			$projects = Project::paginate(PAGINATE_LIMIT);
-		}
-
+		$projects = $this->project_repository->getProjects();
 		return view('project.index', compact('projects'));
 	}
 
