@@ -26,8 +26,10 @@ class ProjectManagementController extends Controller
 
 	public function getUsers(Request $request)
 	{
-		$role = UserRoles::where('user_role_name',$request['role'])->first();
-		$users = User::where('role_id', $role->id)->get()->toArray();
+		$role = $request['role'];
+		$users = User::wherehas('userRole',function($q) use($role){
+               return $q->where('user_role_name',$role);
+			})->get()->toArray();
 		return json_encode($users);
 	}
 
