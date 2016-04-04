@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+define('MANAGER','Manager');
+define('SALES','Sales');
+define('ADMIN','Admin');
+define('GUEST','Guest');
+
 class UserRoles extends Model
 {
 	protected $table = 'user_roles';

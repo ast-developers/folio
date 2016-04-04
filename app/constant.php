@@ -10,8 +10,4 @@ define('GOOGLE_REDIRECT', HOST.'/folio/public/auth/google/callback');
 
 define('PAGINATE_LIMIT', 15);
 
-define('MANAGER','Manager');
-define('SALES','Sales');
-define('ADMIN','Admin');
-define('GUEST','Guest');
 

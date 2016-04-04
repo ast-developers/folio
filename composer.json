@@ -33,7 +33,8 @@
         },
         "files": [
             "app/helpers.php",
-            "app/constant.php"
+            "app/constant.php",
+            "app/UserRoles.php"
         ]
     },
     "autoload-dev": {
