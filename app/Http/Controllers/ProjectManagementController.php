@@ -15,9 +15,9 @@ class ProjectManagementController extends Controller
 	public function getProject()
 	{
 		if (session('from_date') != NULL) {
-			$projects = Project::with('assignProjects')->whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
+			$projects = Project::whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
 		} else {
-			$projects = Project::with('assignProjects')->paginate(PAGINATE_LIMIT);
+			$projects = Project::paginate(PAGINATE_LIMIT);
 		}
 
 		return view('assign.project', compact('projects'));
