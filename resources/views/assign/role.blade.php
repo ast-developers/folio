@@ -22,14 +22,10 @@
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->role}}</td>
                     <td>
-{{--
-                        {!! Form::select('roles', , 'key', array('class' => 'form-control','id' => 'roles','data-user-id'=>$item->id)) !!}
---}}
-                       {!!  Form::label('Sales') !!}
-                       {!!  Form::radio('roles', 'Sales', false, array('class' => 'roles','data-user-id'=>$item->id))  !!}
-                        {!!  Form::label('Manager') !!}
-                       {!!  Form::radio('roles', 'Manager', false, array('class' => 'roles','data-user-id'=>$item->id)) !!}
-
+                       {!!  Form::label(SALES) !!}
+                       {!!  Form::radio('roles', SALES, false, array('class' => 'roles','data-user-id'=>$item->id))  !!}
+                        {!!  Form::label(MANAGER) !!}
+                       {!!  Form::radio('roles', MANAGER, false, array('class' => 'roles','data-user-id'=>$item->id)) !!}
                     </td>
                 </tr>
             @endforeach

@@ -17,15 +17,15 @@ class FilterUser
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (Auth::user()->role == 'Manager') {
+		if (Auth::user()->role == MANAGER) {
 			$projects = $this->getProjects();
 			session(['projects' => $projects]);
-		} elseif (Auth::user()->role == 'Sales') {
+		} elseif (Auth::user()->role == SALES) {
 			$projects = $this->getProjects();
 			session(['projects' => $projects]);
-		} elseif (Auth::user()->role == 'Guest') {
+		} elseif (Auth::user()->role == GUEST) {
 			return redirect('welcome');
-		} elseif (Auth::user()->role == 'Admin') {
+		} elseif (Auth::user()->role == ADMIN) {
 			return redirect('report');
 		} else {
 			return redirect('error');

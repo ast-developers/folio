@@ -29,11 +29,11 @@
                     <td>{{ $item->jira_key}}</td>
                     <td>{{ date_formation($item->start_date) }}</td>
                     <td>
-                        {!!  Form::label('Manager') !!}
-                        {!!  Form::radio('roles', 'Manager', false, array('class' => 'roles','data-project-id'=>$item->id)) !!}
+                        {!!  Form::label(MANAGER) !!}
+                        {!!  Form::radio('roles', MANAGER, false, array('class' => 'roles','data-project-id'=>$item->id)) !!}
 
-                        {!!  Form::label('Sales') !!}
-                        {!!  Form::radio('roles', 'Sales', false, array('class' => 'roles','data-project-id'=>$item->id))  !!}
+                        {!!  Form::label(SALES) !!}
+                        {!!  Form::radio('roles', SALES, false, array('class' => 'roles','data-project-id'=>$item->id))  !!}
                     </td>
                 </tr>
             @endforeach

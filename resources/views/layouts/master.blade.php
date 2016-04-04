@@ -116,7 +116,7 @@
 		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
 		<aside id="left-panel">
 			<!-- NAVIGATION : This navigation is also responsive-->
-			@if( Auth::user()->role == 'Manager')
+			@if( Auth::user()->role == MANAGER)
 				<nav>
 					<ul>
 						<li class="{{ set_active(['/']) }}">
@@ -132,7 +132,7 @@
 							<a href="{{ url('staff-rate') }}"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Staff Rate</span></a></li>
 					</ul>
 				</nav>
-			@elseif( Auth::user()->role == 'Sales')
+			@elseif( Auth::user()->role == SALES)
 				<nav>
 					<ul>
 						<li class="{{ set_active(['/']) }}">
@@ -157,7 +157,7 @@
 						</li>
 					</ul>
 				</nav>
-             @elseif(Auth::user()->role == 'Guest')
+             @elseif(Auth::user()->role == GUEST)
                 <nav>
                     <ul>
                         <li class="{{ set_active(['welcome']) }}">

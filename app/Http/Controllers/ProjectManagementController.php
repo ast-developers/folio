@@ -39,7 +39,9 @@ class ProjectManagementController extends Controller
 	{
 		$user = User::find($request['user_id']);
 		$user_projects = $user->projects()->select('user_id')->where('project_id',$request['project_id'])->get()->toArray();
-		return json_encode(count($user_projects));
+		echo $user_projects->count();
+
+		return json_encode($user_projects->count());
 	}
 
 }
