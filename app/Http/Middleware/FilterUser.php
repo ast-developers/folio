@@ -29,9 +29,6 @@ class FilterUser
 				return redirect('report');
 				break;
 			case 2:
-				$projects = $this->projects->getProjects();
-				session(['projects' => $projects]);
-				break;
 			case 3:
 				$projects = $this->projects->getProjects();
 				session(['projects' => $projects]);
