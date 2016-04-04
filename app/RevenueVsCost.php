@@ -8,6 +8,7 @@
 namespace App;
 
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class RevenueVsCost
 {
@@ -72,6 +73,19 @@ class RevenueVsCost
 			$to = $to[0] . $to[1];
 
 			$query->whereBetween('sub.month_logged', [$from, $to]);
+		}
+		if(Auth::user()->role_id == 3 || Auth::user()->role_id == 2)
+		{
+			$user = Auth::user();
+			$user_projects = $user->projects()->select('user_id')->get();
+			$project_id       = array();
+			$i                = 0;
+			foreach ($user_projects as $item) {
+				$project_id[$i] = $item->pivot->project_id;
+				$i++;
+			}
+
+			$query->whereIn('sub.project_id',$project_id);
 		}
 		return collect($query->get());
 	}
