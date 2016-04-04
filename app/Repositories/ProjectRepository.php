@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
-	public function getProjects()
+	public function getAssignedProjects()
 	{
 		$user = Auth::user();
 		$user_projects = $user->projects()->select('user_id')->get();
@@ -32,7 +32,7 @@ class ProjectRepository implements ProjectRepositoryInterface
 		return $projects;
 	}
 
-	public function getAssignedProjects()
+	public function getProjects()
 	{
 		if (session('projects') != NULL) {
 			$projects = session('projects');

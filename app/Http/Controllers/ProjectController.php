@@ -13,10 +13,10 @@ use Response;
 class ProjectController extends Controller
 {
 
-	public  $projects;
+	public  $project_repository;
 	public function __construct(ProjectRepositoryInterface $project)
 	{
-		$this->projects=$project;
+		$this->project_repository=$project;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -24,7 +24,7 @@ class ProjectController extends Controller
 	 */
 	public function index()
 	{
-		$projects = $this->projects->getAssignedProjects();
+		$projects = $this->project_repository->getProjects();
 		return view('project.index', compact('projects'));
 	}
 

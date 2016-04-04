@@ -30,7 +30,7 @@ class FilterUser
 				break;
 			case 2:
 			case 3:
-				$projects = $this->projects->getProjects();
+				$projects = $this->projects->getAssignedProjects();
 				session(['projects' => $projects]);
 				break;
 			case 4:
