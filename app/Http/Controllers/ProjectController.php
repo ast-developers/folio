@@ -6,7 +6,9 @@ use App\Http\Requests;
 use App\Interfaces\ProjectRepositoryInterface;
 use App\Project;
 use App\RevenueVsCost;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Response;
 
@@ -46,6 +48,12 @@ class ProjectController extends Controller
 	{
 
 		$project = Project::create($request->all());
+		$user = Auth::user();
+		$user->projects()->attach($project->id);
+
+		$projects = $this->project_repository->getAssignedProjects();
+		session(['projects' => $projects]);
+
 		$project->syncWithJira();
 
 		Session::flash('flash_message', 'Project successfully added!');
@@ -90,6 +98,9 @@ class ProjectController extends Controller
 		$project = Project::findOrFail($id);
 		$project->update($request->all());
 
+		$projects = $this->project_repository->getAssignedProjects();
+		session(['projects' => $projects]);
+
 		Session::flash('flash_message', 'Project successfully updated!');
 
 		return redirect('project');
@@ -104,8 +115,13 @@ class ProjectController extends Controller
 	{
 		Project::destroy($id);
 
-		Session::flash('flash_message', 'Project successfully deleted!');
+		$user = Auth::user();
+		$user->projects()->detach($id);
 
+		$projects = $this->project_repository->getAssignedProjects();
+		session(['projects' => $projects]);
+
+		Session::flash('flash_message', 'Project successfully deleted!');
 		return redirect('project');
 	}
 
