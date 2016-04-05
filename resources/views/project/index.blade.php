@@ -2,12 +2,16 @@
 
 @section('content')
 
-    <h1>Projects <a href="{{ route('project.create') }}" class="btn btn-primary pull-right btn-sm">Add New Project</a></h1>
+    <h1>Projects
+        @if( Auth::user()->role_id != 3)
+        <a href="{{ route('project.create') }}" class="btn btn-primary pull-right btn-sm">Add New Project</a>
+        @endif
+    </h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>Name</th><th>Jira Key</th><th>Start Date</th><th>Actions</th>
+                    <th>S.No</th><th>Name</th><th>Jira Key</th><th>Start Date</th> @if( Auth::user()->role_id != 3)<th>Actions</th>@endif
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +25,7 @@
                         <td><a href="{{ url('/project', $item->id) }}">{{ $item->name }}</a></td>
                         <td>{{ $item->jira_key}}</td>
                         <td>{{ date_formation($item->start_date) }}</td>
+                        @if( Auth::user()->role_id != 3)
                         <td>
                             <a href="{{ route('project.edit', $item->id) }}">
                                 <button type="submit" class="btn btn-primary btn-xs">Update</button>
@@ -33,6 +38,7 @@
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                             {!! Form::close() !!}
                         </td>
+                         @endif
                     </tr>
 
             @endforeach
