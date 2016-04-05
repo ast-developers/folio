@@ -9,6 +9,7 @@ use App\RevenueVsCost;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 use Response;
 
@@ -124,7 +125,7 @@ class ProjectController extends Controller
 			session(['projects' => $projects]);
 		}
 		Session::flash('flash_message', 'Project successfully deleted!');
-		return redirect('project');
+		return Redirect::back();
 	}
 
 	public function syncWithJira($id = NULL)
