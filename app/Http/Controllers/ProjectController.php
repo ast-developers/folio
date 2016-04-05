@@ -98,8 +98,10 @@ class ProjectController extends Controller
 		$project = Project::findOrFail($id);
 		$project->update($request->all());
 
-		$projects = $this->project_repository->getAssignedProjects();
-		session(['projects' => $projects]);
+		if(Auth::user()->role_id!=1) {
+			$projects = $this->project_repository->getAssignedProjects();
+			session(['projects' => $projects]);
+		}
 
 		Session::flash('flash_message', 'Project successfully updated!');
 
@@ -117,10 +119,10 @@ class ProjectController extends Controller
 
 		$user = Auth::user();
 		$user->projects()->detach($id);
-
-		$projects = $this->project_repository->getAssignedProjects();
-		session(['projects' => $projects]);
-
+		if($user->role_id!=1) {
+			$projects = $this->project_repository->getAssignedProjects();
+			session(['projects' => $projects]);
+		}
 		Session::flash('flash_message', 'Project successfully deleted!');
 		return redirect('project');
 	}
