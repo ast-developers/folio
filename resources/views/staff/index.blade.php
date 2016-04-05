@@ -2,12 +2,16 @@
 
 @section('content')
 
-    <h1>Staff <a href="{{ route('staff.create') }}" class="btn btn-primary pull-right btn-sm">Add New Staff</a></h1>
+    <h1>Staff
+        @if( Auth::user()->role_id != 2)
+        <a href="{{ route('staff.create') }}" class="btn btn-primary pull-right btn-sm">Add New Staff</a>
+        @endif
+    </h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th>User Name</th><th>Email</th><th>Actions</th>
+                    <th>S.No</th><th>User Name</th><th>Email</th> @if( Auth::user()->role_id != 2)<th>Actions</th>@endif
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +21,7 @@
                 <tr>
                     <td>{{ $x }}</td>
                     <td><a href="{{ url('/staff', $item->id) }}">{{ $item->user_name }}</a></td><td>{{ $item->email }}</td>
+                    @if( Auth::user()->role_id != 2)
                     <td>
                         <a href="{{ route('staff.edit', $item->id) }}">
                             <button type="submit" class="btn btn-primary btn-xs">Update</button>
@@ -29,6 +34,7 @@
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                         {!! Form::close() !!}
                     </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>
