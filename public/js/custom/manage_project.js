@@ -40,13 +40,6 @@ $(document).ready(function () {
                             }
                         }
                     });
-
-                    swal({
-                        title: "Loading",
-                        text: "Loading Please wait..",
-                        timer: 700,
-                        showConfirmButton: false
-                    });
                     if (check) {
                         var option =
                             '<label><input type="checkbox" checked="checked" class="checkboxvalue" data-user-id="' + value.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + value.name + '</label>';
