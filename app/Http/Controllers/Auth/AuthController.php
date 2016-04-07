@@ -86,8 +86,7 @@ class AuthController extends Controller
 
 		if(!$authUser)
 		{
-			Session::flash('message', 'You are not a member of Arsenal Team. So you can not login');
-			Session::flash('alert-class', 'alert-danger');
+			Session::flash('message', 'You are not a member of Arsenal Team. or You are not authorized uder. So you can not login');
 			return Redirect::to('/auth/login');
 		}
 		Auth::login($authUser, true);
@@ -98,25 +97,17 @@ class AuthController extends Controller
 	private function findOrCreateUser($google_user)
 	{
 
-		$staff = Staff::where('email', $google_user->email)->first();
-		$authUser = User::where('google_id', $google_user->id)->first();
+		$user = User::where('email', $google_user->email)->first();
 
-		if ($authUser) {
-			return $authUser;
-		}
-		else if(isset($staff['email'])) {
-			$user               = new User();
+		if ($user) {
 			$user->name         = $google_user->name;
-			$user->email        = $google_user->email;
 			$user->google_id    = $google_user->id;
 			$user->avatar       = $google_user->avatar;
 			$user->access_token = $google_user->token;
 			$user->save();
-
 			return $user;
 		}
-		else
-		{
+		else{
 			return false;
 		}
 	}

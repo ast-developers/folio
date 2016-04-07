@@ -56,7 +56,7 @@
 
     <!-- MAIN CONTENT -->
     <div id="content">
-
+		@include('Notifications.messages')
         @yield('content')
 
     </div>

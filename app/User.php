@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -21,6 +22,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var string
      */
+
     protected $table = 'users';
 
     /**
@@ -28,7 +30,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password','google_id','avatar','access_token'];
+    protected $fillable = ['name', 'email', 'password','google_id','avatar','access_token','role_id'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -45,5 +47,9 @@ class User extends Model implements AuthenticatableContract,
     public function userRole()
     {
         return $this->hasOne('App\UserRoles','id','role_id');
+    }
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
     }
 }

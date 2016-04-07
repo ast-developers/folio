@@ -5,23 +5,28 @@
         "This file is @generated automatically"
     ],
     "hash": "2777f3a4a7e721cf04d285c34f0597c1",
+<<<<<<< HEAD
+=======
+    "content-hash": "e28c224d60066df55140b5fb09b4a4d5",
+>>>>>>> dbf2b3b5ba151c9b99be1fb42ae59794c2ce370f
     "packages": [
         {
             "name": "appzcoder/crud-generator",
-            "version": "v1.0.7",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/appzcoder/crud-generator.git",
-                "reference": "4363192ba2c910057088a48a42fecd719eb0c262"
+                "reference": "c3ac70b551ab8c19535fb258ef667a55a59966c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/appzcoder/crud-generator/zipball/4363192ba2c910057088a48a42fecd719eb0c262",
-                "reference": "4363192ba2c910057088a48a42fecd719eb0c262",
+                "url": "https://api.github.com/repos/appzcoder/crud-generator/zipball/c3ac70b551ab8c19535fb258ef667a55a59966c3",
+                "reference": "c3ac70b551ab8c19535fb258ef667a55a59966c3",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.1",
+                "illuminate/support": "5.1.*",
+                "laravelcollective/html": "5.1.*",
                 "php": ">=5.5.9"
             },
             "type": "library",
@@ -45,168 +50,9 @@
             "keywords": [
                 "crud",
                 "crud generator",
-                "laravel",
-                "laravel crud generator"
+                "laravel"
             ],
-            "time": "2016-02-06 19:14:18"
-        },
-        {
-            "name": "cartalyst/sentinel",
-            "version": "v2.0.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cartalyst/sentinel.git",
-                "reference": "a4921f9195835a7bc701a391e5379ef79b8837df"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/sentinel/zipball/a4921f9195835a7bc701a391e5379ef79b8837df",
-                "reference": "a4921f9195835a7bc701a391e5379ef79b8837df",
-                "shasum": ""
-            },
-            "require": {
-                "cartalyst/support": "~1.0",
-                "illuminate/support": "~5.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "illuminate/cookie": "~5.0",
-                "illuminate/database": "~5.0",
-                "illuminate/http": "~5.0",
-                "illuminate/session": "~5.0",
-                "ircmaxell/password-compat": "~1.0",
-                "mockery/mockery": "~0.9",
-                "paragonie/random_compat": "~1.1",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "illuminate/database": "By default, Sentinel utilizes the powerful Illuminate database layer.",
-                "illuminate/events": "To hook into various events across Sentinel, we recommend using Illuminate's event dispatcher.",
-                "ircmaxell/password-compat": "Default hashing uses PHP 5.5 password_* functions, with forward-compatible support.",
-                "symfony/http-foundation": "Required for native implementations."
-            },
-            "type": "library",
-            "extra": {
-                "component": "package",
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Cartalyst\\Sentinel\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Ben Corlett",
-                    "email": "ben.corlett@cartalyst.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Cartalyst LLC",
-                    "email": "help@cartalyst.com"
-                },
-                {
-                    "name": "Bruno Gaspar",
-                    "email": "bruno.gaspar@cartalyst.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Dan Syme",
-                    "email": "dan.syme@cartalyst.com",
-                    "role": "Creator & Designer"
-                },
-                {
-                    "name": "Suhayb Wardany",
-                    "email": "su.wardany@cartalyst.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP 5.4+ Fully-featured Authentication & Authorization System",
-            "keywords": [
-                "auth",
-                "cartalyst",
-                "codeigniter",
-                "fuelphp",
-                "laravel",
-                "php",
-                "security"
-            ],
-            "time": "2016-02-11 00:19:11"
-        },
-        {
-            "name": "cartalyst/support",
-            "version": "v1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cartalyst/support.git",
-                "reference": "c90931d25e89734ba89875a769af6b2e050593a5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/support/zipball/c90931d25e89734ba89875a769af6b2e050593a5",
-                "reference": "c90931d25e89734ba89875a769af6b2e050593a5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "illuminate/mail": "~4.1|~5.0",
-                "illuminate/validation": "~4.1|~5.0",
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "component": "package",
-                "branch-alias": {
-                    "dev-master": "1.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Cartalyst\\Support\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Cartalyst LLC",
-                    "email": "help@cartalyst.com"
-                },
-                {
-                    "name": "Bruno Gaspar",
-                    "email": "bruno.gaspar@cartalyst.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Dan Syme",
-                    "email": "dan.syme@cartalyst.com",
-                    "role": "Project Lead"
-                },
-                {
-                    "name": "Suhayb Wardany",
-                    "email": "su.wardany@cartalyst.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Support helpers.",
-            "keywords": [
-                "cartalyst",
-                "helper",
-                "laravel",
-                "support"
-            ],
-            "time": "2015-06-24 13:00:53"
+            "time": "2015-12-02 17:43:40"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -979,16 +825,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.1.0",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8"
+                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/bb9024c526b22f3fe6ae55a561fd70653d470aa8",
-                "reference": "bb9024c526b22f3fe6ae55a561fd70653d470aa8",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/b1e1c0d55f8083c71eda2c28c12a228d708294ea",
+                "reference": "b1e1c0d55f8083c71eda2c28c12a228d708294ea",
                 "shasum": ""
             },
             "require": {
@@ -1026,20 +872,20 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-03-08 01:15:46"
+            "time": "2015-10-15 22:28:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.2.3",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b"
+                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/2e89629ff057ebb49492ba08e6995d3a6a80021b",
-                "reference": "2e89629ff057ebb49492ba08e6995d3a6a80021b",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/4d0bdbe1206df7440219ce14c972aa57cc5e4982",
+                "reference": "4d0bdbe1206df7440219ce14c972aa57cc5e4982",
                 "shasum": ""
             },
             "require": {
@@ -1084,7 +930,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-02-18 21:54:00"
+            "time": "2015-11-03 01:34:55"
         },
         {
             "name": "hamcrest/hamcrest-php",
