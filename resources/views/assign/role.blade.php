@@ -5,26 +5,24 @@
     @endsection
 @section('content')
 
-    <h1>Manage Role</h1>
+    <h1>Manage Role
+        <a href="{{ route('user.create') }}" class="btn btn-primary pull-right btn-sm">Add New User</a>
+    </h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
             <tr>
-                <th>S.No</th><th>User Name</th><th>Role</th><th>Change Role</th>
+                <th>S.No</th><th>User Email-Id</th><th>Role</th><th>Change Role</th>
             </tr>
             </thead>
             <tbody>
             {{-- */$x=0;/* --}}
-            @foreach($user as $item)
+            @foreach($users as $item)
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>@if($item->role_id == 1){!! \App\UserRoles::ADMIN !!}
-                        @elseif($item->role_id == 2){!! \App\UserRoles::MANAGER !!}
-                        @elseif($item->role_id == 3){!! \App\UserRoles::SALES !!}
-                        @elseif($item->role_id == 4){!! \App\UserRoles::GUEST !!}
-                        @endif
+                    <td>{{ $item->email }}</td>
+                    <td>{{ $item->userRole->user_role_name }}
                     </td>
                     <td>
                        {!!  Form::label(\App\UserRoles::SALES) !!}
@@ -36,6 +34,6 @@
             @endforeach
             </tbody>
         </table>
-        <div class="pagination"> {!! $user->render() !!} </div>
+        <div class="pagination"> {!! $users->render() !!} </div>
     </div>
 @endsection

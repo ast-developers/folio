@@ -40,13 +40,14 @@ $(document).ready(function () {
                             }
                         }
                     });
+                    var name = (value.email).match(/^([^@]*)@/)[1];
                     if (check) {
                         var option =
-                            '<label><input type="checkbox" checked="checked" class="checkboxvalue" data-user-id="' + value.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + value.name + '</label>';
+                            '<label><input type="checkbox" checked="checked" class="checkboxvalue" data-user-id="' + value.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + name + '</label>';
                     }
                     else {
                         var option =
-                            '<label><input type="checkbox"  class="checkboxvalue" data-user-id="' + value.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + value.name + '</label>';
+                            '<label><input type="checkbox"  class="checkboxvalue" data-user-id="' + value.id + '"' + 'data-project-id="' + project_id + '"' + '/>' + name + '</label>';
                     }
                     select += option;
                 });

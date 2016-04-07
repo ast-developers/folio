@@ -14,6 +14,9 @@
 Route::post('timelog/$2y$10$RmbwSQUSNhJpotMh9Z0/9ObnAJDnFvaYd9bfQDI8rGz8vDRgngLdq', 'TimelogController@create');
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::get('password/reset/{email}','Auth\PasswordController@getResetPassword');
+Route::post('password/reset', 'Auth\PasswordController@setPassword');
+
 Route::post('login', 'Auth\AuthController@postLogin');
 
 Route::get('auth/google', 'Auth\AuthController@googleredirectToProvider');
@@ -22,8 +25,8 @@ Route::get('auth/google/callback', 'Auth\AuthController@googlehandleProviderCall
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'filter-user'], function () {
             Route::resource('/', 'ReportController@project');
-		    Route::get('report/project', 'ReportController@projectMonthly');
-		    Route::get('report/monthly', 'ReportController@monthly');
+        Route::get('report/project', 'ReportController@projectMonthly');
+        Route::get('report/monthly', 'ReportController@monthly');
     });
     Route::get('welcome', function(){
         return view('welcome');
@@ -37,6 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('assign-project-to-user', 'ProjectManagementController@assignProjectToUser');
     Route::post('get-user-projects', 'ProjectManagementController@getUserProjects');
     Route::post('assign', 'ProjectManagementController@assign');
+
+    Route::resource('user', 'UserController');
 
     Route::resource('/report', 'ReportController@project');
 
@@ -58,6 +63,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('report/time-sheet', 'ReportController@timesheet');
 
+
+    //reportico
+
+    Route::get('reportico', 'ReportController@reportico');
 });
 
 /*Route::any('/{all}', function(){
