@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AssignProject;
+use App\Interfaces\ProjectRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Project;
 use App\User;
 use App\UserRoles;
@@ -13,13 +15,16 @@ use App\Http\Controllers\Controller;
 
 class ProjectManagementController extends Controller
 {
+	public  $users;
+	public  $projects;
+	public function __construct(UserRepositoryInterface $users,ProjectRepositoryInterface $projects)
+	{
+		$this->users=$users;
+		$this->projects=$projects;
+	}
 	public function getProject()
 	{
-		if (session('from_date') != NULL) {
-			$projects = Project::whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
-		} else {
-			$projects = Project::paginate(PAGINATE_LIMIT);
-		}
+		$projects = $this->projects->getProjects();
 
 		return view('assign.project', compact('projects'));
 	}
@@ -27,9 +32,8 @@ class ProjectManagementController extends Controller
 	public function getUsers(Request $request)
 	{
 		$role = $request['role'];
-		$users = User::wherehas('userRole',function($q) use($role){
-               return $q->where('user_role_name',$role);
-			})->get()->toArray();
+		$users = $this->users->getUsersByRole($role);
+
 		return json_encode($users);
 	}
 

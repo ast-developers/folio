@@ -29,9 +29,9 @@ class RoleManagementController extends Controller
     {
         $user = User::findOrFail($request['user_id']);
         if ($request['role'] == UserRoles::MANAGER)
-            $user->role_id = 2;
+            $user->role_id = TWO;
         else {
-            $user->role_id = 3;
+            $user->role_id = THREE;
         }
         $user->save();
     }
