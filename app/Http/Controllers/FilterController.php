@@ -12,9 +12,9 @@ use App\Http\Controllers\Controller;
 class FilterController extends Controller
 {
     public  $project_repository;
-    public function __construct(ProjectRepositoryInterface $project)
+    public function __construct(ProjectRepositoryInterface $project_repository)
     {
-        $this->project_repository=$project;
+        $this->project_repository=$project_repository;
     }
     public function dateFilter(Request $req)
     {
