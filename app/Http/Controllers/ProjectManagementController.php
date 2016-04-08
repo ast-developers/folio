@@ -33,7 +33,6 @@ class ProjectManagementController extends Controller
 	{
 		$role = $request['role'];
 		$users = $this->users->getUsersByRole($role);
-
 		return json_encode($users);
 	}
 

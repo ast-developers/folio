@@ -22,4 +22,13 @@ class UserRepository implements UserRepositoryInterface
 		return $users;
 	}
 
+	public function getUsersByRole($role)
+	{
+		$users =  User::whereHas('userRole' , function($q) use ($role){
+			return $q->where('user_role_name',$role);
+		})->get()->toArray();
+
+		return $users;
+	}
+
 }
