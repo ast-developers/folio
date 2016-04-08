@@ -11,6 +11,8 @@ define('GOOGLE_REDIRECT', HOST.'/folio/public/auth/google/callback');
 define('PAGINATE_LIMIT', 15);
 
 define('ONE',1);
+define('TWO',2);
+define('THREE',3);
 define('FOUR',4);
 
 

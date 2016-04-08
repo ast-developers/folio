@@ -18,16 +18,10 @@ class ProjectRepository implements ProjectRepositoryInterface
 		$user = Auth::user();
 		$user_projects = $user->projects()->select('user_id')->get();
 		$project_id       = array();
-		$i                = 0;
-		foreach ($user_projects as $item) {
-			$project_id[$i] = $item->pivot->project_id;
-			$i++;
+		foreach ($user_projects as $key=>$item) {
+			$project_id[$key] = $item->pivot->project_id;
 		}
-		if (session('from_date') != NULL) {
-			$projects = Project::whereIn('id', $project_id)->whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
-		} else {
-			$projects = Project::whereIn('id', $project_id)->paginate(PAGINATE_LIMIT);
-		}
+		$projects = $this->getProject($project_id);
 
 		return $projects;
 	}
@@ -37,12 +31,23 @@ class ProjectRepository implements ProjectRepositoryInterface
 		if (session('projects') != NULL) {
 			$projects = session('projects');
 		} else {
-			if (session('from_date') != NULL) {
-				$projects = Project::whereBetween('start_date', [session('from_date'), session('to_date')])->paginate(PAGINATE_LIMIT);
-			} else {
-				$projects = Project::paginate(PAGINATE_LIMIT);
-			}
+			$projects = $this->getProject();
 		}
+		return $projects;
+	}
+
+	function getProject($project_id = NULL){
+		$projects = Project::where(function($q) use($project_id){
+			$query = NULL;
+			if (session('from_date') != NULL) {
+				$query =  $q->whereBetween('start_date', [session('from_date'), session('to_date')]);
+			}
+			if($project_id != NULL){
+				$query = $q->whereIn('id', $project_id);
+			}
+			if($query) { return $query; }
+		})->paginate(PAGINATE_LIMIT);
+
 		return $projects;
 	}
 }
