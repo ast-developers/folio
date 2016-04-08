@@ -84,10 +84,10 @@ var expanded = false;
 function showCheckboxes(e) {
     var checkboxes = $(e).parent().find('.checkboxes');
     if (!expanded) {
-        checkboxes.css('display', "block");
+        checkboxes.show();
         expanded = true;
     } else {
-        checkboxes.css('display', "none");
+        checkboxes.hide();
         expanded = false;
     }
 }
