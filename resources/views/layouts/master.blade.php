@@ -48,6 +48,7 @@
     <link rel="apple-touch-startup-image" href="{{ url("img/splash/iphone.png") }}" media="screen and (max-device-width: 320px)">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{!! asset('css/sweetalert.css') !!}">
+    <link rel="stylesheet" href="{!! asset('css/your_style.css') !!}">
 </head>
 
 
@@ -113,7 +114,7 @@
 <!-- Note: This width of the aside area can be adjusted through LESS variables -->
 <aside id="left-panel">
     <!-- NAVIGATION : This navigation is also responsive-->
-    @if( Auth::user()->role_id == 2)
+    @if( Auth::user()->role_id == TWO)
         <nav>
             <ul>
                 <li class="{{ set_active(['/']) }}">
@@ -129,7 +130,7 @@
                     <a href="{{ url('staff-rate') }}"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Staff Rate</span></a></li>
             </ul>
         </nav>
-    @elseif( Auth::user()->role_id == 3)
+    @elseif( Auth::user()->role_id == THREE)
         <nav>
             <ul>
                 <li class="{{ set_active(['/']) }}">
@@ -154,7 +155,7 @@
                 </li>
             </ul>
         </nav>
-    @elseif(Auth::user()->role_id == 4)
+    @elseif(Auth::user()->role_id == FOUR)
         <nav>
             <ul>
                 <li class="{{ set_active(['welcome']) }}">
@@ -193,18 +194,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="top-menu-invisible">
-                    <a href="#"><i class="fa fa-lg fa-fw fa-lock txt-color-blue"></i> <span
-                                class="menu-item-parent">Assign to users</span></a>
-                    <ul>
-                        <li class="{{ set_active(['assign/roles']) }}">
-                            <a href="{{ url('assign/roles') }}"><i class="fa fa-user"></i> Role</a>
-                        </li>
-                        <li class="{{ set_active(['assign/project']) }}">
-                            <a href="{{ url('assign/project') }}"><i class="fa fa-inbox"></i> Projects</a>
-                        </li>
-
-                    </ul>
+                <li class="{{ set_active(['user*']) }}">
+                    <a href="{{ url('user') }}"><i class="fa fa-lg fa-fw fa-user"></i> <span
+                                class="menu-item-parent">User Management</span></a>
                 </li>
             </ul>
         </nav>

@@ -6,18 +6,28 @@
 
     {!! Form::open(['route' => 'user.store', 'class' => 'form-horizontal']) !!}
 
-    <div class="form-group {{ $errors->has('staff_id') ? 'has-error' : ''}}">
-        {!! Form::label('email', 'User: ', ['class' => 'col-sm-3 control-label']) !!}
+    <div class="form-group">
+        {!! Form::label('name', 'User Name: ', ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
-            {!! Form::select('email', $staff, null, ['class' =>
-            'form-control']) !!}
+            {!! Form::text('name', null, ['class' => 'form-control']) !!}
         </div>
     </div>
-    <div class="form-group {{ $errors->has('staff_id') ? 'has-error' : ''}}">
-        {!! Form::label('role_id', 'Role: ', ['class' => 'col-sm-3 control-label']) !!}
+    <div class="form-group">
+        {!! Form::label('email', 'Email: ', ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
-            {!! Form::select('role_id', $user_roles, null, ['class' =>
-            'form-control']) !!}
+            {!! Form::email('email', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::label('role', 'Role: ', ['class' => 'col-sm-3 control-label']) !!}
+        <div class="col-sm-6">
+            {!! Form::select('role',(['0' => 'Select Roles'] + $user_roles) ,null, ['class' =>'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+        {!! Form::label('project', 'Project: ', ['class' => 'col-sm-3 control-label']) !!}
+        <div  class="col-sm-6 project">
+            {!! Form::select('project_ids[]', $projects,null, ['class' =>'form-control','multiple' => true]) !!}
         </div>
     </div>
 

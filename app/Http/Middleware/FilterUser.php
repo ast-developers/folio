@@ -25,15 +25,15 @@ class FilterUser
 
 		switch(Auth::user()->role_id)
 		{
-			case 1:
+			case FIVE:
 				return redirect('report');
 				break;
-			case 2:
-			case 3:
+			case TWO:
+			case THREE:
 				$projects = $this->projects->getAssignedProjects();
 				session(['projects' => $projects]);
 				break;
-			case 4:
+			case FOUR:
 				return redirect('welcome');
 				break;
 

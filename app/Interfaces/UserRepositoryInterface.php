@@ -8,4 +8,8 @@ interface UserRepositoryInterface
 
 	public function getUsersByRole($role);
 
+	public function getUserByIdWithRole($id);
+
+	public function save($values,$id);
+
 }

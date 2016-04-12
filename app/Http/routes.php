@@ -35,12 +35,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('ems', 'EmsController@index');
     Route::post('filter', 'FilterController@dateFilter');
 
-    Route::post('update-role', 'RoleManagementController@updateRole');
-    Route::post('get-users', 'ProjectManagementController@getUsers');
-    Route::post('assign-project-to-user', 'ProjectManagementController@assignProjectToUser');
-    Route::post('get-user-projects', 'ProjectManagementController@getUserProjects');
-    Route::post('assign', 'ProjectManagementController@assign');
-
     Route::resource('user', 'UserController');
 
     Route::resource('/report', 'ReportController@project');
@@ -57,9 +51,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('logout', 'Auth\AuthController@getLogout');
     Route::get('report/project', 'ReportController@projectMonthly');
     Route::get('report/monthly', 'ReportController@monthly');
-
-    Route::get('assign/roles', 'RoleManagementController@getRoles');
-    Route::get('assign/project', 'ProjectManagementController@getProject');
 
     Route::get('report/time-sheet', 'ReportController@timesheet');
 
