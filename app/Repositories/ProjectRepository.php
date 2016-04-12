@@ -26,17 +26,21 @@ class ProjectRepository implements ProjectRepositoryInterface
 		return $projects;
 	}
 
-	public function getProjects()
+	public function getFilteredProjects()
 	{
 		if (session('projects') != NULL) {
-			$projects = session('projects');
+			return  session('projects');
 		} else {
-			$projects = $this->getProject();
+			return $this->getProject();
 		}
-		return $projects;
 	}
 
-	function getProject($project_id = NULL){
+	public function getAllProjects()
+	{
+		return  Project::all();
+	}
+
+	public function getProject($project_id = NULL){
 		$projects = Project::where(function($q) use($project_id){
 			$query = NULL;
 			if (session('from_date') != NULL) {

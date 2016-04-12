@@ -27,7 +27,7 @@ class ProjectController extends Controller
 	 */
 	public function index()
 	{
-		$projects = $this->project_repository->getProjects();
+		$projects = $this->project_repository->getFilteredProjects();
 		return view('project.index', compact('projects'));
 	}
 
@@ -49,9 +49,7 @@ class ProjectController extends Controller
 	{
 
 		$project = Project::create($request->all());
-		$user = Auth::user();
-		$user->projects()->attach($project->id);
-
+		Auth::user()->projects()->attach($project->id);
 		$projects = $this->project_repository->getAssignedProjects();
 		session(['projects' => $projects]);
 

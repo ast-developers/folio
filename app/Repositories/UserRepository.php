@@ -31,4 +31,27 @@ class UserRepository implements UserRepositoryInterface
 		return $users;
 	}
 
+	public function getUserByIdWithRole($id)
+	{
+		$users = User::with('userRole')->with(['projects' => function ($q) {
+			return $q->selectRaw('group_concat(projects.id) as project_ids');
+		}])->find($id);
+		return $users;
+	}
+
+	public function save($request, $id = NULL)
+	{
+		if ($id) {
+			$user = User::find($id);
+			$user->projects()->detach();
+		} else {
+			$user = new User();
+		}
+		$values = array('name' => $request['name'], 'email' => $request['email'], 'role_id' => $request['role']);
+		$user->fill($values);
+		$user->save();
+		foreach ($request['project_ids'] as $project_id) {
+			$user->projects()->attach($project_id);
+		}
+	}
 }

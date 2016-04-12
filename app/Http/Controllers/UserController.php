@@ -4,23 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Events\SendMail;
 use App\Http\Requests\UserRequest;
+use App\Interfaces\ProjectRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Staff;
 use App\User;
 use App\UserRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 
 class UserController extends Controller
 {
+	protected $userRepository;
+	protected $projectRepository;
+
+	public function __construct(UserRepositoryInterface $usersRepository, ProjectRepositoryInterface $projectRepository)
+	{
+		$this->userRepository = $usersRepository;
+		$this->projectRepository = $projectRepository;
+	}
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-
+		$users = $this->userRepository->getUsers();
+		return view('user.index', compact('users'));
     }
 
     /**
@@ -30,9 +44,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $staff = Staff::orderBy("user_name")->lists('email', 'email');
-        $user_roles = UserRoles::all()->lists('user_role_name', 'id');
-        return view('user.create', compact('staff','user_roles'));
+		$user_roles = UserRoles::where('user_role_name', '!=', UserRoles::ADMIN)->lists('user_role_name', 'id')->toArray();
+		$projects = $this->projectRepository->getAllProjects()->lists('name', 'id');;
+		return view('user.create', compact('user_roles', 'projects'));
     }
 
     /**
@@ -43,13 +57,9 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-		$user = new User();
-        $user->fill(array('email' => $request['email'], 'role_id' => $request['role_id']));
-		$user->save();
-
-		Event::fire(new SendMail($user));
-
-		return redirect('assign/roles');
+		$this->userRepository->save($request->all());
+		//Event::fire(new SendMail($user));
+		return redirect('user');
     }
 
     /**
@@ -60,7 +70,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+		$user = User::find($id);
+		return view('user.show', compact('user'));
     }
 
     /**
@@ -71,7 +82,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+		$selected_project_list = null;
+		$user     = $this->userRepository->getUserByIdWithRole($id);
+		$projects = $this->projectRepository->getAllProjects()->lists('name', 'id');
+		if (($user->projects->count())) {
+			$selected_project_list = explode(',', $user->projects[0]->project_ids);
+		}
+		return view('user.edit', compact('user', 'projects', 'selected_project_list'));
     }
 
     /**
@@ -83,7 +100,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+		$this->userRepository->save($request->all(), $id);
+		Session::flash('flash_message', 'User successfully updated!');
+		return redirect('user');
     }
 
     /**
@@ -94,6 +113,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+		User::find($id)->projects()->detach($id);
+		if (User::destroy($id)) {
+			Session::flash('flash_message', 'User successfully updated!');
+			return Redirect::back();
+		} else {
+			return redirect('user');
+		}
+
     }
 }
