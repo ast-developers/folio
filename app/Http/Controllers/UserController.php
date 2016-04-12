@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\SendMail;
 use App\Http\Requests\UserRequest;
+use App\Interfaces\ProjectRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Staff;
 use App\User;
 use App\UserRoles;
