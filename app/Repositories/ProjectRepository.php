@@ -15,14 +15,18 @@ class ProjectRepository implements ProjectRepositoryInterface
 {
 	public function getAssignedProjects()
 	{
-		$user = Auth::user();
+		$user = Auth::user()->with('userRole');
+		if($user->role_id == FIVE){
+			$projects = $this->getProject();
+		}
+		else{
 		$user_projects = $user->projects()->select('user_id')->get();
 		$project_id       = array();
 		foreach ($user_projects as $key=>$item) {
 			$project_id[$key] = $item->pivot->project_id;
 		}
 		$projects = $this->getProject($project_id);
-
+		}
 		return $projects;
 	}
 
