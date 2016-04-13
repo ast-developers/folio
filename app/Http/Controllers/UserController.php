@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SendMail;
+use App\Http\Requests\updateUserRequest;
 use App\Http\Requests\UserRequest;
 use App\Interfaces\ProjectRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
@@ -57,8 +58,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-		$this->userRepository->save($request->all());
-		//Event::fire(new SendMail($user));
+		$user = $this->userRepository->save($request->all());
+		Event::fire(new SendMail($user));
 		return redirect('user');
     }
 
@@ -98,7 +99,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
 		$this->userRepository->save($request->all(), $id);
 		Session::flash('flash_message', 'User successfully updated!');
@@ -122,4 +123,12 @@ class UserController extends Controller
 		}
 
     }
+	public function setPassword($email, $token)
+	{
+		$user = User::where('remember_token', $token)->where('email', $email)->first();
+		if ($user) {
+			return redirect('error');
+		}
+		return view('password.reset', compact('email', 'token'));
+	}
 }

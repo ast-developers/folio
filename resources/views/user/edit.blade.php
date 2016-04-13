@@ -16,6 +16,7 @@
         {!! Form::label('name', 'Name: ', ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
             {!! Form::text('name', null, ['class' => 'form-control']) !!}
+            {!! Form::hidden('user_id', $user->id, ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="form-group ">
@@ -27,7 +28,7 @@
     <div class="form-group">
         {!! Form::label('role', 'Role: ', ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
-            {!! Form::select('role',$user->userRole->lists('user_role_name','id')->except(FIVE), $user->role_id, ['class' =>'form-control']) !!}
+            {!! Form::select('role',( ['' => 'Select Roles'] + $user->userRole->lists('user_role_name','id')->except(FIVE)->toArray() ), $user->role_id, ['class' =>'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
@@ -41,6 +42,9 @@
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
             {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+        </div>
+        <div class=" col-sm-3">
+            <a href="{!! route('user.index') !!}" class="btn btn-primary form-control">Cancel</a>
         </div>
     </div>
     {!! Form::close() !!}

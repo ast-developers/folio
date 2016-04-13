@@ -22,18 +22,16 @@ class PasswordController extends Controller
 	| explore this trait and override any methods you wish to tweak.
 	|
 	*/
-	public function getResetPassword($email)
-	{
-		return view('password.reset',compact('email'));
-	}
+
 	public function setPassword(PasswordResetRequest $request)
 	{
 		$credentials = $request->only(
-			'email', 'password', 'password_confirmation'
+			'email', 'password', 'password_confirmation', 'token'
 		);
 		$user        = User::where('email', $credentials['email'])->first();
 		if ($user) {
-			$user->password = $credentials['password_confirmation'];
+			$user->password       = $credentials['password_confirmation'];
+			$user->remember_token = $credentials['token'];
 			$user->save();
 			return redirect('/');
 		} else {
