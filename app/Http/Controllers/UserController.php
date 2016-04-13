@@ -46,7 +46,7 @@ class UserController extends Controller
     public function create()
     {
 		$user_roles = UserRoles::where('user_role_name', '!=', UserRoles::ADMIN)->lists('user_role_name', 'id')->toArray();
-		$projects = $this->projectRepository->getAllProjects()->lists('name', 'id');;
+		$projects = $this->projectRepository->getAllProjects()->lists('name', 'id');
 		return view('user.create', compact('user_roles', 'projects'));
     }
 
