@@ -15,7 +15,7 @@ class ProjectRepository implements ProjectRepositoryInterface
 {
 	public function getAssignedProjects()
 	{
-		$user = Auth::user()->with('userRole');
+		$user = Auth::user();
 		if($user->role_id == FIVE){
 			$projects = $this->getProject();
 		}
