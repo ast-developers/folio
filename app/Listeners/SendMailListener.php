@@ -42,8 +42,8 @@ class SendMailListener
 				$role = UserRoles::GUEST;
 				break;
 		}
-
-		$link = url('password/reset').'/'.urlencode($event->user['email']);
+		$token = app('auth.password.tokens')->create($event->user);
+		$link = url('password/reset').'/'.(urlencode($event->user['email']).'/'.$token);
 		$set_password = "<b>Click here to set your password:</b> $link";
 		$data = ['to'=>$event->user['email'] , 'subject'=>'Welcome to ArsenalTech PortFolio' , 'email'=> $event->user['email'], 'role' => $role ,'link' => $set_password] ;
 

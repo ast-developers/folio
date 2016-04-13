@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Input;
+
 class UserRequest extends Request
 {
 	/**
@@ -19,9 +21,10 @@ class UserRequest extends Request
 	 */
 	public function rules()
 	{
+		$id = Input::get('user_id');
 		return [
 			'name'        => 'required',
-			'email'       => 'required|unique:users',
+			'email'       => 'required|email|unique:users,email,'.$id,
 			'role'        => 'required',
 			'project_ids' => 'required',
 		];

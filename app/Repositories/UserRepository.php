@@ -47,11 +47,12 @@ class UserRepository implements UserRepositoryInterface
 		} else {
 			$user = new User();
 		}
-		$values = array('name' => $request['name'], 'email' => $request['email'], 'role_id' => $request['role']);
+		$values = array('name' => $request['name'], 'email' => $request['email'],'remember_token'=>$request['_token'] ,'role_id' => $request['role']);
 		$user->fill($values);
 		$user->save();
 		foreach ($request['project_ids'] as $project_id) {
 			$user->projects()->attach($project_id);
 		}
+		return $user;
 	}
 }

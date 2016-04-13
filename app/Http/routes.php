@@ -14,7 +14,7 @@
 Route::post('timelog/$2y$10$RmbwSQUSNhJpotMh9Z0/9ObnAJDnFvaYd9bfQDI8rGz8vDRgngLdq', 'TimelogController@create');
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::get('password/reset/{email}','Auth\PasswordController@getResetPassword');
+Route::get('password/reset/{email}/{token}','UserController@setPassword');
 Route::post('password/reset', 'Auth\PasswordController@setPassword');
 
 Route::post('login', 'Auth\AuthController@postLogin');
@@ -60,6 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reportico', 'ReportController@reportico');
 });
 
-/*Route::any('/{all}', function(){
+Route::any('/{all}', function(){
     return view('errors.503');
-})->where('all', '.*');*/
+})->where('all', '.*');
