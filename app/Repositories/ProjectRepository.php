@@ -41,7 +41,7 @@ class ProjectRepository implements ProjectRepositoryInterface
 
 	public function getAllProjects()
 	{
-		return  Project::all();
+		return  Project::orderBy('name');
 	}
 
 	public function getProject($project_id = NULL){
