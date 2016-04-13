@@ -60,6 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reportico', 'ReportController@reportico');
 });
 
-Route::any('/{all}', function(){
+/*Route::any('/{all}', function(){
     return view('errors.503');
-})->where('all', '.*');
+})->where('all', '.*');*/
