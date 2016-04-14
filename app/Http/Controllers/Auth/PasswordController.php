@@ -26,12 +26,12 @@ class PasswordController extends Controller
 	public function setPassword(PasswordResetRequest $request)
 	{
 		$credentials = $request->only(
-			'email', 'password', 'password_confirmation', 'token'
+			'email', 'password', 'password_confirmation', 'token' ,'_token'
 		);
 		$user        = User::where('email', $credentials['email'])->first();
 		if ($user) {
 			$user->password       = $credentials['password_confirmation'];
-			$user->remember_token = $credentials['token'];
+			$user->remember_token = $credentials['_token'];
 			$user->save();
 			return redirect('/');
 		} else {
