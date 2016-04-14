@@ -69,7 +69,7 @@ class ProjectRepository implements ProjectRepositoryInterface
 
 	public function getProjectByRole($id){
 		$project = null;
-		switch (Auth::user()->user_id)
+		switch (Auth::user()->role_id)
 		{
 			case ONE:
 				$project = Project::findOrFail($id);
