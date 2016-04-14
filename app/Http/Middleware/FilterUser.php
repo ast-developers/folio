@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\AssignProject;
 use App\Interfaces\ProjectRepositoryInterface;
+use App\UserRoles;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,9 +24,9 @@ class FilterUser
 	public function handle($request, Closure $next)
 	{
 
-		switch(Auth::user()->role_id)
+		switch(Auth::user()->user_id)
 		{
-			case FIVE:
+			case ONE:
 				return redirect('report');
 				break;
 			case TWO:
@@ -33,12 +34,8 @@ class FilterUser
 				$projects = $this->projects->getAssignedProjects();
 				session(['projects' => $projects]);
 				break;
-			case FOUR:
-				return redirect('welcome');
-				break;
-
 			default:
-				return redirect('error');
+				return view('errors.503');
 		}
 		return $next($request);
 	}

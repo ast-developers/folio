@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@extends('layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+@section('content')
         <style>
             html, body {
                 height: 100%;
@@ -16,7 +12,7 @@
                 width: 100%;
                 color: #B0BEC5;
                 display: table;
-                font-weight: 100;
+                font-weight: bold;
                 font-family: 'Lato';
             }
 
@@ -32,16 +28,15 @@
             }
 
             .title {
-                font-size: 72px;
+                font-size: 50px;
                 margin-bottom: 40px;
             }
         </style>
-    </head>
-    <body>
+
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">You are not Authorized.</div>
             </div>
         </div>
-    </body>
-</html>
+
+@endsection

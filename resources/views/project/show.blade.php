@@ -1,12 +1,16 @@
 @extends('layouts.master')
 
 @section('content')
+    @if((count($performance))==0)
+        <h2>You are not authorized to view this project</h2>
+    @else
 
-<h1>{{ $project->name }} </h1>
+        <h1>{{ $project->name }}
 <button type="button" id="sync-timelog" data-loading-text="Loading..." class="btn btn-primary pull-right"
                       autocomplete="off">
         Sync Timelog
-    </button> <br />
+</button>
+        </h1><br/>
 
 
 <div class="ui-tabs"  style="display: none;">
@@ -15,7 +19,7 @@
                 <a href="#overview">Overview</a>
             </li>
             <li>
-                <a href="#cost">Costs</a>
+                @if(Auth::user()->user_id != THREE)<a href="#cost">Costs</a>@endif
             </li>
             <li>
                 <a href="#revenue">Revenue</a>
@@ -26,11 +30,11 @@
 
         </div>
         <div id="cost">
-            @include('cost.index', ['costs'=>$project->costs])
+            @if(Auth::user()->user_id != THREE)@include('cost.index', ['costs'=>$project->costs])@endif
         </div>
         <div id="revenue">
             @include('revenue.index', ['revenues'=>$project->revenues, 'project_id'=>$project->id])
         </div>
     </div>
-
+    @endif
 @endsection

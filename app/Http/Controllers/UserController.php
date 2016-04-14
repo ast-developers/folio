@@ -47,7 +47,7 @@ class UserController extends Controller
      */
     public function create()
     {
-		$user_roles = UserRoles::where('user_role_name', '!=', UserRoles::ADMIN)->lists('user_role_name', 'id')->toArray();
+		$user_roles = UserRoles::where('id', '!=', ONE)->lists('user_role_name', 'id')->toArray();
 		$projects = $this->projectRepository->getAllProjects()->lists('name', 'id');
 		return view('user.create', compact('user_roles', 'projects'));
     }
@@ -88,9 +88,8 @@ class UserController extends Controller
 		$selected_project_list = null;
 		$user     = $this->userRepository->getUserByIdWithRole($id);
 		$projects = $this->projectRepository->getAllProjects()->lists('name', 'id');
-		if (($user->projects->count())) {
-			$selected_project_list = explode(',', $user->projects[0]->project_ids);
-		}
+		$selected_project_list = $this->projectRepository->getSelectedProjectList($user);
+
 		return view('user.edit', compact('user', 'projects', 'selected_project_list'));
     }
 
@@ -129,7 +128,7 @@ class UserController extends Controller
 	{
 		$user = User::where('remember_token', $token)->where('email', $email)->first();
 		if ($user) {
-			return view('errors.503');
+			return view('errors.unauthorized');
 		}
 		return view('password.reset', compact('email', 'token'));
 	}

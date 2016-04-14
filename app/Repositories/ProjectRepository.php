@@ -7,16 +7,24 @@
  */
 namespace App\Repositories;
 use App\Interfaces\ProjectRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Project;
+use App\UserRoles;
 use Illuminate\Support\Facades\Auth;
 
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
+	protected $user_repository;
+
+	public function __construct()
+	{
+		$this->user_repository = new UserRepository();
+	}
 	public function getAssignedProjects()
 	{
 		$user = Auth::user();
-		if($user->role_id == FIVE){
+		if ($user->user_id == ONE) {
 			$projects = $this->getProject();
 		}
 		else{
@@ -57,5 +65,38 @@ class ProjectRepository implements ProjectRepositoryInterface
 		})->paginate(PAGINATE_LIMIT);
 
 		return $projects;
+	}
+
+	public function getProjectByRole($id){
+		$project = null;
+		switch (Auth::user()->user_id)
+		{
+			case ONE:
+				$project = Project::findOrFail($id);
+				break;
+			case TWO:
+				$user                  = $this->user_repository->getUserByIdWithRole(Auth::id());
+				$selected_project_list = $this->getSelectedProjectList($user);
+				if ($selected_project_list) {
+					if (in_array($id, $selected_project_list)) {
+						$project = Project::findOrFail($id);
+					}
+				}
+				break;
+			case THREE:
+				break;
+		}
+
+		return $project ;
+	}
+
+	public function getSelectedProjectList($user)
+	{
+		if (($user->projects->count())) {
+			return explode(',', $user->projects[0]->project_ids);
+		} else {
+			return false;
+		}
+
 	}
 }

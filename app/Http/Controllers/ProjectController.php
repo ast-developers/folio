@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Interfaces\ProjectRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Project;
 use App\RevenueVsCost;
 use App\User;
+use App\UserRoles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -17,9 +19,12 @@ class ProjectController extends Controller
 {
 
 	public  $project_repository;
-	public function __construct(ProjectRepositoryInterface $project)
+	public $user_repository;
+
+	public function __construct(ProjectRepositoryInterface $project_repository, UserRepositoryInterface $user_repository)
 	{
-		$this->project_repository=$project;
+		$this->project_repository=$project_repository;
+		$this->user_repository = $user_repository;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -81,9 +86,8 @@ class ProjectController extends Controller
 	 */
 	public function edit($id)
 	{
-		$project = Project::findOrFail($id);
-
-		return view('project.edit', compact('project'));
+		$project = $this->project_repository->getProjectByRole($id);
+		return (isset($project)) ? view('project.edit', compact('project')) : view('errors.503');
 	}
 
 	/**
@@ -97,7 +101,7 @@ class ProjectController extends Controller
 		$project = Project::findOrFail($id);
 		$project->update($request->all());
 
-		if(Auth::user()->role_id!=1) {
+		if (Auth::user()->user_id != ONE) {
 			$projects = $this->project_repository->getAssignedProjects();
 			session(['projects' => $projects]);
 		}
@@ -114,11 +118,14 @@ class ProjectController extends Controller
 	 */
 	public function destroy($id)
 	{
+		if (Auth::user()->user_id == THREE) {
+			return view('errors.503');
+		}
 		Project::destroy($id);
 
 		$user = Auth::user();
 		$user->projects()->detach($id);
-		if($user->role_id!=1) {
+		if (Auth::user()->user_id != ONE) {
 			$projects = $this->project_repository->getAssignedProjects();
 			session(['projects' => $projects]);
 		}

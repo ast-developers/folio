@@ -8,6 +8,7 @@
 namespace App;
 
 use DB;
+use DebugBar\Bridge\Twig\TwigCollector;
 use Illuminate\Support\Facades\Auth;
 
 class RevenueVsCost
@@ -74,7 +75,7 @@ class RevenueVsCost
 
 			$query->whereBetween('sub.month_logged', [$from, $to]);
 		}
-		if(Auth::user()->role_id == THREE || Auth::user()->role_id == TWO)
+		if(Auth::user()->user_id == THREE || Auth::user()->user_id == TWO)
 		{
 			$user = Auth::user();
 			$user_projects = $user->projects()->select('user_id')->get();
