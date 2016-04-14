@@ -19,7 +19,7 @@
                 <a href="#overview">Overview</a>
             </li>
             <li>
-                @if(Auth::user()->user_id != THREE)<a href="#cost">Costs</a>@endif
+                @if(Auth::user()->role_id != THREE)<a href="#cost">Costs</a>@endif
             </li>
             <li>
                 <a href="#revenue">Revenue</a>
@@ -30,7 +30,7 @@
 
         </div>
         <div id="cost">
-            @if(Auth::user()->user_id != THREE)@include('cost.index', ['costs'=>$project->costs])@endif
+            @if(Auth::user()->role_id != THREE)@include('cost.index', ['costs'=>$project->costs])@endif
         </div>
         <div id="revenue">
             @include('revenue.index', ['revenues'=>$project->revenues, 'project_id'=>$project->id])

@@ -101,7 +101,7 @@ class ProjectController extends Controller
 		$project = Project::findOrFail($id);
 		$project->update($request->all());
 
-		if (Auth::user()->user_id != ONE) {
+		if (Auth::user()->role_id != ONE) {
 			$projects = $this->project_repository->getAssignedProjects();
 			session(['projects' => $projects]);
 		}
@@ -118,14 +118,14 @@ class ProjectController extends Controller
 	 */
 	public function destroy($id)
 	{
-		if (Auth::user()->user_id == THREE) {
+		if (Auth::user()->role_id == THREE) {
 			return view('errors.503');
 		}
 		Project::destroy($id);
 
 		$user = Auth::user();
 		$user->projects()->detach($id);
-		if (Auth::user()->user_id != ONE) {
+		if (Auth::user()->role_id != ONE) {
 			$projects = $this->project_repository->getAssignedProjects();
 			session(['projects' => $projects]);
 		}
