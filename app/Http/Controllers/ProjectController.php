@@ -52,9 +52,10 @@ class ProjectController extends Controller
 	 */
 	public function store(Request $request)
 	{
-
 		$project = Project::create($request->all());
-		Auth::user()->projects()->attach($project->id);
+		if (Auth()->role_id != ONE) {
+			Auth::user()->projects()->attach($project->id);
+		}
 		$projects = $this->project_repository->getAssignedProjects();
 		session(['projects' => $projects]);
 
