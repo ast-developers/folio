@@ -23,8 +23,7 @@ class FilterUser
 	 */
 	public function handle($request, Closure $next)
 	{
-
-		switch(Auth::user()->user_id)
+		switch(Auth::user()->role_id)
 		{
 			case ONE:
 				return redirect('report');
