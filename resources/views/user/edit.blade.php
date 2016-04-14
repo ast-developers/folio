@@ -28,7 +28,7 @@
     <div class="form-group">
         {!! Form::label('role', 'Role: ', ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
-            {!! Form::select('role',( ['' => 'Select Roles'] + $user->userRole->lists('user_role_name','id')->except(ONE)->toArray() ), $user->role_id, ['class' =>'form-control']) !!}
+            {!! Form::select('role',( ['' => 'Select Roles'] + $user->userRole->lists('user_role_name','id')->toArray() ), $user->role_id, ['class' =>'form-control']) !!}
         </div>
     </div>
     <div class="form-group">

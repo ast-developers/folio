@@ -4,16 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Interfaces\ProjectRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Project;
 use App\Revenue;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class RevenueController extends Controller
 {
 
+    public  $project_repository;
+    public  $user_repository;
 
+    public function __construct(ProjectRepositoryInterface $project_repository,UserRepositoryInterface $user_repository)
+    {
+        $this->project_repository=$project_repository;
+        $this->user_repository=$user_repository;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -22,8 +32,8 @@ class RevenueController extends Controller
     public function create()
     {
         $project_id = \Input::get("project_id");
-        $project = Project::find($project_id);
-        return view('revenue.create', ['project'=>$project]);
+        $project = $this->project_repository->getProjectByRole($project_id);
+        return (isset($project)) ? view('revenue.create', compact('project')) : view('errors.503');
     }
 
     /**
@@ -49,9 +59,9 @@ class RevenueController extends Controller
      */
     public function edit($id)
     {
-        $revenue = Revenue::findOrFail($id);
-
-        return view('revenue.edit', compact('revenue'));
+        $selected_project_list = $this->project_repository->getSelectedProjectList($this->user_repository->getUserByIdWithRole(Auth::id()));
+        $revenue = Revenue::whereIn('project_id',$selected_project_list)->find($id);
+        return (isset($revenue)) ? view('revenue.edit', compact('revenue')) : view('errors.503');
     }
 
     /**
