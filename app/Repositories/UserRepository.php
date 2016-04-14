@@ -55,4 +55,12 @@ class UserRepository implements UserRepositoryInterface
 		}
 		return $user;
 	}
+
+	public function updateProfile($request)
+	{
+		$user = User::find($request['user_id']);
+		$values = array('name' => $request['name'], 'email' => $request['email'],'password' => (isset($request['password']))?$request['password']:$user->password);
+		$user->fill($values);
+		$user->save();
+	}
 }

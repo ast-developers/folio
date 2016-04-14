@@ -12,4 +12,6 @@ interface UserRepositoryInterface
 
 	public function save($values,$id);
 
+	public function updateProfile($request);
+
 }

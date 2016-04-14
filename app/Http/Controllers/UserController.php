@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\SendMail;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\updateUserRequest;
 use App\Http\Requests\UserRequest;
 use App\Interfaces\ProjectRepositoryInterface;
@@ -11,6 +12,7 @@ use App\Staff;
 use App\User;
 use App\UserRoles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -127,8 +129,9 @@ class UserController extends Controller
 	{
 		$user = User::where('remember_token', $token)->where('email', $email)->first();
 		if ($user) {
-			return redirect('error');
+			return view('errors.503');
 		}
 		return view('password.reset', compact('email', 'token'));
 	}
+
 }

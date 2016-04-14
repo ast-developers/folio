@@ -67,19 +67,21 @@
     <!-- pulled right: nav area -->
     <div class="pull-right">
 
+        <div class="dropdown  pull-right " style="margin-top: 15px; margin-left: 5px">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <b>{{ Auth::user()->name }}</b> <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i> Profile</a></li>
+                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> Logout</a></li>
+            </ul>
+        </div>
         <!-- collapse menu button -->
         <div id="hide-menu" class="btn-header pull-right">
             <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
         </div>
         <!-- end collapse menu -->
-
-
-        <!-- logout button -->
-        <div id="logout" class="btn-header transparent pull-right">
-            <span> <a href="{{URL::to('logout')}}" title="Sign Out"><i class="fa fa-sign-out"></i></a> </span>
-        </div>
-        <!-- end logout button -->
-
 
         <!-- fullscreen button -->
         <div id="fullscreen" class="btn-header transparent pull-right">

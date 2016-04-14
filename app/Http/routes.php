@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::resource('/', 'ReportController@project');
         Route::get('report/project', 'ReportController@projectMonthly');
         Route::get('report/monthly', 'ReportController@monthly');
+
     });
     Route::get('welcome', function(){
         return view('welcome');
@@ -47,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('staff', 'StaffController');
     Route::resource('staff-rate', 'StaffRateController');
     Route::resource('revenue', 'RevenueController');
+
+	Route::resource('profile', 'ProfileController');
 
     Route::get('logout', 'Auth\AuthController@getLogout');
     Route::get('report/project', 'ReportController@projectMonthly');
