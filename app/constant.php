@@ -16,4 +16,6 @@ define('THREE',3);
 define('FOUR',4);
 define('FIVE',5);
 
+define('FULL_ACCESS',"FULL");
+
 

@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //reportico
 
-    Route::get('reportico', 'ReportController@reportico');
+    Route::get('generate-report', 'ReportController@generateByPackage');
 });
 /*
 Route::any('/{all}', function(){

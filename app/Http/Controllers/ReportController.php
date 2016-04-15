@@ -8,6 +8,8 @@
 namespace App\Http\Controllers;
 
 use App\RevenueVsCost;
+use App\UserRoles;
+use Illuminate\Support\Facades\App;
 
 class ReportController extends Controller
 {
@@ -31,5 +33,16 @@ class ReportController extends Controller
 
     public function timesheet() {
 
+    }
+
+    public function generateByPackage()
+    {
+		$report                          = App::make("getReporticoEngine");
+		$report->initial_execute_mode    = UserRoles::REPORTICO_ADMIN;
+		$report->access_mode             = FULL_ACCESS;
+		$report->initial_project         = "admin";
+		$report->clear_reportico_session = true;
+
+        return view('reports.package-reports', compact('report'));
     }
 }

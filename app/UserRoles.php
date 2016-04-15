@@ -19,6 +19,7 @@ class UserRoles extends Model
 	const SALES = 'Sales';
 	const ADMIN = 'Admin';
 	const GUEST = 'Guest';
+	const REPORTICO_ADMIN = 'ADMIN';
 	public function user()
 	{
 		return $this->hasMany('App\User');
