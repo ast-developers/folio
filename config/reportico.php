@@ -10,7 +10,7 @@
     'path_to_assets' => 'vendor/reportico',
 
     // Path relative to laravel pase or fully where projects will be created
-    'path_to_projects' => storage_path()."/reportico/projects",
+    'path_to_projects' => public_path()."/reportico/projects",
 
     // Path relative to laravel pase or fully where admin project will be stored
     'path_to_admin' => 'projects',

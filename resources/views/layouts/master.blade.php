@@ -114,104 +114,8 @@
 
 <!-- Left panel : Navigation area -->
 <!-- Note: This width of the aside area can be adjusted through LESS variables -->
-<aside id="left-panel">
-    <!-- NAVIGATION : This navigation is also responsive-->
-    @if( Auth::user()->role_id == TWO)
-        <nav>
-            <ul>
-                <li class="{{ set_active(['/']) }}">
-                    <a href="{{ url("/") }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
-                </li>
-                <li class="{{ set_active(['project*']) }}">
-                    <a href="{{ url('project') }}"><i class="fa fa-lg fa-fw fa-inbox"></i> <span
-                                class="menu-item-parent">Projects</span></a>
-                </li>
-                <li class="{{ set_active(['staff','staff/*']) }}">
-                    <a href="{{ url('staff') }}"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Staff</span></a></li>
-                <li class="{{ set_active(['staff-rate*']) }}">
-                    <a href="{{ url('staff-rate') }}"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Staff Rate</span></a></li>
-            </ul>
-        </nav>
-    @elseif( Auth::user()->role_id == THREE)
-        <nav>
-            <ul>
-                <li class="{{ set_active(['/']) }}">
-                    <a href="{{ url("/") }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
-                </li>
-                <li class="{{ set_active(['project*']) }}">
-                    <a href="{{ url('project') }}"><i class="fa fa-lg fa-fw fa-inbox"></i> <span
-                                class="menu-item-parent">Projects</span></a>
-                </li>
-
-                <li class="top-menu-invisible">
-                    <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span
-                                class="menu-item-parent">Reports</span></a>
-                    <ul>
-                        <li class="{{ set_active(['report/project']) }}">
-                            <a href="{{ url('report/project') }}"><i class="fa fa-stack-overflow"></i> Project Performance</a>
-                        </li>
-                        <li class="{{ set_active(['report/monthly']) }}">
-                            <a href="{{ url('report/monthly') }}"><i class="fa fa-cube"></i> Monthly Performance</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    @elseif(Auth::user()->role_id == FOUR)
-        <nav>
-            <ul>
-                <li class="{{ set_active(['welcome']) }}">
-                    <a href="{{ url('welcome') }}"><i class="fa fa-lg fa-fw fa-home"></i> <span
-                                class="menu-item-parent">Welcome</span></a>
-                </li>
-            </ul>
-        </nav>
-    @else
-        <nav>
-            <ul>
-                <li class="{{ set_active(['/']) }}">
-                    <a href="{{ url("/") }}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
-                </li>
-
-                <li class="{{ set_active(['project*']) }}">
-                    <a href="{{ url('project') }}"><i class="fa fa-lg fa-fw fa-inbox"></i> <span
-                                class="menu-item-parent">Projects</span></a>
-                </li>
-
-                <li class="{{ set_active(['shared-cost*']) }}">
-                    <a href="{{ url('shared-cost') }}"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Shared Cost</span></a>
-                <li class="{{ set_active(['staff','staff/*']) }}">
-                    <a href="{{ url('staff') }}"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Staff</span></a></li>
-                <li class="{{ set_active(['staff-rate*']) }}">
-                    <a href="{{ url('staff-rate') }}"><i class="fa fa-lg fa-fw fa-map-marker"></i> <span class="menu-item-parent">Staff Rate</span></a></li>
-                <li class="top-menu-invisible">
-                    <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span
-                                class="menu-item-parent">Reports</span></a>
-                    <ul>
-                        <li class="{{ set_active(['report/project']) }}">
-                            <a href="{{ url('report/project') }}"><i class="fa fa-stack-overflow"></i> Project Performance</a>
-                        </li>
-                        <li class="{{ set_active(['report/monthly']) }}">
-                            <a href="{{ url('report/monthly') }}"><i class="fa fa-cube"></i> Monthly Performance</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="{{ set_active(['user*']) }}">
-                    <a href="{{ url('user') }}"><i class="fa fa-lg fa-fw fa-user"></i> <span
-                                class="menu-item-parent">User Management</span></a>
-                </li>
-                <li class="{{ set_active(['generate-report*']) }}">
-                    <a href="{{ url('generate-report') }}"><i class="fa fa-lg fa-fw fa-cube"></i> <span
-                                class="menu-item-parent">Reportico</span></a>
-                </li>
-            </ul>
-        </nav>
-    @endif
-    <span class="minifyme" data-action="minifyMenu">
-				<i class="fa fa-arrow-circle-left hit"></i> 
-			</span>
-
-</aside>
+<!-- NAVIGATION : This navigation is also responsive-->
+    @include('menu.navigation')
 <!-- END NAVIGATION -->
 
 <!-- MAIN PANEL -->
@@ -270,6 +174,7 @@
 
         <!-- custom js -->
 {!! HTML::script("js/custom/filter.js") !!}
+
 
 @yield('js')
 

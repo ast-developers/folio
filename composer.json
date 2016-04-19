@@ -14,7 +14,8 @@
         "reportico/laravel-reportico": "~5.1",
         "laravel/socialite": "^2.0",
         "cartalyst/sentinel": "2.0.*",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "zizaco/entrust": "^1.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

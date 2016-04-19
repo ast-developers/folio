@@ -17,5 +17,9 @@ define('FOUR',4);
 define('FIVE',5);
 
 define('FULL_ACCESS',"FULL");
+define('MENU_ACCESS',"MENU");
+define('ALLPROJECTS_ACCESS',"ALLPROJECTS");
+define('PREPARE_MODE',"PREPARE");
+define('INITIAL_PROJECT',"admin");
 
 

@@ -58,9 +58,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('report/time-sheet', 'ReportController@timesheet');
 
 
+
     //reportico
 
     Route::get('generate-report', 'ReportController@generateByPackage');
+    Route::get('report/{project_name}/{file}', 'ReportController@executeByPackage');
 });
 /*
 Route::any('/{all}', function(){

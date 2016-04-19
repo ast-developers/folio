@@ -146,6 +146,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ProjectRepositoryProvider::class,
         App\Providers\EmailServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
         App\Providers\UserRepositoryProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
