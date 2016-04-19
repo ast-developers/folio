@@ -15,6 +15,7 @@ class ComposerServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
+		$menu = NULL;
 		$path           = public_path() . '/reportico/projects';
 		$directory_list = File::directories($path);
 		foreach ($directory_list as $list_key => $value) {
