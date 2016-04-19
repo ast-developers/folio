@@ -8,6 +8,7 @@
         <li class="{{ set_active(['report/monthly']) }}">
             <a href="{{ url('report/monthly') }}"><i class="fa fa-cube"></i> Monthly Performance</a>
         </li>
+        @if(isset($report_menu))
         @foreach($report_menu as $projects=>$reports)
             <li class="top-menu-invisible">
                 <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span
@@ -21,5 +22,6 @@
                 </ul>
             </li>
         @endforeach
+        @endif
     </ul>
 </li>
