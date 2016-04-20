@@ -11,6 +11,7 @@
             </li>
             @if( Auth::user()->role_id == TWO)
                 @include('menu.staff')
+                @include('menu.reports')
                 @include('menu.reportico')
             @elseif( Auth::user()->role_id == THREE)
                 @include('menu.reports')
