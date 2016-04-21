@@ -198,6 +198,13 @@
     $(document).ready(function () {
         $('.ui-tabs').tabs();
         $('.ui-tabs').show();
+
+        $( ".datepicker" ).datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true
+        });
+
     });
     var base_url = window.location.origin;
 

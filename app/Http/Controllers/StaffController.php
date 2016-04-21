@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests\StaffRequest  ;
 use App\Http\Controllers\Controller;
 
 use App\Staff;
@@ -20,9 +20,8 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staff = Staff::paginate(PAGINATE_LIMIT);
-
-        return view('staff.index', compact('staff'));
+			$staff = Staff::paginate(PAGINATE_LIMIT);
+			return view('staff.index', compact('staff'));
     }
 
     /**
@@ -40,7 +39,7 @@ class StaffController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(StaffRequest $request)
     {
         
         Staff::create($request->all());
@@ -82,7 +81,7 @@ class StaffController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id, Request $request)
+    public function update($id, StaffRequest $request)
     {
         
         $staff = Staff::findOrFail($id);
