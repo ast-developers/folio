@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests\ProjectRequest;
 use App\Interfaces\ProjectRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
 use App\Project;
 use App\RevenueVsCost;
 use App\User;
 use App\UserRoles;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Session;
@@ -50,10 +49,10 @@ class ProjectController extends Controller
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(ProjectRequest $request)
 	{
 		$project = Project::create($request->all());
-		if (Auth()->role_id != ONE) {
+		if (Auth::user()->role_id != ONE) {
 			Auth::user()->projects()->attach($project->id);
 		}
 		$projects = $this->project_repository->getAssignedProjects();
@@ -96,7 +95,7 @@ class ProjectController extends Controller
 	 * @param  int $id
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, ProjectRequest $request)
 	{
 
 		$project = Project::findOrFail($id);
@@ -123,10 +122,8 @@ class ProjectController extends Controller
 			return view('errors.503');
 		}
 		Project::destroy($id);
-
-		$user = Auth::user();
-		$user->projects()->detach($id);
 		if (Auth::user()->role_id != ONE) {
+			Auth::user()->projects()->detach($id);
 			$projects = $this->project_repository->getAssignedProjects();
 			session(['projects' => $projects]);
 		}

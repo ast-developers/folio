@@ -22,16 +22,16 @@
                 </div>
             </div>
             <div class="form-group {{ $errors->has('start_date') ? 'has-error' : ''}}">
-                {!! Form::label('start_date', 'Start Date: ', ['class' => 'col-sm-3 control-label']) !!}
+                {!! Form::label('start_date', 'Start Date: ', ['class' => 'col-sm-3 control-label' ]) !!}
                 <div class="col-sm-6">
-                    {!! Form::date('start_date', null, ['class' => 'form-control']) !!}
+                    {!! Form::date('start_date', null, ['class' => 'form-control datepicker', 'placeholder'=>'YYYY-MM-DD']) !!}
                     {!! $errors->first('start_date', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
             <div class="form-group {{ $errors->has('end_date') ? 'has-error' : ''}}">
                 {!! Form::label('end_date', 'End Date: ', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::date('end_date', null, ['class' => 'form-control']) !!}
+                    {!! Form::date('end_date', null, ['class' => 'form-control datepicker', 'placeholder'=>'YYYY-MM-DD']) !!}
                     {!! $errors->first('end_date', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -53,15 +53,10 @@
         <div class="col-sm-offset-3 col-sm-3">
             {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
         </div>
+        <div class=" col-sm-3">
+            <a href="{!! route('project.index') !!}" class="btn btn-primary form-control">Cancel</a>
+        </div>
     </div>
     {!! Form::close() !!}
-
-    @if ($errors->any())
-        <ul class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
 
 @endsection
