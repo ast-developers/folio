@@ -52,12 +52,11 @@ class ProjectController extends Controller
 	public function store(ProjectRequest $request)
 	{
 		$project = Project::create($request->all());
+		$projects = $this->project_repository->getAssignedProjects();
 		if (Auth::user()->role_id != ONE) {
 			Auth::user()->projects()->attach($project->id);
+			session(['projects' => $projects]);
 		}
-		$projects = $this->project_repository->getAssignedProjects();
-		session(['projects' => $projects]);
-
 		$project->syncWithJira();
 
 		Session::flash('flash_message', 'Project successfully added!');
