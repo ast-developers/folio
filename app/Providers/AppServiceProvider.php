@@ -28,5 +28,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ConfigurationInterface::class, function(){
             return new DotEnvConfiguration(base_path());
         });
+
+		$this->app->bind('reportico_extended', function ($app) {
+			return new \App\Reportico\ReporticoExtended(
+				$app->make('Illuminate\Foundation\Application'),
+				$app->view
+			);
+		});
     }
 }

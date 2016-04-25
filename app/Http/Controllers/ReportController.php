@@ -11,6 +11,7 @@ use App\RevenueVsCost;
 use App\UserRoles;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use App\Reportico\ReporticoExtended;
 
 class ReportController extends Controller
 {
@@ -44,6 +45,8 @@ class ReportController extends Controller
         $report_object->access_mode             = ($user_role) ? ALLPROJECTS_ACCESS : FULL_ACCESS;
         $report_object->initial_project         = INITIAL_PROJECT;
         $report_object->initial_report          = false;
+        $reportico_extended = new ReporticoExtended();
+        $reportico_extended->login();
         $report_object->clear_reportico_session = true;
 
         return view('reports.package-reports', compact('report_object'));
