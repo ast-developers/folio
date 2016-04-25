@@ -207,7 +207,9 @@
 
     });
     var base_url = window.location.origin;
-
+    $(".delete").click(function () {
+        return confirm('Do you sure want to delete the record?');
+    });
 </script>
 
 </body>
