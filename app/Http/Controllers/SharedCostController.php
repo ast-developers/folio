@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests\SharedCostRequest;
 use App\Http\Controllers\Controller;
 
 use App\SharedCost;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 use DB;
 
@@ -44,7 +45,7 @@ class SharedCostController extends Controller
 	 * Store a newly created resource in storage.
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(SharedCostRequest $request)
 	{
 
 		SharedCost::create($request->all());
@@ -83,7 +84,7 @@ class SharedCostController extends Controller
 	 * @param  int $id
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, SharedCostRequest $request)
 	{
 
 		$sharedcost = SharedCost::findOrFail($id);
@@ -105,7 +106,7 @@ class SharedCostController extends Controller
 
 		Session::flash('flash_message', 'SharedCost successfully deleted!');
 
-		return redirect('shared-cost');
+		return Redirect::back();
 	}
 
 	public function copy(Request $request)

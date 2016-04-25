@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests\StaffRateRequest;
 use App\Http\Controllers\Controller;
 use App\Staff;
 use App\StaffRate;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 
 class StaffRateController extends Controller
@@ -42,7 +43,7 @@ class StaffRateController extends Controller
 	 * Store a newly created resource in storage.
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(StaffRateRequest $request)
 	{
 
 		StaffRate::create($request->all());
@@ -82,7 +83,7 @@ class StaffRateController extends Controller
 	 * @param  int $id
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, StaffRateRequest $request)
 	{
 
 		$staffrate = StaffRate::findOrFail($id);
@@ -104,7 +105,7 @@ class StaffRateController extends Controller
 
 		Session::flash('flash_message', 'StaffRate successfully deleted!');
 
-		return redirect('staff-rate');
+		return Redirect::back();
 	}
 
 }

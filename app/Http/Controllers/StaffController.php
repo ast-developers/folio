@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Staff;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 
 class StaffController extends Controller
@@ -104,7 +105,7 @@ class StaffController extends Controller
 
         Session::flash('flash_message', 'Staff successfully deleted!');
 
-        return redirect('staff');
+        return Redirect::back();
     }
 
 }
