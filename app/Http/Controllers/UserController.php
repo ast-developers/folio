@@ -62,6 +62,7 @@ class UserController extends Controller
     {
 		$user = $this->userRepository->save($request->all());
 		Event::fire(new SendMail($user));
+		Session::flash('message', 'User successfully added!');
 		return redirect('user');
     }
 
@@ -103,7 +104,7 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
 		$this->userRepository->save($request->all(), $id);
-		Session::flash('flash_message', 'User successfully updated!');
+		Session::flash('message', 'User successfully updated!');
 		return redirect('user');
     }
 
@@ -117,7 +118,7 @@ class UserController extends Controller
     {
 		User::find($id)->projects()->detach($id);
 		if (User::destroy($id)) {
-			Session::flash('flash_message', 'User successfully updated!');
+			Session::flash('message', 'User successfully updated!');
 			return Redirect::back();
 		} else {
 			return redirect('user');

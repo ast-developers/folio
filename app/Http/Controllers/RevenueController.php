@@ -45,7 +45,7 @@ class RevenueController extends Controller
     {
         Revenue::create($request->all());
 
-        Session::flash('flash_message', 'Revenue successfully added!');
+        Session::flash('message', 'Revenue successfully added!');
 
         return redirect(route('project.show', $request->get('project_id')));
     }
@@ -76,7 +76,7 @@ class RevenueController extends Controller
         $revenue = Revenue::findOrFail($id);
         $revenue->update($request->all());
 
-        Session::flash('flash_message', 'Revenue successfully updated!');
+        Session::flash('message', 'Revenue successfully updated!');
 
         return redirect(route('project.show', $request->get('project_id')));
     }
@@ -92,7 +92,7 @@ class RevenueController extends Controller
         $revenue = Revenue::find($id);
         Revenue::destroy($id);
 
-        Session::flash('flash_message', 'Revenue successfully deleted!');
+        Session::flash('message', 'Revenue successfully deleted!');
 
         return redirect(route('project.show', $revenue->project_id));
     }

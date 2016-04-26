@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use JiraRestApi\Configuration\ConfigurationInterface;
 use JiraRestApi\Issue\IssueService;
 use JiraRestApi\Issue\Worklog;
@@ -47,15 +49,20 @@ class Project extends Model
         $start = 0;
 
         while(1) {
-            $issues = $issue_service->search(
-                "project={$this->jira_key} and timespent>0 and updated >= {$this->start_date}",
-                $start,
-                250,
-                [
-                    "key",
-                    "worklog"
-                ]
-            );
+			try {
+				$issues = $issue_service->search(
+					"project={$this->jira_key} and timespent>0 and updated >= {$this->start_date}",
+					$start,
+					250,
+					[
+						"key",
+						"worklog"
+					]
+				);
+			} catch (JiraException $exception) {
+				return false;
+			}
+
 
             if(count($issues->getIssues()) == 0) {
                 break;
@@ -86,6 +93,7 @@ class Project extends Model
             Timelog::insert($timelogs);
             $start += count($issues->getIssues());
         }
+		return true;
     }
 
 }

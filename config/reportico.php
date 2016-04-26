@@ -3,7 +3,7 @@
         'prefix' => 'reportico',
         // 'subdomain' => 'faq.site.com',
     ),
-
+    'SW_DB_HOST'=> 'localhost',
     'framework_type' => 'laravel',
 
     // Path relative to public where reportico assets are
@@ -115,4 +115,5 @@
     //                    ),
     //            ),
     'dropdown_menu' => false,
+
 );

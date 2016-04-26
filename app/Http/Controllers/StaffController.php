@@ -45,7 +45,7 @@ class StaffController extends Controller
         
         Staff::create($request->all());
 
-        Session::flash('flash_message', 'Staff successfully added!');
+        Session::flash('message', 'Staff successfully added!');
 
         return redirect('staff');
     }
@@ -88,7 +88,7 @@ class StaffController extends Controller
         $staff = Staff::findOrFail($id);
         $staff->update($request->all());
 
-        Session::flash('flash_message', 'Staff successfully updated!');
+        Session::flash('message', 'Staff successfully updated!');
 
         return redirect('staff');
     }
@@ -103,7 +103,7 @@ class StaffController extends Controller
     {
         Staff::destroy($id);
 
-        Session::flash('flash_message', 'Staff successfully deleted!');
+        Session::flash('message', 'Staff successfully deleted!');
 
         return Redirect::back();
     }

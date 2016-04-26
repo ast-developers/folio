@@ -50,7 +50,7 @@ class SharedCostController extends Controller
 
 		SharedCost::create($request->all());
 
-		Session::flash('flash_message', 'SharedCost successfully added!');
+		Session::flash('message', 'SharedCost successfully added!');
 
 		return redirect('shared-cost');
 	}
@@ -90,7 +90,7 @@ class SharedCostController extends Controller
 		$sharedcost = SharedCost::findOrFail($id);
 		$sharedcost->update($request->all());
 
-		Session::flash('flash_message', 'SharedCost successfully updated!');
+		Session::flash('message', 'SharedCost successfully updated!');
 
 		return redirect('shared-cost');
 	}
@@ -104,7 +104,7 @@ class SharedCostController extends Controller
 	{
 		SharedCost::destroy($id);
 
-		Session::flash('flash_message', 'SharedCost successfully deleted!');
+		Session::flash('message', 'SharedCost successfully deleted!');
 
 		return Redirect::back();
 	}
@@ -113,7 +113,7 @@ class SharedCostController extends Controller
 	{
 		if ($request->isMethod('post')) {
 			DB::statement('INSERT INTO shared_costs(name, amount, incurred_on) SELECT name, amount, :to as incurred_on FROM shared_costs WHERE MONTH(incurred_on)=MONTH(:from)', $request->only(['from', 'to']));
-			Session::flash('flash_message', 'SharedCost successfully copied!');
+			Session::flash('message', 'SharedCost successfully copied!');
 			return redirect('shared-cost');
 		} else {
 			return view('shared-cost.copy');
