@@ -81,6 +81,7 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request, $id)
     {
         $this->userRepository->updateProfile($request->all());
+        Session::flash('message', 'Profile successfully updated!');
         return redirect('/');
     }
 

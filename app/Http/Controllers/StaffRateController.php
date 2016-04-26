@@ -48,7 +48,7 @@ class StaffRateController extends Controller
 
 		StaffRate::create($request->all());
 
-		Session::flash('flash_message', 'StaffRate successfully added!');
+		Session::flash('message', 'StaffRate successfully added!');
 
 		return redirect('staff-rate');
 	}
@@ -89,7 +89,7 @@ class StaffRateController extends Controller
 		$staffrate = StaffRate::findOrFail($id);
 		$staffrate->update($request->all());
 
-		Session::flash('flash_message', 'StaffRate successfully updated!');
+		Session::flash('message', 'StaffRate successfully updated!');
 
 		return redirect('staff-rate');
 	}
@@ -103,7 +103,7 @@ class StaffRateController extends Controller
 	{
 		StaffRate::destroy($id);
 
-		Session::flash('flash_message', 'StaffRate successfully deleted!');
+		Session::flash('message', 'StaffRate successfully deleted!');
 
 		return Redirect::back();
 	}

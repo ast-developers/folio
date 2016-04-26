@@ -57,11 +57,15 @@ class ProjectController extends Controller
 			Auth::user()->projects()->attach($project->id);
 			session(['projects' => $projects]);
 		}
-		$project->syncWithJira();
+		if ($project->syncWithJira()) {
+			Session::flash('message', 'Project successfully added!');
+			return redirect('project');
+		} else {
+			Session::flash('message', 'Your Jira key is invalid');
+			Project::destroy($project->id);
+			return Redirect::back();
+		}
 
-		Session::flash('flash_message', 'Project successfully added!');
-
-		return redirect('project');
 	}
 
 	/**
@@ -105,7 +109,7 @@ class ProjectController extends Controller
 			session(['projects' => $projects]);
 		}
 
-		Session::flash('flash_message', 'Project successfully updated!');
+		Session::flash('message', 'Project successfully updated!');
 
 		return redirect('project');
 	}
@@ -126,7 +130,7 @@ class ProjectController extends Controller
 			$projects = $this->project_repository->getAssignedProjects();
 			session(['projects' => $projects]);
 		}
-		Session::flash('flash_message', 'Project successfully deleted!');
+		Session::flash('message', 'Project successfully deleted!');
 		return Redirect::back();
 	}
 
