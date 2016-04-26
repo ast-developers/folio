@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
@@ -83,7 +84,7 @@ class ProfileController extends Controller
     {
         $this->userRepository->updateProfile($request->all());
         Session::flash('message', 'Profile successfully updated!');
-        return redirect('/');
+        return Redirect::back();
     }
 
     /**
