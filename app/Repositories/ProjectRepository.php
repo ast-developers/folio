@@ -95,7 +95,7 @@ class ProjectRepository implements ProjectRepositoryInterface
 		if (($user->projects->count())) {
 			return explode(',', $user->projects[0]->project_ids);
 		} else {
-			return false;
+			return ;
 		}
 
 	}

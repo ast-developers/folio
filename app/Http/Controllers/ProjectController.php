@@ -17,14 +17,15 @@ use Response;
 class ProjectController extends Controller
 {
 
-	public  $project_repository;
+	public $project_repository;
 	public $user_repository;
 
 	public function __construct(ProjectRepositoryInterface $project_repository, UserRepositoryInterface $user_repository)
 	{
-		$this->project_repository=$project_repository;
-		$this->user_repository = $user_repository;
+		$this->project_repository = $project_repository;
+		$this->user_repository    = $user_repository;
 	}
+
 	/**
 	 * Display a listing of the resource.
 	 * @return Response
@@ -51,7 +52,7 @@ class ProjectController extends Controller
 	 */
 	public function store(ProjectRequest $request)
 	{
-		$project = Project::create($request->all());
+		$project  = Project::create($request->all());
 		$projects = $this->project_repository->getAssignedProjects();
 		if (Auth::user()->role_id != ONE) {
 			Auth::user()->projects()->attach($project->id);
