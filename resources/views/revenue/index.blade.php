@@ -25,7 +25,7 @@
                             'route' => ['revenue.destroy', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs delete']) !!}
                         {!! Form::close() !!}
                     </td>
                 </tr>

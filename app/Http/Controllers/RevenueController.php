@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Http\Requests\RevenueRequest;
 use App\Http\Controllers\Controller;
 use App\Interfaces\ProjectRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
@@ -41,7 +41,7 @@ class RevenueController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(RevenueRequest $request)
     {
         Revenue::create($request->all());
 
@@ -60,7 +60,12 @@ class RevenueController extends Controller
     public function edit($id)
     {
         $selected_project_list = $this->project_repository->getSelectedProjectList($this->user_repository->getUserByIdWithRole(Auth::id()));
-        $revenue = Revenue::whereIn('project_id',$selected_project_list)->find($id);
+        if(isset($selected_project_list)){
+            $revenue = Revenue::whereIn('project_id',$selected_project_list)->find($id);
+        }
+        elseif(Auth::user()->role_id == ONE){
+           $revenue = Revenue::find($id);
+        }
         return (isset($revenue)) ? view('revenue.edit', compact('revenue')) : view('errors.503');
     }
 
@@ -70,7 +75,7 @@ class RevenueController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id, Request $request)
+    public function update($id, RevenueRequest $request)
     {
         
         $revenue = Revenue::findOrFail($id);
