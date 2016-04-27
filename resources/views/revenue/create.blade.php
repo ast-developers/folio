@@ -35,15 +35,10 @@
             {!! Form::hidden('project_id', $project->id) !!}
             {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
         </div>
+        <div class=" col-sm-3">
+            <a href="{!! url('project/'.$project->id ) !!}" class="btn btn-primary form-control">Cancel</a>
+        </div>
     </div>
     {!! Form::close() !!}
-
-    @if ($errors->any())
-        <ul class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
 
 @endsection
