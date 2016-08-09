@@ -77,7 +77,8 @@ class AuthController extends Controller
 	{
 
 		try {
-			$user = Socialite::driver('google')->stateless()->user();
+			$user = Socialite::driver('google')->user();
+
 		} catch (Exception $e) {
 			return redirect('auth/google');
 		}
