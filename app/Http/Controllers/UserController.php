@@ -161,20 +161,21 @@ class UserController extends Controller
 
     private function findOrCreateUser($google_user)
     {
+        $user =new User();
+        //$user = User::where('email', $google_user->email)->first();
 
-        $user = User::where('email', $google_user->email)->first();
-
-        if ($user) {
+        //if ($user) {
             $user->name         = $google_user->name;
+            $user->email         = $google_user->email;
             $user->google_id    = $google_user->id;
             $user->avatar       = $google_user->avatar;
             $user->access_token = $google_user->token;
-            $user->save();
+            $user->saveOrFail();
             return $user;
-        }
+        /*}
         else{
             return false;
-        }
+        }*/
     }
 
 }
