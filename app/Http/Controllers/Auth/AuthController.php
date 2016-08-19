@@ -70,14 +70,13 @@ class AuthController extends Controller
 
 	public function googleredirectToProvider()
 	{
-		return Socialite::driver('google')->redirect();
+		return Socialite::with('google')->redirect();
 	}
 
 	public function googlehandleProviderCallback()
 	{
-
 		try {
-			$user = Socialite::driver('google')->user();
+			$user = Socialite::with('google')->user();
 
 		} catch (Exception $e) {
 			return redirect('auth/google');
@@ -93,24 +92,6 @@ class AuthController extends Controller
 		Auth::login($authUser, true);
 
 		return Redirect::to('/');
-	}
-
-	private function findOrCreateUser($google_user)
-	{
-
-		$user = User::where('email', $google_user->email)->first();
-
-		if ($user) {
-			$user->name         = $google_user->name;
-			$user->google_id    = $google_user->id;
-			$user->avatar       = $google_user->avatar;
-			$user->access_token = $google_user->token;
-			$user->save();
-			return $user;
-		}
-		else{
-			return false;
-		}
 	}
 
 }

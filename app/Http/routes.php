@@ -20,7 +20,7 @@ Route::post('password/reset', 'Auth\PasswordController@setPassword');
 Route::post('login', 'Auth\AuthController@postLogin');
 
 Route::get('auth/google', 'Auth\AuthController@googleredirectToProvider');
-Route::get('auth/google/callback', 'Auth\AuthController@googlehandleProviderCallback');
+Route::get('auth/google/callback', 'UserController@googlehandle');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'filter-user'], function () {

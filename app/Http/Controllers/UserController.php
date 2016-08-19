@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 
+use Socialite;
+use Validator;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+
+
 class UserController extends Controller
 {
 	protected $userRepository;
@@ -133,5 +140,42 @@ class UserController extends Controller
 		}
 		return view('password.reset', compact('email', 'token'));
 	}
+
+    public function googlehandle()
+    {
+        try {
+            $user = Socialite::driver('google')->user();
+        } catch (Exception $e) {
+            return redirect('auth/google');
+        }
+
+        $authUser = $this->findOrCreateUser($user);
+        if(!$authUser)
+        {
+            Session::flash('message', 'You are not a member of Arsenal Team. or You are not authorized uder. So you can not login');
+            return Redirect::to('/auth/login');
+        }
+        Auth::login($authUser, true);
+        return Redirect::to('/');
+    }
+
+    private function findOrCreateUser($google_user)
+    {
+        $user =new User();
+        //$user = User::where('email', $google_user->email)->first();
+
+        //if ($user) {
+            $user->name         = $google_user->name;
+            $user->email         = $google_user->email;
+            $user->google_id    = $google_user->id;
+            $user->avatar       = $google_user->avatar;
+            $user->access_token = $google_user->token;
+            $user->saveOrFail();
+            return $user;
+        /*}
+        else{
+            return false;
+        }*/
+    }
 
 }
