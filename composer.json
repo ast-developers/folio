@@ -12,7 +12,7 @@
         "lesstif/php-jira-rest-client": "1.5.*",
         "laravelcollective/html": "5.1.*",
         "reportico/laravel-reportico": "~5.1",
-        "laravel/socialite": "^2.0",
+        "laravel/socialite": "^2.0.4",
         "cartalyst/sentinel": "2.0.*",
         "doctrine/dbal": "^2.5",
         "zizaco/entrust": "^1.7"
