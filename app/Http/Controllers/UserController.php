@@ -21,6 +21,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+
 class UserController extends Controller
 {
     protected $userRepository;
@@ -135,6 +136,7 @@ class UserController extends Controller
         }
         return view('password.reset', compact('email', 'token'));
     }
+	
 
     public function googlehandle()
     {
