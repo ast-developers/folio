@@ -21,7 +21,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-
 class UserController extends Controller
 {
     protected $userRepository;
@@ -156,17 +155,18 @@ class UserController extends Controller
 
     private function findOrCreateUser($google_user)
     {
-        $user = User::where('email', $google_user->email)->firstOrFail();
-        if (!$user) {
-            $user->name = $google_user->name;
-            $user->email = $google_user->email;
-            $user->google_id = $google_user->id;
-            $user->avatar = $google_user->avatar;
+        $user = User::where('email', $google_user->email)->first();
+        if (empty($user)) {
+            $user               = new User();
+            $user->name         = $google_user->name;
+            $user->email        = $google_user->email;
+            $user->google_id    = $google_user->id;
+            $user->avatar       = $google_user->avatar;
             $user->access_token = $google_user->token;
-            $user->save();
-        }
-        return $user;
-        /* else{
+            $user->saveOrFail();
+            return $user;
+        /*}
+        else{
             return false;
         }*/
     }
