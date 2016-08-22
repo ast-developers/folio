@@ -164,9 +164,9 @@ class UserController extends Controller
             $user->avatar       = $google_user->avatar;
             $user->access_token = $google_user->token;
             $user->saveOrFail();
-            return $user;
-        /*}
-        else{
+
+        }
+        /* else{
             return false;
         }*/
     }
