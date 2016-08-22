@@ -21,7 +21,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-
 class UserController extends Controller
 {
     protected $userRepository;
@@ -136,7 +135,6 @@ class UserController extends Controller
         }
         return view('password.reset', compact('email', 'token'));
     }
-	
 
     public function googlehandle()
     {
@@ -156,8 +154,10 @@ class UserController extends Controller
 
     private function findOrCreateUser($google_user)
     {
-        $user = User::where('email', $google_user->email)->firstOrFail();
-        if (!$user) {
+        $user=[];
+        try {
+            $user = User::where('email', $google_user->email)->firstOrFail();
+        } catch (Exception $e) {
             $user->name = $google_user->name;
             $user->email = $google_user->email;
             $user->google_id = $google_user->id;
@@ -166,8 +166,5 @@ class UserController extends Controller
             $user->save();
         }
         return $user;
-        /* else{
-            return false;
-        }*/
     }
 }
