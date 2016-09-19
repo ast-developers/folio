@@ -166,8 +166,6 @@ class UserController extends Controller
             $user->saveOrFail();
 
         }
-        /* else{
-            return false;
-        }*/
+        return $user;
     }
 }
