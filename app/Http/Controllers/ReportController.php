@@ -38,6 +38,9 @@ class ReportController extends Controller
 
     public function generateByPackage()
     {
+        $_SESSION['reportico']['admin_password']='1';
+        $_SESSION['reportico']['loggedin']=true;
+
         $user_role                              = Auth::user()->role_id != ONE;
         $report_object                          = App::make("getReporticoEngine");
         $report_object->initial_execute_mode    = ($user_role) ? MENU_ACCESS : UserRoles::REPORTICO_ADMIN;
@@ -51,12 +54,15 @@ class ReportController extends Controller
 
     public function executeByPackage($project_name, $file)
     {
+        $_SESSION['reportico']['admin_password']='1';
+        $_SESSION['reportico']['loggedin']=true;
+
         $report_object                          = App::make("getReporticoEngine");
         $report_object->initial_execute_mode    = PREPARE_MODE ;
         $report_object->access_mode             = ALLPROJECTS_ACCESS;
         $report_object->initial_project         = $project_name;
         $report_object->initial_report          = $file . '.xml';
-        $report_object->clear_reportico_session = true;
+        $report_object->clear_reportico_session = false;
 
         return view('reports.package-reports', compact('report_object'));
     }
