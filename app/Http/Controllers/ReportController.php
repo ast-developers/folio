@@ -44,7 +44,7 @@ class ReportController extends Controller
         $report_object->access_mode             = ($user_role) ? ALLPROJECTS_ACCESS : FULL_ACCESS;
         $report_object->initial_project         = INITIAL_PROJECT;
         $report_object->initial_report          = false;
-        $report_object->clear_reportico_session = true;
+        $report_object->clear_reportico_session = false;
 
         return view('reports.package-reports', compact('report_object'));
     }
