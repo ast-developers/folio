@@ -58,7 +58,6 @@ class ReportController extends Controller
         $_SESSION['reportico']['loggedin']=true;
 
         $report_object                          = App::make("getReporticoEngine");
-        $report_object->initial_execute_mode    = PREPARE_MODE ;
         $report_object->access_mode             = ALLPROJECTS_ACCESS;
         $report_object->initial_project         = $project_name;
         $report_object->initial_report          = $file . '.xml';
