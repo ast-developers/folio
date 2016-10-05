@@ -58,13 +58,13 @@ class ReportController extends Controller
         $_SESSION['reportico']['loggedin']=true;
 
         $report_object                          = App::make("getReporticoEngine");
-        $report_object->access_mode             = "REPORTOUTPUT";
+        $report_object->access_mode             = "ONEREPORT";
         $report_object->initial_project         = $project_name;
         $report_object->initial_report          = $file . '.xml';
-        $report_object->clear_reportico_session = false;
-        $report_object->initial_execute_mode = "EXECUTE";
-        $report_object->embedded_report = true;
 
+        $report_object->initial_execute_mode = "PREPARE";
+        $report_object->embedded_report = true;
+        $report_object->initial_show_criteria='show';
 
 
         return view('reports.package-reports', compact('report_object'));
