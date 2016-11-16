@@ -11,7 +11,12 @@
 |
 */
 
+/* Syncing the Timelog for the project in Jira */
 Route::post('timelog/$2y$10$RmbwSQUSNhJpotMh9Z0/9ObnAJDnFvaYd9bfQDI8rGz8vDRgngLdq', 'TimelogController@create');
+
+/* Creating Project in Folio, as soon as they are created in Jira */
+Route::post('project-api/store', 'ProjectController@createFromJiraHook');
+
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::get('password/reset/{email}/{token}','UserController@setPassword');
@@ -57,14 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('report/time-sheet', 'ReportController@timesheet');
 
-
-
     //reportico
 
     Route::get('generate-report', 'ReportController@generateByPackage');
     Route::get('report/{project_name}/{file}', 'ReportController@executeByPackage');
 });
-/*
-Route::any('/{all}', function(){
-    return view('errors.503');
-})->where('all', '.*');*/
